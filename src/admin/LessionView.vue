@@ -68,7 +68,7 @@
 
                     <!-- Display product details once the data is loaded -->
                     <template v-else>
-                        <template v-for="cat in productDetails" :key="cat.id">
+                        <template v-for="cat in filterProductDetail" :key="cat.id">
                             <tr v-for="pro in cat.product" :key="pro.id">
                                 <template v-for="detail in pro.productDetail" :key="detail.id">
                                     <td>{{ detail.title }}</td>
@@ -182,7 +182,7 @@ import getNestedSubcollection from '@/firebase/getNestedSubcollection';
 import AddLessionModal from '@/components/admin/AddLessionModal.vue';
 import LessionModalDeleteComponent from '@/components/admin/LessionModalDeleteComponent.vue';
 import moment from 'moment';
-import { onMounted, ref, } from 'vue';
+import { onMounted, ref,computed } from 'vue';
 
 
 export default {
@@ -198,6 +198,7 @@ export default {
         const currentComponents = ref("");
         const isOpenAction = ref({});
         // const editData = ref(null);
+        const searchText = ref("")
         const isLoading = ref(false)
         const category = ref(null)
         const product = ref(null)
@@ -243,7 +244,7 @@ export default {
 
         //fetch nestedsubcollection  
         const fetchCategoryProductAndProductDetail = async () => {
-            isLoading.value = true
+            isLoading.value = true;
             const categoryProduct = [];
             const orderByField = 'productName';
 
@@ -252,11 +253,10 @@ export default {
 
                 try {
                     await fetchSubcollection();
-
                     const productArray = [];
 
                     for (const pro of products.value) {
-                        const { subcollectionData: productDetail, fetchSubcollections, } = getNestedSubcollection('categories', cate.id, 'product', pro.id, 'productDetail');
+                        const { subcollectionData: productDetail, fetchSubcollections } = getNestedSubcollection('categories', cate.id, 'product', pro.id, 'productDetail');
 
                         try {
                             await fetchSubcollections();
@@ -265,7 +265,6 @@ export default {
                                 ...pro,
                                 productDetail: productDetail.value
                             });
-
                         } catch (err) {
                             console.error(`Error processing product ${pro.id}:`, err);
                         }
@@ -283,10 +282,28 @@ export default {
                 }
             }
 
-            isLoading.value = false
+            isLoading.value = false;
             productDetails.value = categoryProduct;
-            // console.log("Product details:", productDetails.value);
         };
+
+        // Filter logic based on search text
+        const filterProductDetail = computed(() => {
+            if (!searchText.value) {
+                return productDetails.value;
+            }
+
+            // Filter products based on the search text
+            return productDetails.value.map(category => ({
+                ...category,
+                product: category.product.filter(pro =>
+                    pro.productName.toLowerCase().includes(searchText.value.toLowerCase()) ||
+                    pro.productDetail.some(detail =>
+                        detail.title.toLowerCase().includes(searchText.value.toLowerCase())
+                    )
+                ),
+            }));
+        });
+
 
         //handle action
         const handleIsOpenAction = (id) => {
@@ -325,8 +342,9 @@ export default {
         return {
             onMountedCurrentComponents,
             currentComponents,
+            searchText,
             products,
-
+            filterProductDetail,
             handleIsOpenAction,
             isOpenAction,
             fetchCategoryProductAndProductDetail,
