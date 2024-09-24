@@ -1,18 +1,21 @@
 <template>
   <div class="">
-    <NavbarViewVue/>
- 
-  </div>
-  <div class="mb-auto h-screen">
-    <SlideComponentVue/>
+    <NavbarViewVue />
 
   </div>
-  <!-- <div>
-    <h1>Main Squery</h1>
+  <!-- <div class="mb-auto h-screen">
+    <SlideComponentVue/>
+
   </div> -->
- 
+  <div>
+    <SlideComponentVue />
+  </div>
+  <div>
+    <BannerHomeView />
+  </div>
+
   <div class="">
-    <FooterViewVue/>
+    <FooterViewVue />
   </div>
 </template>
 
@@ -20,7 +23,9 @@
 import SlideComponentVue from '@/components/client/SlideComponent.vue'
 // import BussinessDropdownVue from '@/components/client/BussinessDropdown.vue'
 import FooterViewVue from './FooterView.vue'
+
 import NavbarViewVue from './NavbarView.vue'
+import BannerHomeView from '@/components/client/BannerHomeView.vue'
 
 
 export default {
@@ -29,7 +34,8 @@ export default {
     FooterViewVue,
     // BussinessDropdownVue,
     NavbarViewVue,
-    SlideComponentVue
+    SlideComponentVue,
+    BannerHomeView
   }
 }
 </script>

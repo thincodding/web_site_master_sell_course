@@ -44,19 +44,29 @@
                                 </div>
                                 <div class="grid grid-cols-2 gap-3">
                                     <div class="space-y-1">
+                                        <label for="" class="font-NotoSansKhmer font-[500]">បង្ហាញលក្ខណ: *</label>
+                                        <select v-model="show_spacial" class="input_text p-[9.4px]" id="">
+                                            <option selected disabled value="">--ជ្រើសរើស--</option>
+                                            <option value="Most Popular">Most Popular</option>
+                                            <option value="New">New</option>
+                                            <option value="Beginer Favorites">Beginer Favorites</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="space-y-1">
                                         <label for="" class="font-NotoSansKhmer font-[500]">បង្រៀនដោយ: *</label>
                                         <input type="text" v-model="lectures" required placeholder="បង្រៀនដោយ"
                                             class="input_text">
 
-                                        <div class="space-y-1">
-                                            <label for="" class="font-NotoSansKhmer font-[500]">លីងវីដេអូ: *</label>
-                                            <input type="text" v-html="urlCopyLink" v-model="urlCopyLink" placeholder="បញ្ចូលលីងវីដេអូ"
-                                                class="input_text">
+                                       
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="" class="font-NotoSansKhmer font-[500]">លីងវីដេអូ: *</label>
+                                        <input type="text" v-html="urlCopyLink" v-model="urlCopyLink" placeholder="បញ្ចូលលីងវីដេអូ"
+                                            class="input_text">
 
-                                            <!-- for display url video from Input text -->
-                                            <div v-if="urlEmbedCodes" v-html="urlEmbedCodes"></div>
-                                        </div>
-
+                                        <!-- for display url video from Input text -->
+                                        <div v-if="urlEmbedCodes" v-html="urlEmbedCodes"></div>
                                     </div>
 
                                     <div class="space-y-1">
@@ -142,6 +152,7 @@ export default {
         const lectures = ref("")
         const price = ref(0)
         const discount = ref(0)
+        const show_spacial = ref("")
         const desctiption = ref("")
         const selectFile = ref("")
         const pre_Image = ref("")
@@ -162,6 +173,7 @@ export default {
                 lectures.value = props.productDetail.lectures
                 price.value = props.productDetail.price
                 discount.value = props.productDetail.discount
+                show_spacial.value = props.productDetail.show_spacial
                 desctiption.value = props.productDetail.desctiption,
                 urlCopyLink.value = props.productDetail.urlLinkCopy,
                 videoEmbedCodes.value = convertToEmbedCode(props.productDetail.desctiption)
@@ -290,6 +302,7 @@ export default {
                     lectures: lectures.value,
                     price: price.value,
                     discount: discount.value,
+                    show_spacial: show_spacial.value,
                     desctiption: videoEmbedCode || desctiption.value,
                     urlLinkCopy: urlLinkEmbedCode,
                     imageUrl: imageUrl,
@@ -332,7 +345,7 @@ export default {
         }
 
 
-        return { editor, urlCopyLink, urlEmbedCodes, currentComponent, videoEmbedCodes, discount, handleClose, isLoading, title, categoryId, productId, lectures, price, desctiption, selectFile, pre_Image, handleChangeFile, handleSubmitLession, filterSearchCategory, category }
+        return { editor,show_spacial, urlCopyLink, urlEmbedCodes, currentComponent, videoEmbedCodes, discount, handleClose, isLoading, title, categoryId, productId, lectures, price, desctiption, selectFile, pre_Image, handleChangeFile, handleSubmitLession, filterSearchCategory, category }
     }
 
 }

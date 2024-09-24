@@ -90,7 +90,13 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div v-html="detail.urlLinkCopy"></div>
+                                        <div v-if="detail.urlLinkCopy?.length > 0">
+                                            <div v-html="detail.urlLinkCopy"></div>
+                                        </div>
+                                        <div v-else>
+                                            <p>មិនមានលីងវីដែអូ</p>
+                                        </div>
+                                       
                                     </td>
                                     <td>
                                         <div v-if="detail.imageUrl?.length > 0">
@@ -211,6 +217,7 @@ export default {
             await fetchCollection();
             await fetchCategoryProduct();
             await fetchCategoryProductAndProductDetail();
+           
         });
 
         const onMountedCurrentComponents = async (component) => {
@@ -336,9 +343,7 @@ export default {
             product.value = pro
             productDetail.value = detail
         }
-
-
-
+        
         return {
             onMountedCurrentComponents,
             currentComponents,

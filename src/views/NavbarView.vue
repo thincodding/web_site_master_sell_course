@@ -4,9 +4,9 @@
     <div class="flex justify-between items-center">
 
       <div class="flex space-x-5 items-center w-full  xl:mr-5 ">
-        <div>
+        <router-link to="/">
           <img class="w-[91px] h-[34px]" src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" alt="">
-        </div>
+        </router-link>
         <!-- <div class="text-[14px] font-[400] text-[#2D2f31] cursor-pointer hover:text-indigo-400"></div> -->
 
         <div class="relative group ">
@@ -14,7 +14,7 @@
             class="text-[14px] group-hover:block  font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap">
             Categories</div>
 
-          <div class="h-14 w-20 right-0 bg-transparent absolute top-2 cursor-pointer ">
+          <div class="h-14 w-20 right-0 bg-transparent absolute top-5 z-10 cursor-pointer ">
           </div>
           <div class="absolute top-14 hidden group-hover:block  ">
             <CategoryDropdownVue />

@@ -9,6 +9,7 @@ import ProductView from '@/admin/ProductView.vue'
 import CategoryView from '@/admin/CategoryView.vue'
 import AddCategory from '@/components/admin/AddCategory.vue'
 import LessionView from '@/admin/LessionView.vue'
+
 import MessageComponent from '@/components/admin/MessageComponent.vue'
 import TestVue from '@/admin/TestVue.vue'
 
