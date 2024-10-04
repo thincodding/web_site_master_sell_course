@@ -7,7 +7,7 @@
         <div class="my-5 flex justify-between">
             <h1 class="text-[20px] font-NotoSansKhmer font-bold">តារាងបញ្ជីវគ្គសិក្សា</h1>
             <button @click="addCategory"
-                class="bg-blue-500 px-5 py-2.5  text-white flex items-center gap-1 hover:bg-blue-400"> <svg
+                class="bg-background px-5 py-2.5  text-white flex items-center gap-1 hover:bg-background/90"> <svg
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -63,9 +63,9 @@
                 </thead>
                 <tbody>
 
-                    <div v-if="isLoading" class="text-center">
-                        <p class="absolute left-1/2 top-16 text-lg font-NotoSansKhmer">សូមរងចាំ...</p>
-                    </div>
+                   <tr v-if="isLoading" class="text-center">
+            <td colspan="10" class="text-center text-md my-2 font-NotoSansKhmer">សូមរងចាំ...</td>
+          </tr>
 
                     <tr v-else v-for="cat in categories" :key="cat"
                         class="border-b dark:bg-gray-800 dark:border-gray-700 select-none">

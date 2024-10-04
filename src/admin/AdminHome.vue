@@ -37,7 +37,7 @@
                     <div :class="isOpenNav ? '' : 'justify-center flex relative group'">
                         <!-- Menu Button -->
                         <div @click="handleIsOpenDropdown('វគ្គសិក្សា')" :class="{
-                            'bg-blue-600 text-white': isOpenDropdown === 'វគ្គសិក្សា',
+                            'bg-background text-white': isOpenDropdown === 'វគ្គសិក្សា',
                             'hover:text-white': !isOpenDropdown === 'វគ្គសិក្សា'
                         }" class="cursor-pointer flex items-center gap-4 p-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -101,7 +101,7 @@
                     <div :class="isOpenNav ? '' : 'justify-center flex relative group'">
                         <!-- Menu Button -->
                         <div @click="handleIsOpenDropdownProduct('ផលិតផល')" :class="{
-                            'bg-blue-600 text-white': isOpenDropdownProduct === 'ផលិតផល',
+                            'bg-background text-white': isOpenDropdownProduct === 'ផលិតផល',
                             'hover:text-white': !isOpenDropdownProduct === 'ផលិតផល'
                         }" class="cursor-pointer flex items-center gap-4 p-3 ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
@@ -114,19 +114,6 @@
                             <p :class="isOpenNav ? 'block' : 'hidden'" class="font-NotoSansKhmer text-[18px]">
                                 {{ product }}
                             </p>
-
-
-                            <!-- <div :class="isOpenDropdownProduct ? 'text-white' : 'text-black'"
-                                class="absolute left-52 top-[225px] cursor-pointer">
-                                <svg :class="isOpenNav ? '' : 'hidden'" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                    class="size-4 group-hover:text-primary ">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                                </svg>
-                            </div> -->
-
-                            
 
                             <svg :class="isOpenNav ? '' : 'hidden'" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -162,11 +149,6 @@
                         </div>
 
                     </div>
-
-
-
-
-
                 </div>
 
 

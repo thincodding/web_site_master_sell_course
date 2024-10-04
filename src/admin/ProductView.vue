@@ -16,7 +16,7 @@
           <p class="font-NotoSansKhmer">បង្កើតមេរៀនថ្មី</p>
         </button>
         <button @click="onMountedCurrentComponents('AddProductModalVue')"
-          class="bg-blue-500 px-5 py-2.5  text-white flex items-center gap-1 hover:bg-blue-400"> <svg
+          class="bg-background px-5 py-2.5  text-white flex items-center gap-1 hover:bg-background/90"> <svg
             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -64,9 +64,9 @@
           </tr>
         </thead>
         <tbody>
-          <div v-if="isLoading" class="text-center">
-            <p class="absolute left-1/2 top-16 text-lg font-NotoSansKhmer">សូមរងចាំ...</p>
-          </div>
+          <tr v-if="isLoading" class="text-center">
+            <td colspan="10" class="text-center text-md my-2 font-NotoSansKhmer">សូមរងចាំ...</td>
+          </tr>
           <template v-else v-for="cate in filteredProducts" :key="cate.id">
             <tr v-for="pro in cate.product" :key="pro.id"
               class="border-b dark:bg-gray-800 dark:border-gray-700 select-none">
@@ -209,24 +209,58 @@ export default {
 
     const fetchCategoryProduct = async () => {
       isLoading.value = true
-      const categoryProduct = [];
-      for (const cate of categoryDocument.value) {
-        const orderByField = 'productName';
-        const { subcollectionData: product, fetchSubcollection } = useSubcollection('categories', cate.id, 'product', orderByField);
+      const orderByField = 'productName';
 
-        await fetchSubcollection();
-        categoryProduct.push({
-          id: cate.id,
-          categoryName: cate.categoryName,
-          descripton: cate.descripton,
-          image: cate.image,
-          product: product.value,
+      try {
+        // Fetch all categories and products concurrently
+        const categoryPromises = categoryDocument.value.map(async (cate) => {
+          const { subcollectionData: product, fetchSubcollection } = useSubcollection('categories', cate.id, 'product', orderByField);
+
+          // Fetch products for the category
+          await fetchSubcollection();
+
+          // Return the category and its products
+          return {
+            id: cate.id,
+            categoryName: cate.categoryName,
+            description: cate.description,
+            image: cate.image,
+            product: product.value,
+          };
         });
-      }
 
-      isLoading.value = false
-      products.value = categoryProduct;
+        // Wait for all categories and products to be fetched
+        const result = await Promise.all(categoryPromises);
+        isLoading.value = false
+        // Store the result in your reactive `products` variable
+        products.value = result;
+      } catch (err) {
+        console.error('Error fetching categories and products:', err);
+      }
     };
+
+
+
+    // const fetchCategoryProduct = async () => {
+    //   isLoading.value = true
+    //   const categoryProduct = [];
+    //   for (const cate of categoryDocument.value) {
+    //     const orderByField = 'productName';
+    //     const { subcollectionData: product, fetchSubcollection } = useSubcollection('categories', cate.id, 'product', orderByField);
+
+    //     await fetchSubcollection();
+    //     categoryProduct.push({
+    //       id: cate.id,
+    //       categoryName: cate.categoryName,
+    //       descripton: cate.descripton,
+    //       image: cate.image,
+    //       product: product.value,
+    //     });
+    //   }
+
+    //   isLoading.value = false
+    //   products.value = categoryProduct;
+    // };
 
 
     //search document

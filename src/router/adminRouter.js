@@ -105,7 +105,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-  linkExactActiveClass: 'bg-blue-600 text-white h-12 hover:text-white ',
+  linkExactActiveClass: 'bg-background text-white h-12 hover:text-white ',
 
 })
 

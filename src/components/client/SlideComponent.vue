@@ -2,7 +2,9 @@
 
   <!-- desk top -->
   <div class="hidden xl:block">
-    <swiper :navigation="{
+    <swiper
+    
+    :navigation="{
       nextEl: '.button-next-slide',
       prevEl: '.button-pre-slide'
 
@@ -180,3 +182,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+</style>

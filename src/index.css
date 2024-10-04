@@ -7,6 +7,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Moul&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Moul&family=Noto+Sans+Khmer:wght@100..900&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 * {
   font-family: "Roboto", sans-serif;
   /* font-family: "Noto Sans Khmer"; */
@@ -52,4 +54,12 @@ th {
   .select_page_size {
     @apply px-5 p-2 placeholder:font-NotoSansKhmer   border-2 outline-none bg-gray-50/20 focus:border-blue-500;
   }
+
+  .hideButton {
+    @apply hidden;
+  }
+
 }
+
+
+

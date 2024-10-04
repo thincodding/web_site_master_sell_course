@@ -26,7 +26,7 @@
                     <div class="p-4 border-l w-60 relative" v-if="filteredSubcategories.length">
                         <p class="text-[14px] mt-1 font-bold text-[#6b6b6b]">Popular Topics</p>
                         <div v-for="sub in filteredSubcategories" :key="sub.id" class="relative mt-1">
-                            <router-link :to="{ name: 'productdetail', params: { id: sub.id } }"
+                            <router-link :to="{ name: 'productdetail', params: { id: sub.id }  }"
                                 class="text-[14px] text-[#2D2f31] font-[400] leading-8 hover:text-indigo-400"
                                 @mouseover="activeSubcategoryId = sub.id" @click="handleClick(sub.id)"
                                 :class="{ 'text-indigo-600': sub.id === activeSubcategoryId }">
@@ -76,7 +76,7 @@
 
             <div v-if="selectedCategory" class="px-5 mt-2 capitalize">
                 <div v-for="sub in selectedCategory" :key="sub.id" class="leading-9 text-[14px]">
-                    <router-link :to="{name: 'productdetail', params: {id: sub.id} }">{{ sub.productName }}</router-link>
+                    <router-link  :to="{name: 'productdetail', params: {id: sub.id} }" @click="handleClickSideBar(sub.id)">{{ sub.productName }}</router-link>
                 </div>
             </div>
         </div>
@@ -180,6 +180,21 @@ export default {
             }
         };
 
+        const handleClickSideBar = (id) => {
+              // Check if the current route's params.id matches the clicked product ID
+              if (route.params.id === id) {
+               
+               const anotherId = route.params.id; // Set this to your desired fallback ID
+               router.push({ name: 'productdetail', params: { id: anotherId } });
+           } else {
+               // If it doesn't match, navigate to the selected product detail page
+               router.push({ name: 'productdetail', params: { id } });
+              setTimeout(()=>{
+               window.location.reload();
+              },100)
+           }
+        }
+
 
 
         return {
@@ -191,7 +206,8 @@ export default {
             isOpen,
             selectedCategory,
             handleIsopen,
-            handleClick
+            handleClick,
+            handleClickSideBar
         };
     }
 };

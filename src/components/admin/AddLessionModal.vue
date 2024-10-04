@@ -254,7 +254,7 @@ export default {
             let videoEmbedCode = '';
             if (videoUrlMatch) {
                 const videoId = videoUrlMatch[1] || videoUrlMatch[2];
-                videoEmbedCode = `<figure class="media"><iframe width="100px" height="100px" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></figure>`;
+                videoEmbedCode = `<figure class="media"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></figure>`;
             }
 
             //copy link in Text
@@ -263,7 +263,7 @@ export default {
 
             if (copyLinkVideo) {
                 const videoId = copyLinkVideo[1] || copyLinkVideo[2]
-                urlLinkEmbedCode = `<figure class="media"><iframe width="100px" height="100px" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></figure>`;
+                urlLinkEmbedCode = `<figure class="media"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></figure>`;
             }
 
 
