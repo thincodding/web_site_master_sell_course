@@ -83,7 +83,11 @@
 
 
                                 <div class="space-y-1">
-                                    <label class="font-NotoSansKhmer font-[500]">ពិពណ៌នា</label>
+                                    <label class="font-NotoSansKhmer font-[500]">អំពីវគ្គសិក្សា</label>
+                                    <ckeditor class="" :editor="editor" v-model="aboutCourse" :config="editorConfig" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-NotoSansKhmer font-[500]">ពិពណ៌នាផ្សេងៗ</label>
                                     <ckeditor class="" :editor="editor" v-model="desctiption" :config="editorConfig" />
                                 </div>
 
@@ -160,11 +164,10 @@ export default {
         const urlCopyLink = ref("")
         const urlEmbedCodes = ref("")
         const videoEmbedCodes = ref("")
+        const aboutCourse = ref("")
+
         const editor = ClassicEditor
         const { uploadImage, removeImage } = useStorage()
-
-
-
         onMounted(() => {
             if (props.categories && props.product && props.productDetail) {
                 title.value = props.productDetail.title
@@ -306,6 +309,7 @@ export default {
                     desctiption: videoEmbedCode || desctiption.value,
                     urlLinkCopy: urlLinkEmbedCode,
                     imageUrl: imageUrl,
+                    aboutCourse: aboutCourse.value,
                     createdAt: timestamp()
                 }
 
@@ -345,7 +349,7 @@ export default {
         }
 
 
-        return { editor,show_spacial, urlCopyLink, urlEmbedCodes, currentComponent, videoEmbedCodes, discount, handleClose, isLoading, title, categoryId, productId, lectures, price, desctiption, selectFile, pre_Image, handleChangeFile, handleSubmitLession, filterSearchCategory, category }
+        return { editor,show_spacial, urlCopyLink, urlEmbedCodes, currentComponent, videoEmbedCodes, discount, handleClose, isLoading, title, categoryId, productId, lectures, price, desctiption, selectFile, pre_Image, handleChangeFile, handleSubmitLession, filterSearchCategory, category,aboutCourse }
     }
 
 }
