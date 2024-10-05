@@ -176,6 +176,7 @@ export default {
                 lectures.value = props.productDetail.lectures
                 price.value = props.productDetail.price
                 discount.value = props.productDetail.discount
+                aboutCourse.value = props.productDetail.aboutCourse
                 show_spacial.value = props.productDetail.show_spacial
                 desctiption.value = props.productDetail.desctiption,
                 urlCopyLink.value = props.productDetail.urlLinkCopy,
@@ -206,10 +207,7 @@ export default {
             }
             return '';
         }
-
-
-
-
+        
         const handleClose = () => {
             emit("close")
         }

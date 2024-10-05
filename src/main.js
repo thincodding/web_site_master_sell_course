@@ -8,6 +8,7 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import { browserLocalPersistence, setPersistence } from 'firebase/auth'
 import { projectAuth } from './config/config'
+import '@/ckeditor-tailwind-reset/ckeditor-tailwind-reset.css'
 
 
 let routes;

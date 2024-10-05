@@ -12,6 +12,7 @@
     "@ckeditor/ckeditor5-vue": "^5.1.0",
     "@headlessui/vue": "^1.7.22",
     "@vueuse/motion": "^2.2.3",
+    "ckeditor-tailwind-reset": "^1.0.5",
     "core-js": "^3.8.3",
     "element-plus": "^2.8.2",
     "firebase": "^10.13.1",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@tailwindcss/typography": "^0.5.15",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
