@@ -117,7 +117,9 @@
         </div>
 
         <div class="ml-10">
+          <router-link to="/">
           <img class="w-[80px] h-[30px]" src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" alt="">
+        </router-link>
         </div>
 
         <div class="flex gap-7 md:gap-6">

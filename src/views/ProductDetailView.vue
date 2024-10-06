@@ -502,9 +502,11 @@
 
                                                     </div>
                                                     <div class="mt-2 space-y-1">
-                                                        <p
-                                                            class="text-[15px] font-semibold line-clamp-2 cursor-pointer">
-                                                            {{ detail.title }}</p>
+                                                        <router-link
+                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                        class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
+                                                        {{
+                                                            detail.title }}</router-link>
                                                         <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                             detail.lectures }}</p>
                                                         <div class="flex space-x-[2px] items-center">
@@ -608,9 +610,11 @@
 
                                                     </div>
                                                     <div class="mt-2 space-y-1">
-                                                        <p
-                                                            class="text-[15px] font-semibold line-clamp-2 cursor-pointer">
-                                                            {{ detail.title }}</p>
+                                                        <router-link
+                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                        class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
+                                                        {{
+                                                            detail.title }}</router-link>
                                                         <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                             detail.lectures }}</p>
                                                         <div class="flex space-x-[2px] items-center">
@@ -714,9 +718,11 @@
 
                                                     </div>
                                                     <div class="mt-2 space-y-1">
-                                                        <p
-                                                            class="text-[15px] font-semibold line-clamp-2 cursor-pointer">
-                                                            {{ detail.title }}</p>
+                                                        <router-link
+                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                        class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
+                                                        {{
+                                                            detail.title }}</router-link>
                                                         <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                             detail.lectures }}</p>
                                                         <div class="flex space-x-[2px] items-center">

@@ -5,7 +5,7 @@
                 <div class="p-4 space-y-3">
                     <h1 class="font-bold font-NotoSansKhmer">លុបទិន្ន័យ </h1>
                     <div>
-                        <h1 class="font-NotoSansKhmer text-xl capitalize">
+                        <h1 class="font-NotoSansKhmer  text-xl capitalize">
                             តើអ្នកចង់លុបចំណងជើង
                             <span class="font-NotoSansKhmer font-bold text-red-500 capitalize">
                                 {{ productDetail.title }}

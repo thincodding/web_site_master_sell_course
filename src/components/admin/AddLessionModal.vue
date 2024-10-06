@@ -1,7 +1,7 @@
 <template>
     <div class="h-screen bg-black/50 w-full z-10 fixed top-0 left-0">
         <div class="flex justify-center items-center mt-5">
-            <div class="bg-white w-[45%] overflow-y-auto" v-motion :initial="{ scale: 0.9 }"
+            <div class="bg-white w-[45%] overflow-y-auto h-[900px]" v-motion :initial="{ scale: 0.9 }"
                 :visible="{ opacity: 1, scale: 1 }">
                 <div class="p-4 space-y-3">
                     <!-- <h1 class="font-bold font-NotoSansKhmer">{{ !editData ? ' បង្កើតផលិតផល' : 'កែប្រែផលិតផល' }}</h1> -->
@@ -203,7 +203,7 @@ export default {
             const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
             if (videoIdMatch) {
                 const videoId = videoIdMatch[1] || videoIdMatch[0].split('/').pop();
-                return `<figure class="media"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></figure>`;
+                return `<figure class="media"><iframe width="100%" height="300px" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></figure>`;
             }
             return '';
         }

@@ -82,7 +82,7 @@
                                         <td>{{ detail.discount }} ភាគរយ</td>
                                         <td>
                                             <div v-if="detail.desctiption?.length > 0">
-                                                <p v-html="detail.desctiption"></p>
+                                                <p v-html="detail.desctiption" class="line-clamp-2"></p>
                                             </div>
                                             <div v-else>
                                                 <p>មិនមានទិន្ន័យ</p>
