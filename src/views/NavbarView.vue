@@ -78,28 +78,50 @@
 
         </div>
 
-        <div class="flex items-center space-x-2">
-          <div class="border-[1px] border-black p-[6px] px-5 hover:bg-gray-200 cursor-pointer">
-            <router-link to="/" class="font-bold text-[14px] text-[#2D2f31] text-nowrap">Log in</router-link>
-          </div>
-          <div class=" bg-black p-[7px] px-5  cursor-pointer">
-            <router-link to="/" class="font-bold text-[14px] text-white text-nowrap">Sign up</router-link>
-          </div>
-          <div class="border-[1px] border-black p-[8px] px-2 hover:bg-gray-200 cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" class="w-[20px] h-[20px]">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
-            </svg>
+        <div class="relative">
+          <div class="flex items-center space-x-2">
 
+            <div v-if="!user" class="flex items-center space-x-2">
+              <div class="border-[1px] border-black p-[6px] px-5 hover:bg-gray-200 cursor-pointer">
+                <router-link to="/login" class="font-bold text-[14px] text-[#2D2f31] text-nowrap">Log in</router-link>
+              </div>
+              <div class=" bg-black p-[7px] px-5  cursor-pointer">
+                <router-link to="/signup" class="font-bold text-[14px] text-white text-nowrap">Sign up</router-link>
+              </div>
+            </div>
+
+            <div v-else @click="isDrowdown = !isDrowdown"
+              class="border-[1px] border-background bg-gray-50 w-10 h-10 flex justify-center items-center rounded-full  hover:bg-gray-200 cursor-pointer">
+              <div class="capitalize">{{ user?.email[0] }}</div>
+            </div>
+
+            <div class="border-[1px] border-black p-[8px] px-2 hover:bg-gray-200 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-[20px] h-[20px]">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+              </svg>
+            </div>
+
+
+          </div>
+          <div v-if="isDrowdown">
+            <div
+              class=" w-28 shadow p-3 z-[10] absolute top-16 right-5 bg-white flex items-center gap-2 cursor-pointer hover:text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-log-out">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" x2="9" y1="12" y2="12" />
+              </svg>
+              <p @click="handleSignout">Sign out</p>
+            </div>
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
-
 
 
   <!-- mobile -->
@@ -118,8 +140,8 @@
 
         <div class="ml-10">
           <router-link to="/">
-          <img class="w-[80px] h-[30px]" src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" alt="">
-        </router-link>
+            <img class="w-[80px] h-[30px]" src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" alt="">
+          </router-link>
         </div>
 
         <div class="flex gap-7 md:gap-6">
@@ -172,12 +194,16 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import SearchComponentsVue from '@/components/client/SearchComponent.vue'
 import BussinessDropdownVue from '@/components/client/BussinessDropdown.vue'
 import TeachUdemyDropdownVue from '@/components/client/TeachUdemyDropdown.vue'
 import CartDropdownVue from '@/components/client/CartDropdown.vue'
 import CategoryDropdownVue from '@/components/client/CategoryDropdown.vue'
-import { ref } from 'vue'
+import getUser from '@/firebase/getUser'
+import useSignout from '@/firebase/useSignout'
+import { useRouter } from 'vue-router'
+
 export default {
   components: {
     SearchComponentsVue,
@@ -190,12 +216,17 @@ export default {
   setup() {
 
     const isOpen = ref(false)
+    const isDrowdown = ref(false)
 
+
+    const { user } = getUser()
+    const router = useRouter();
+
+    const { signOut } = useSignout()
 
     const handleIsopen = () => {
       isOpen.value = !isOpen.value
       toggleScroll(isOpen.value);
-
     }
 
 
@@ -218,7 +249,15 @@ export default {
       }
     };
 
-    return { isOpen, handleIsopen }
+    const handleSignout = async () => {
+      if (window.confirm('Are you sure to sign out')) {
+        await signOut()
+        router.push({name: 'login'});
+        isDrowdown.value = false
+      }
+    }
+
+    return { isOpen, handleIsopen, isDrowdown, user, handleSignout }
   }
 }
 </script>

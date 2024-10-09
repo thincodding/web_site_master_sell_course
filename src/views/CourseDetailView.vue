@@ -699,7 +699,7 @@ export default {
             } finally {
                 isLoading.value = false; // Ensure loading state is reset
             }
-
+            
             console.log("Product Details Fetched:", productDetails.value); // Debugging log
         };
 

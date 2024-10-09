@@ -30,6 +30,21 @@ const routes = [
     path: "/courseDetail/:id",
     name: "courseDetail",
     component: () => import('@/views/CourseDetailView.vue')
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import('@/views/LoginView.vue')
+  },
+  {
+    path: "/signup",
+    name: "signup",
+    component: () => import('@/views/SignupView.vue')
+  },
+  {
+    path: "/verify",
+    name: "verify",
+    component: () => import('@/views/VerifySuccess.vue')
   }
 ]
 

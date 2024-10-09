@@ -33,7 +33,6 @@
                                             <option class="capitalize" v-for="c in course" :key="c"
                                                 :value="c.categoryName">{{
                                                     c.categoryName }}</option>
-
                                         </select>
                                     </div>
                                 </div>

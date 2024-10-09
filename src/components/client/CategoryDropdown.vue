@@ -45,8 +45,8 @@
     <!-- Mobile View -->
     <div class="w-full lg:hidden h-screen overflow-hidden relative">
         <div class="flex flex-col space-y-3 p-4">
-            <router-link to="#" class="text-indigo-600 text-[15px]">Log in</router-link>
-            <router-link to="#" class="text-indigo-600 text-[15px]">Sign up</router-link>
+            <router-link to="/login" class="text-indigo-600 text-[15px]">Log in</router-link>
+            <router-link to="/signup" class="text-indigo-600 text-[15px]">Sign up</router-link>
         </div>
         <hr>
         <div class="p-4">

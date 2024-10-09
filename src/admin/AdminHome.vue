@@ -34,11 +34,46 @@
                         </router-link>
                     </div>
 
+                    <div :class="isOpenNav ? '' : 'justify-center flex'">
+
+                        <router-link class="hover:text-primary  flex items-center gap-4 p-3 " :to="{ name: 'partner' }">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-hand-coins">
+                                <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17" />
+                                <path
+                                    d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+                                <path d="m2 16 6 6" />
+                                <circle cx="16" cy="9" r="2.9" />
+                                <circle cx="6" cy="5" r="3" />
+                            </svg>
+                            <p :class="isOpenNav ? 'block' : 'hidden'" class="font-NotoSansKhmer text-[18px]">
+                                ដៃគូសហការ</p>
+                        </router-link>
+                    </div>
+
+
+                    <div :class="isOpenNav ? '' : 'justify-center flex'">
+
+                        <router-link class="hover:text-primary  flex items-center gap-4 p-3 "
+                            :to="{ name: 'student_register' }">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                            </svg>
+
+                            <p :class="isOpenNav ? 'block' : 'hidden'" class="font-NotoSansKhmer text-[18px]">
+                                ចុះឈ្មោះសិស្ស</p>
+                        </router-link>
+                    </div>
+
+
                     <div :class="isOpenNav ? '' : 'justify-center flex relative group'">
                         <!-- Menu Button -->
-                        <div @click="handleIsOpenDropdown('វគ្គសិក្សា')" :class="{
-                            'bg-background text-white': isOpenDropdown === 'វគ្គសិក្សា',
-                            'hover:text-white': !isOpenDropdown === 'វគ្គសិក្សា'
+                        <div @click="handleIsOpenDropdown('ប្រភេទវគ្គ')" :class="{
+                            'bg-background text-white': isOpenDropdown === 'ប្រភេទវគ្គ',
+                            'hover:text-white': !isOpenDropdown === 'ប្រភេទវគ្គ'
                         }" class="cursor-pointer flex items-center gap-4 p-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
@@ -81,7 +116,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                                     </svg>
-                                    <p class="text-[16px] font-NotoSansKhmer">បញ្ចីវគ្គសិក្សា</p>
+                                    <p class="text-[16px] font-NotoSansKhmer">បញ្ចីប្រភេទវគ្គសិក្សា</p>
                                 </router-link>
                                 <router-link :to="{ name: 'addcategory' }" class="flex items-center gap-4 p-3 pl-10">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -89,7 +124,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                                     </svg>
-                                    <p class="text-[16px] font-NotoSansKhmer">បង្កើតវគ្គសិក្សា</p>
+                                    <p class="text-[16px] font-NotoSansKhmer">បង្កើតប្រភេទវគ្គសិក្សា</p>
                                 </router-link>
 
                             </div>
@@ -100,11 +135,11 @@
 
                     <div :class="isOpenNav ? '' : 'justify-center flex relative group'">
                         <!-- Menu Button -->
-                        <div @click="handleIsOpenDropdownProduct('ផលិតផល')" :class="{
-                            'bg-background text-white': isOpenDropdownProduct === 'ផលិតផល',
-                            'hover:text-white': !isOpenDropdownProduct === 'ផលិតផល'
+                        <div @click="handleIsOpenDropdownProduct('វគ្គសិក្សា')" :class="{
+                            'bg-background text-white': isOpenDropdownProduct === 'វគ្គសិក្សា',
+                            'hover:text-white': !isOpenDropdownProduct === 'វគ្គសិក្សា'
                         }" class="cursor-pointer flex items-center gap-4 p-3 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-book">
                                 <path
@@ -117,7 +152,7 @@
 
                             <svg :class="isOpenNav ? '' : 'hidden'" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                class="size-4  w-20 pl-4 group-hover:text-primary ">
+                                class="size-4  w-20 pl-14 group-hover:text-primary ">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                             </svg>
                         </div>
@@ -134,7 +169,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                                     </svg>
-                                    <p class="text-[16px] font-NotoSansKhmer">បញ្ចីផលិតផល</p>
+                                    <p class="text-[16px] font-NotoSansKhmer">បញ្ចីវគ្គសិក្សា</p>
                                 </router-link>
                                 <router-link :to="{ name: 'lession' }" class="flex items-center gap-4 p-3 pl-10">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -150,8 +185,6 @@
 
                     </div>
                 </div>
-
-
             </div>
 
             <!-- Main Content -->
@@ -162,6 +195,8 @@
                         <span class="text-gray-500 font-NotoSansKhmer">បញ្ជីផលិតផល</span>
                     </p>
                     <p v-else-if="currentRouteName === 'categoryList'" class="font-NotoSansKhmer font-bold select-none">
+                        ប្រភេទ / <span class="text-gray-500 font-NotoSansKhmer">បញ្ចីវគ្គសិក្សា</span></p>
+                    <p v-else-if="currentRouteName === 'partner'" class="font-NotoSansKhmer font-bold select-none">
                         ប្រភេទ / <span class="text-gray-500 font-NotoSansKhmer">បញ្ចីវគ្គសិក្សា</span></p>
                     <p v-else class="font-NotoSansKhmer font-bold select-none">ទំព័រដើម / <span
                             class="text-gray-500 font-NotoSansKhmer">ផ្ទាំងគ្រប់គ្រង</span></p>
@@ -217,8 +252,8 @@ export default {
         const route = useRoute();
         const isOpenDropdown = ref(false)
         const isOpenDropdownProduct = ref(false)
-        const course = 'វគ្គសិក្សា';
-        const product = "ផលិតផល";
+        const course = 'ប្រភេទវគ្គ';
+        const product = "វគ្គសិក្សា";
 
         const currentRouteName = ref(route.name)
 

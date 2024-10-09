@@ -53,9 +53,9 @@
                         <th width="7%" class="py-4">បញ្ចុះតម្លៃ</th>
                         <!-- <th width="10%" class="py-4">លក្ខណ:ផលិតផល</th> -->
                         <th width="15%" class="py-4">ពិពណ៌នា</th>
-                        <th width="10%" class="py-4">វីដេអូមេរៀន</th>
+                        <!-- <th width="10%" class="py-4">វីដេអូមេរៀន</th> -->
                         <th width="5%" class="py-4">រូបភាព</th>
-                        <th width="18%" class="py-4">កាលបរិច្ឆេត</th>
+                        <th width="15%" class="py-4">កាលបរិច្ឆេត</th>
                         <th width="5%" class="py-4">សកម្មភាព</th>
                     </tr>
                 </thead>
@@ -88,14 +88,14 @@
                                                 <p>មិនមានទិន្ន័យ</p>
                                             </div>
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <div v-if="detail.urlLinkCopy?.length > 0">
                                                 <div v-html="detail.urlLinkCopy"></div>
                                             </div>
                                             <div v-else>
                                                 <p>មិនមានលីងវីដែអូ</p>
                                             </div>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <div v-if="detail.imageUrl?.length > 0">
                                                 <img :src="detail.imageUrl" class="w-10 h-10 object-contain" alt="">
@@ -231,6 +231,7 @@ export default {
         };
 
 
+
         //fetch category & product
         // const fetchCategoryProduct = async () => {
         //     const categoryProduct = [];
@@ -294,7 +295,7 @@ export default {
                 // Fetch all categories first
                 const categoryPromises = categoryDocument.value.map(async (cate) => {
                     const { subcollectionData: products, fetchSubcollection } = useSubcollection('categories', cate.id, 'product', orderByField);
-
+              
                     try {
                         await fetchSubcollection();
 
