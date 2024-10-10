@@ -84,33 +84,10 @@
 
                                 </div>
 
-                                <!-- <div class="" v-if="selectedProductDetail.length > 0">
-
-                                    <div class="space-y-1">
-                                        <label for="" class="font-NotoSansKhmer font-[500]">មេរៀនសិក្សា: *</label>
-                                        <select  required
-                                            class="input_text p-[9.4px] capitalize">
-                                            <option selected value="">--ជ្រើសរើសមេរៀនសិក្សា--</option>
-                                            <option v-for="detail in selectedProductDetail" :key="detail.id"
-                                                :value="detail.id">
-                                                {{ detail.title }} <img :src="detail.imageUrl" />
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                </div> -->
+                          
                             </div>
 
-                            <!-- Product Details Section -->
-
-                            <!-- <div class="flex justify-end gap-2 mt-20">
-                                <button @click.prevent="handleClose" class="button_only_close">បោះបង់</button>
-                                <button class="button_only_submit">រក្សាទុក</button>
-                                <button v-else disabled
-                                    class="bg-blue-400 px-8 py-2.5 text-white flex items-center gap-1 font-NotoSansKhmer font-bold">
-                                    កំពុងរក្សាទុក...
-                                </button>
-                            </div> -->
+                        
 
                             <div v-if="openModalSave"
                                 class="w-full  fixed top-0 left-0 flex justify-center bg-black/15 h-full   items-center">
