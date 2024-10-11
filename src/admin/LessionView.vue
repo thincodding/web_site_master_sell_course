@@ -71,7 +71,13 @@
                             <template v-for="pro in cat.product" :key="pro.id">
                                 <template v-for="detail in pro.productDetail" :key="detail.id">
                                     <tr v-if="detail.id !== 'dummy'">
-                                        <td>{{ detail.title }}</td>
+                                        <td>
+                                            {{ detail.title }}
+                                            <span v-if="detail.isBestSeller"
+                                                class="ml-2 px-2 py-0.5 bg-green-100 text-green-800 text-xs font-semibold rounded">
+                                                Best Seller
+                                            </span>
+                                        </td>
                                         <td>
                                             <p class="bg-blue-500 pl-2 text-xs p-0.5 text-white rounded-full">
                                                 {{ pro.productName }}
@@ -100,6 +106,7 @@
                                             <div v-if="detail.imageUrl?.length > 0">
                                                 <img :src="detail.imageUrl" class="w-10 h-10 object-contain" alt="">
                                             </div>
+                                            
                                             <div v-else>
                                                 <img class="w-10 h-10"
                                                     src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
@@ -189,9 +196,10 @@ import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDoc
 import getNestedSubcollection from '@/firebase/getNestedSubcollection';
 import AddLessionModal from '@/components/admin/AddLessionModal.vue';
 import LessionModalDeleteComponent from '@/components/admin/LessionModalDeleteComponent.vue';
+import getNestedSubSubcollection from '@/firebase/getNestedSubsubCollection';
+
 import moment from 'moment';
 import { onMounted, ref, computed } from 'vue';
-
 
 export default {
     components: {
@@ -202,68 +210,40 @@ export default {
     },
     setup() {
         const products = ref([]);
-        const productDetails = ref([])
+        const productDetails = ref([]);
         const currentComponents = ref("");
         const isOpenAction = ref({});
-        // const editData = ref(null);
-        const searchText = ref("")
-        const isLoading = ref(false)
-        const category = ref(null)
-        const product = ref(null)
-        const productDetail = ref(null)
+        const searchText = ref("");
+        const isLoading = ref(false);
+        const category = ref(null);
+        const product = ref(null);
+        const productDetail = ref(null);
         const date = moment;
-        const { documents: categoryDocument, fetchCollection, } = useFirestoreCollection("categories");
 
+        // Firestore Collections
+        const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
 
         onMounted(async () => {
             await fetchCollection();
             await fetchCategoryProduct();
             await fetchCategoryProductAndProductDetail();
-
         });
 
         const onMountedCurrentComponents = async (component) => {
             currentComponents.value = component;
-            // editData.value = null;
-            category.value = null
-            product.value = null
-            productDetail.value = null
+            category.value = null;
+            product.value = null;
+            productDetail.value = null;
         };
 
-
-
-        //fetch category & product
-        // const fetchCategoryProduct = async () => {
-        //     const categoryProduct = [];
-
-        //     for (const cate of categoryDocument.value) {
-        //         const orderByField = 'productName';
-        //         const { subcollectionData: product, fetchSubcollection } = useSubcollection('categories', cate.id, 'product', orderByField);
-        //         await fetchSubcollection();
-        //         categoryProduct.push({
-        //             id: cate.id,
-        //             categoryName: cate.categoryName,
-        //             description: cate.description,
-        //             image: cate.image,
-        //             product: product.value,
-        //         });
-        //     }
-        //     products.value = categoryProduct;
-        // };
-
+        // Fetch Categories and Products
         const fetchCategoryProduct = async () => {
-          
             const orderByField = 'productName';
 
             try {
-                // Fetch all categories and products concurrently
                 const categoryPromises = categoryDocument.value.map(async (cate) => {
                     const { subcollectionData: product, fetchSubcollection } = useSubcollection('categories', cate.id, 'product', orderByField);
-
-                    // Fetch products for the category
                     await fetchSubcollection();
-
-                    // Return the category and its products
                     return {
                         id: cate.id,
                         categoryName: cate.categoryName,
@@ -273,67 +253,97 @@ export default {
                     };
                 });
 
-                // Wait for all categories and products to be fetched
                 const result = await Promise.all(categoryPromises);
-
-                // Store the result in your reactive `products` variable
                 products.value = result;
             } catch (err) {
                 console.error('Error fetching categories and products:', err);
             }
         };
 
-
-
-        //fetch nestedsubcollection  
+        
+        // Fetch ProductDetails and Students, and Compute isBestSeller
         const fetchCategoryProductAndProductDetail = async () => {
             isLoading.value = true;
-
             const orderByField = 'productName';
 
             try {
-                // Fetch all categories first
                 const categoryPromises = categoryDocument.value.map(async (cate) => {
                     const { subcollectionData: products, fetchSubcollection } = useSubcollection('categories', cate.id, 'product', orderByField);
-              
+
                     try {
                         await fetchSubcollection();
 
-                        // Fetch all products and their details concurrently
                         const productPromises = products.value.map(async (pro) => {
                             const { subcollectionData: productDetail, fetchSubcollections } = getNestedSubcollection('categories', cate.id, 'product', pro.id, 'productDetail');
 
                             try {
                                 await fetchSubcollections();
 
+                                // Fetch students for each productDetail
+                                const productDetailWithStudents = await Promise.all(productDetail.value.map(async (detail) => {
+                                    const { subSubcollectionData: students, fetchSubSubcollections } = getNestedSubSubcollection(
+                                        'categories',
+                                        cate.id,
+                                        'product',
+                                        pro.id,
+                                        'productDetail',
+                                        detail.id,
+                                        'student' 
+                                    );
+
+                                    try {
+                                        await fetchSubSubcollections();
+
+                                        // Compute the count of students with the same title
+                                        const titleCounts = students.value.reduce((acc, stu) => {
+                                            const title = stu.title || 'Unknown';
+                                            acc[title] = (acc[title] || 0) + 1;
+                                            return acc;
+                                        }, {});
+
+                                        const isBestSeller = titleCounts[detail.title] > 2;
+
+                                        return {
+                                            ...detail,
+                                            student: students.value,
+                                            isBestSeller 
+                                        };
+                                    } catch (err) {
+                                        console.error(`Error fetching students for productDetail ${detail.id}:`, err);
+                                        return {
+                                            ...detail,
+                                            student: [],
+                                            isBestSeller: false
+                                        };
+                                    }
+                                }));
+
                                 return {
                                     ...pro,
-                                    productDetail: productDetail.value
+                                    productDetail: productDetailWithStudents
                                 };
                             } catch (err) {
-                                console.error(`Error processing product ${pro.id}:`, err);
-                                return null; // Handle failed product fetch
+                                console.error(`Error fetching productDetail for product ${pro.id}:`, err);
+                                return null;
                             }
                         });
 
                         const productArray = await Promise.all(productPromises);
-
                         return {
                             id: cate.id,
                             categoryName: cate.categoryName,
                             description: cate.description,
                             image: cate.image,
-                            product: productArray.filter(Boolean) // Filter out failed products
+                            product: productArray.filter(Boolean)
                         };
                     } catch (err) {
-                        console.error(`Error processing category ${cate.id}:`, err);
-                        return null; // Handle failed category fetch
+                        console.error(`Error fetching products for category ${cate.id}:`, err);
+                        return null;
                     }
                 });
 
                 const result = await Promise.all(categoryPromises);
-
-                productDetails.value = result.filter(Boolean); // Filter out failed categories
+                productDetails.value = result.filter(Boolean);
             } catch (err) {
                 console.error('Error fetching categories:', err);
             }
@@ -341,27 +351,27 @@ export default {
             isLoading.value = false;
         };
 
-
-        // Filter logic based on search text
+        // Filter Logic Based on Search Text
         const filterProductDetail = computed(() => {
             if (!searchText.value) {
                 return productDetails.value;
             }
 
-            // Filter products based on the search text
+            const lowerSearch = searchText.value.toLowerCase();
+
             return productDetails.value.map(category => ({
                 ...category,
-                product: category.product.filter(pro =>
-                    pro.productName.toLowerCase().includes(searchText.value.toLowerCase()) ||
-                    pro.productDetail.some(detail =>
-                        detail.title.toLowerCase().includes(searchText.value.toLowerCase())
+                product: category.product.map(pro => ({
+                    ...pro,
+                    productDetail: pro.productDetail.filter(detail =>
+                        detail.title.toLowerCase().includes(lowerSearch) ||
+                        pro.productName.toLowerCase().includes(lowerSearch)
                     )
-                ),
-            }));
+                })).filter(pro => pro.productDetail.length > 0)
+            })).filter(category => category.product.length > 0);
         });
 
-
-        //handle action
+        // Handle Action Buttons
         const handleIsOpenAction = (id) => {
             if (id) {
                 if (isOpenAction.value[id]) {
@@ -376,22 +386,21 @@ export default {
 
         const handleLoadProductDetail = async () => {
             await fetchCategoryProductAndProductDetail();
-        }
-
+        };
 
         const handleDelete = (cat, pro, detail) => {
-            currentComponents.value = 'LessionModalDeleteComponent'
-            category.value = cat
-            product.value = pro
-            productDetail.value = detail
-        }
+            currentComponents.value = 'LessionModalDeleteComponent';
+            category.value = cat;
+            product.value = pro;
+            productDetail.value = detail;
+        };
 
         const handleEditProductDetail = (cat, pro, detail) => {
-            currentComponents.value = 'AddLessionModal'
-            category.value = cat
-            product.value = pro
-            productDetail.value = detail
-        }
+            currentComponents.value = 'AddLessionModal';
+            category.value = cat;
+            product.value = pro;
+            productDetail.value = detail;
+        };
 
         return {
             onMountedCurrentComponents,
@@ -411,7 +420,6 @@ export default {
             productDetail,
             handleLoadProductDetail,
             handleEditProductDetail
-
         };
     },
 };

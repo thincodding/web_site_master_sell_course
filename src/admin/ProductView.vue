@@ -153,7 +153,7 @@
     </div>
 
 
-
+   
   </div>
 
   <component :is="currentComponents" @close="currentComponents = ''" :handleFetch="handleFetch" :product="product"

@@ -30,8 +30,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </template>
 
@@ -39,8 +37,10 @@
 
 import { ref } from 'vue';
 import useNestedDocument from '@/firebase/useNestedSubcollection';
-import { handleMessageSuccess } from '../js/messageHandler';
+import { handleMessageError, handleMessageSuccess } from '../js/messageHandler';
 import useStorage from '@/firebase/useStorage';
+import { collection, getDocs } from 'firebase/firestore';
+import { projectFirestore } from '@/config/config';
 
 
 export default {
@@ -58,14 +58,23 @@ export default {
 
 
         const handleDelete = async (categoryId, productId, productDetailId, imageUrl) => {
+
             try {
                 isLoading.value = true
-                // Import deleteDocs from useNestedDocument hook
+
+                const docRef = collection(projectFirestore, 'categories', categoryId, 'product', productId, 'productDetail', productDetailId, 'student');
+                const productSnapshot = await getDocs(docRef);
+
+                // Check if the product has any associated cateogory
+                if (!productSnapshot.empty) {
+                    
+                    handleMessageError(`មេរៀន ${props.productDetail.title} មានសិស្សចុះឈ្មោះរៀនរួចហើយ។ មិនអាចលុបបានទេ!`);
+
+                    isLoading.value = false
+                    return;
+                }
                 const { deleteDocs } = useNestedDocument('categories', categoryId, 'product', productId, 'productDetail');
-
-                // Call the deleteDocs function with the productDetailId
-                await deleteDocs(productDetailId);
-
+                 await deleteDocs(productDetailId);
                 // Success message
                 handleMessageSuccess(`បានលុបមេរៀន ${props.productDetail.title} ដោយជោគជ័យ`);
                 await removeImage(imageUrl)
@@ -77,10 +86,6 @@ export default {
                 console.log('Error deleting product detail:', err);
             }
         };
-
-
-
-
 
         return { handleClose, isLoading, handleDelete }
     }

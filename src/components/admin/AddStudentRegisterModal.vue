@@ -1,7 +1,7 @@
 <template>
     <div class="h-screen bg-black/50 w-full z-10 fixed top-0 left-0 select-none">
         <div class="flex justify-center items-center mt-5">
-            <div class="bg-white w-[50%] overflow-y-auto" v-motion :initial="{ scale: 0.9 }"
+            <div class="bg-white w-[60%] overflow-y-auto" v-motion :initial="{ scale: 0.9 }"
                 :visible="{ opacity: 1, scale: 1 }">
 
 
@@ -18,8 +18,7 @@
                         </p>
                     </div>
                     <div>
-                        <form class="mt-3">
-
+                        <form @submit.prevent="handleSubmitStudent" class="mt-3">
                             <div class="space-y-2">
                                 <div class="grid grid-cols-2 gap-3">
                                     <div class="space-y-1">
@@ -64,7 +63,7 @@
 
                                         <div v-for="detail in selectedProductDetail" :key="detail.id">
                                             <div @click="handleOpen(detail)"
-                                                class="shadow bg-white h-44 rounded-md p-1 flex justify-center mt-10 cursor-pointer hover:bg-gray-50">
+                                                class="shadow bg-white h-48 rounded-md p-1 flex justify-center mt-10 cursor-pointer hover:bg-gray-50">
                                                 <div v-if="detail.imageUrl" class="p-2 ">
                                                     <div class="space-y-2">
                                                         <img class="w-full object-contain" :src="detail.imageUrl"
@@ -84,14 +83,14 @@
 
                                 </div>
 
-                          
+
                             </div>
 
-                        
+
 
                             <div v-if="openModalSave"
-                                class="w-full  fixed top-0 left-0 flex justify-center bg-black/15 h-full   items-center">
-                                <div class="h-96 bg-white border-t-2 border-t-blue-500  shadow-md w-[90%] p-4" v-motion
+                                class="w-full  fixed top-0 left-0 flex justify-center bg-black/30 h-full   items-center">
+                                <div class="h-96 overflow-y-auto  bg-white border-t-2 border-t-blue-500  shadow-md w-[70%] p-4" v-motion
                                     :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
                                     <div class="flex justify-between">
                                         <div class="flex gap-1">
@@ -120,10 +119,11 @@
                                         </div>
                                     </div>
 
-                                    <div>
-                                        <div class="p-4 mt-3 space-y-3">
+                                    <div class="grid grid-cols-2 gap-2 ">
+
+                                        <div class="p-4 m-3 space-y-3">
                                             <div>
-                                                <img class="w-52" :src="items.imageUrl" alt="">
+                                                <img class="w-52 border-[1px]" :src="items.imageUrl" alt="">
                                                 <div class="flex items-center gap-1 mt-4">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -139,17 +139,37 @@
                                                 </div>
                                             </div>
 
-                                            <div class="flex w-[40%] gap-1">
+                                            <div class="flex gap-1">
                                                 <p>មេរៀន៖</p>
-                                                <p class="font-bold ">{{ items.title }}</p>
+                                                <p class="font-bold line-clamp-3">{{ items.title }}</p>
+                                            </div>
+
+                                            <div class="flex gap-1">
+                                                <p>តម្លៃសិក្សា៖</p>
+                                                <p class="font-bold line-clamp-3">${{ items.price }}</p>
                                             </div>
                                         </div>
+
+                                        <div class="mt-4">
+                                            <input type="text" hidden readonly v-model="productDetailId" class="input_text">
+                                            <div class="space-y-1">
+                                                <label for="" class="font-NotoSansKhmer font-[500]">ចំនួន:*</label>
+                                                <input type="text" required placeholder="ចំនួន" class="input_text"
+                                                    v-model="qty">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="flex justify-end">
+                                        <button v-if="!isLoading" class="button_only_submit">រក្សាទុក</button>
+                                        <button v-else disabled
+                                            class="bg-blue-400 px-8 py-2.5  text-white flex items-center gap-1  font-NotoSansKhmer font-bold">កំពុងរក្សាទុក...</button>
                                     </div>
                                 </div>
                             </div>
 
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -163,27 +183,31 @@ import { onMounted, ref, watch } from 'vue';
 import getDocument from '@/firebase/getDocument';
 import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDocument';
 import getNestedSubcollection from '@/firebase/getNestedSubcollection';
-
+import useNestedSubDocument from '@/firebase/useNestedSubcollectionDocument';
+import { handleMessageSuccess } from '../js/messageHandler';
 export default {
-    props: ['documentProducts'],
+    props: ['documentProducts', 'handleLoadStudent'],
 
     setup(props, { emit }) {
-        const isLoading = ref(true);
+        const isLoading = ref(false);
         const categoryId = ref('');
         const productId = ref("");
         const category = ref([]);
         const productDetails = ref([]);
         const studentName = ref('');
-        const lectures = ref('');
         const selectedProductDetail = ref([]);
         const openModalSave = ref(false)
         const items = ref(null)
+        const title = ref(null)
+        const productDetailId = ref(null)
+        const qty = ref("")
 
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
 
         onMounted(async () => {
             await fetchCollection();
             await fetchCategoryProductAndProductDetail();
+
         });
 
         // Filter display based on selected category
@@ -284,12 +308,10 @@ export default {
             for (const category of productDetails.value) {
                 const product = category.product.find(p => p.id === productId.value);
                 if (product) {
-                    selectedProductDetail.value = product.productDetail || []; // Ensure it's an array
+                    selectedProductDetail.value = product.productDetail || [];
                     break;
                 }
             }
-
-            // If productDetail is nested or requires additional fetching, adjust accordingly
             console.log('Selected Product Details:', selectedProductDetail.value);
         };
 
@@ -297,13 +319,33 @@ export default {
         const handleOpen = (item) => {
             openModalSave.value = !openModalSave.value
             items.value = item
-
+            productDetailId.value = item.id
+            title.value = item.title
         }
 
         const handleCloseX = () => {
             openModalSave.value = false
         }
 
+        const handleSubmitStudent = async () => {
+            isLoading.value = true
+            const {addDocs} = useNestedSubDocument('categories',categoryId.value, 'product', productId.value, 'productDetail', productDetailId.value, 'student' )
+
+            const data =  {
+
+                studentName: studentName.value,
+                title: title.value,
+                qty: qty.value
+            }
+
+            await addDocs(data)
+            handleMessageSuccess(`បានរក្សាទុក ${studentName.value} ដោយជោគជ័យ`)
+            handleCloseX();
+            await props.handleLoadStudent();
+            studentName.value = ''
+            isLoading.value = false
+            qty.value = ''
+        }
 
         return {
             handleCloseX,
@@ -316,11 +358,13 @@ export default {
             productDetails,
             selectedProductDetail,
             studentName,
-            lectures,
             showProductDetail,
             openModalSave,
             handleOpen,
-            items
+            items,
+            productDetailId,
+            qty,
+            handleSubmitStudent
         };
     }
 };

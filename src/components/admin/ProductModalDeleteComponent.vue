@@ -25,6 +25,7 @@
                             </button>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -59,7 +60,7 @@ export default {
                 isLoading.value = true;
 
 
-                isLoading.value = true
+            
                 // Get the 'product' subcollection for the cateogory
                 const docRef = collection(projectFirestore, 'categories', categoryId, 'product', productId, 'productDetail');
                 const productSnapshot = await getDocs(docRef);

@@ -13,6 +13,9 @@
   <div>
     <BannerHomeView />
   </div>
+  <div>
+    <LearnerViewingView/>
+  </div>
 
   <div class="">
     <FooterViewVue />
@@ -26,7 +29,7 @@ import FooterViewVue from './FooterView.vue'
 
 import NavbarViewVue from './NavbarView.vue'
 import BannerHomeView from '@/components/client/BannerHomeView.vue'
-
+import LearnerViewingView from '@/components/client/LearnerViewingView.vue'
 
 export default {
   name: 'HomeView',
@@ -35,7 +38,8 @@ export default {
     // BussinessDropdownVue,
     NavbarViewVue,
     SlideComponentVue,
-    BannerHomeView
+    BannerHomeView,
+    LearnerViewingView
   }
 }
 </script>
