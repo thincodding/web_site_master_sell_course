@@ -47,11 +47,12 @@ const routes = [
     component: () => import('@/views/VerifySuccess.vue')
   },
   {
-    path: "/top_category",
-    name: "top_category",
-    component: () => import('@/components/client/TopCategory.vue')
+    path: "/selectionCourse",
+    name: "selectionCourse",
+    component: () => import('@/components/client/SelectionCourse.vue')
   }
 ]
+
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

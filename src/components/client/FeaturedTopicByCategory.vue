@@ -1,24 +1,33 @@
 <template>
-    <div class="xl:w-[1200px] mx-auto my-10 px-10 lg:px-10 xl:px-0">
-        <div class="my-4">
-            <h1 class="text-[18px] lg:text-[20px]  md:text-[20px]">Top Categories</h1>
-        </div>
+    <div class="bg-[#E4E8EB]/30 py-5 ">
+        <div class="xl:w-[1200px] mx-auto my-5 px-10 lg:px-10 xl:px-0">
 
-        <!-- Loading Indicator -->
-        <div v-if="isLoading" class="text-center py-10">
-            <p>Loading...</p>
-        </div>
+            <!-- Loading Indicator -->
+            <div v-if="isLoading" class="text-center py-10">
+                <p>Loading...</p>
+            </div>
 
-        <!-- Categories Display -->
-        <div v-else>
-       
+            <!-- Categories Display -->
+            <div v-else>
+                <h1 class="text-[20px]  my-3">Featured topics by category</h1>
+                <div v-if="filteredCategories.length === 0" class="text-center py-10">
+                    <p>No Featured topics by category.</p>
+                </div>
+                <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div v-for="category in filteredCategories" :key="category.id" class="">
+                        <h2 class="text-md font-[400] mb-1 capitalize">{{ category.categoryName }}</h2>
+                        <div>
+                            <div>
+                                <div v-for="product in category.product" :key="product.id">
+                                    <p class=" text-sm md:text-md text-indigo-600 underline cursor-pointer">{{ product.productName }}</p>
 
-            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div v-for="category in filteredCategories" :key="category.id">
-                    <div class="p-4 bg-[#E4E8EB]/30">
-                        <img :src="category.image" alt="" class="w-full h-40 object-contain rounded-md mb-4" />
+                                    <span class="text-gray-500 text-[13px]">
+                                        {{ product.productDetail.reduce((sum, detail) => sum + detail.studentCount, 0)}} learners 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h2 class="text-sm my-2 mb-2 capitalize font-[500]">{{ category.categoryName }}</h2>
                 </div>
             </div>
         </div>
@@ -100,7 +109,7 @@ export default {
                                         await fetchSubSubcollections();
 
                                         const studentCount = students.value.length;
-                                        const isBestSeller = studentCount > 1;
+                                        const isBestSeller = studentCount > 2;
 
                                         return {
                                             ...detail,
@@ -165,23 +174,23 @@ export default {
             isLoading.value = false;
         };
 
-        // Updated filteredCategories
+        // Computed property to gather categories with best selling products
         const filteredCategories = computed(() => {
             return productDetails.value.filter(category => {
-                const totalStudents = category.product.reduce((sum, product) => {
-                    return sum + product.productDetail.reduce((detailSum, detail) => detailSum + detail.studentCount, 0);
-                }, 0);
-                return totalStudents > 10; 
+                return category.product.some(product => product.productDetail.length > 0);
             });
         });
-
+        
         return {
-            filteredCategories,
+            filteredCategories, // Use this in the template
             isLoading,
+
+
         };
     },
 };
 </script>
 
-
-<style scoped></style>
+<style scoped>
+/* Add your styles here */
+</style>

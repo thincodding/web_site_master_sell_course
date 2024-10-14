@@ -1,12 +1,12 @@
 <template>
     <div class="xl:w-[1200px] mx-auto my-5 px-10 lg:px-10 xl:px-0">
         <div class="my-4">
-            <h1 class="text-[18px] lg:text-[30px] font-playfair md:text-[24px]">Learners are viewing</h1>
+            <h1 class="text-[18px] lg:text-[20px] md:text-[20px]">Learners are viewing</h1>
         </div>
         <div class="relative">
             <swiper ref="mySwiper" :navigation="{
-                nextEl: '.button-next-slide',
-                prevEl: '.button-pre-slide'
+                nextEl: '.button-next-slides',
+                prevEl: '.button-pre-slides'
             }" :spaceBetween="10" :slidesPerView="'auto'" :breakpoints="{
                 '540': { slidesPerView: 2, spaceBetween: 20 },
                 '768': { slidesPerView: 3, spaceBetween: 15 },
@@ -48,7 +48,7 @@
                 </swiper-slide>
             </swiper>
 
-            <div class="button-pre-slide cursor-pointer rounded-full text-white absolute top-[45%] -left-5 z-[2]">
+            <div class="button-pre-slides cursor-pointer rounded-full text-white absolute top-[45%] -left-5 z-[2]">
                 <div class="flex justify-center w-10 h-10 border-gray-500 border-[1px] items-center bg-background rounded-full hover:bg-background/90"
                     @click="prevSlide">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="button-next-slide cursor-pointer rounded-full text-white absolute top-[45%] -right-5  xl:-right-5 z-[2]">
+            <div class="button-next-slides cursor-pointer rounded-full text-white absolute top-[45%] -right-5  xl:-right-5 z-[2]">
                 <div class="flex justify-center w-10 h-10 border-gray-500 border-[1px] items-center bg-background rounded-full hover:bg-background/90"
                     @click="nextSlide">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

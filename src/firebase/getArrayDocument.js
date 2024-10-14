@@ -30,7 +30,6 @@ export const useSubcollection = (parentCollection, docId, subcollectionName, ord
         try {
             let subcollectionRef = collection(projectFirestore, `${parentCollection}/${docId}/${subcollectionName}`);
             
-            // Apply ordering if orderByField is provided
             if (orderByField) {
                 subcollectionRef = query(subcollectionRef, orderBy(orderByField));
             }

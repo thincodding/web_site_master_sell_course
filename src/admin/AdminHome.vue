@@ -196,6 +196,8 @@
                     </p>
                     <p v-else-if="currentRouteName === 'categoryList'" class="font-NotoSansKhmer font-bold select-none">
                         ប្រភេទ / <span class="text-gray-500 font-NotoSansKhmer">បញ្ចីវគ្គសិក្សា</span></p>
+                        <p v-else-if="currentRouteName === 'lession'" class="font-NotoSansKhmer font-bold select-none">
+                            ប្រភេទ / <span class="text-gray-500 font-NotoSansKhmer">បញ្ចីមេរៀន</span></p>
                     <p v-else-if="currentRouteName === 'partner'" class="font-NotoSansKhmer font-bold select-none">
                         ប្រភេទ / <span class="text-gray-500 font-NotoSansKhmer">បញ្ចីវគ្គសិក្សា</span></p>
                     <p v-else class="font-NotoSansKhmer font-bold select-none">ទំព័រដើម / <span

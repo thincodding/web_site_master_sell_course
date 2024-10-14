@@ -64,12 +64,12 @@
 import { ref } from 'vue';
 import useStorage from '@/firebase/useStorage';
 import useCollection from '@/firebase/useCollection';
-import { projectFirestore, timestamp } from '@/config/config';
+import {  timestamp } from '@/config/config';
 import { handleMessageError, handleMessageSuccess } from '../js/messageHandler';
 import { watchEffect } from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { collection, getDocs } from 'firebase/firestore';
+// import { collection, getDocs } from 'firebase/firestore';
 
 export default {
 
@@ -152,15 +152,15 @@ export default {
                 };
 
                 if (props.editCategory) {
-                    const docRef = collection(projectFirestore, 'categories', props.editCategory.id, 'product');
-                    const categorySnapshot = await getDocs(docRef);
+                    // const docRef = collection(projectFirestore, 'categories', props.editCategory.id, 'product');
+                    // const categorySnapshot = await getDocs(docRef);
 
-                    // Check if the category has any associated products
-                    if (!categorySnapshot.empty) {
+                    // // Check if the category has any associated products
+                    // if (!categorySnapshot.empty) {
 
-                        handleMessageError(`ប្រភេទ ${categoryName.value} មានផលិតផលដែលទាក់ទង។ មិនអាចកែប្រែបានទេ!`);
-                        return;
-                    }
+                    //     handleMessageError(`ប្រភេទ ${categoryName.value} មានផលិតផលដែលទាក់ទង។ មិនអាចកែប្រែបានទេ!`);
+                    //     return;
+                    // }
 
                     // Update the category data
                     await updateDocs(props.editCategory.id, data);
