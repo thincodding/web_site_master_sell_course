@@ -45,6 +45,11 @@ const routes = [
     path: "/verify",
     name: "verify",
     component: () => import('@/views/VerifySuccess.vue')
+  },
+  {
+    path: "/top_category",
+    name: "top_category",
+    component: () => import('@/components/client/TopCategory.vue')
   }
 ]
 
