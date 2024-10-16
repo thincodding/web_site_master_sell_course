@@ -4,15 +4,12 @@
             <h1 class="text-[18px] lg:text-[20px]  md:text-[20px]">Top Categories</h1>
         </div>
 
-        <!-- Loading Indicator -->
+
         <div v-if="isLoading" class="text-center py-10">
             <p>Loading...</p>
         </div>
 
-        <!-- Categories Display -->
         <div v-else>
-       
-
             <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div v-for="category in filteredCategories" :key="category.id">
                     <div class="p-4 bg-[#E4E8EB]/30">
@@ -165,7 +162,6 @@ export default {
             isLoading.value = false;
         };
 
-        // Updated filteredCategories
         const filteredCategories = computed(() => {
             return productDetails.value.filter(category => {
                 const totalStudents = category.product.reduce((sum, product) => {
