@@ -2,9 +2,7 @@
 
   <!-- desk top -->
   <div class="hidden xl:block">
-    <swiper
-    
-    :navigation="{
+    <swiper :navigation="{
       nextEl: '.button-next-slide',
       prevEl: '.button-pre-slide'
 
@@ -14,31 +12,33 @@
         <div class="flex justify-center">
           <img :src="img.image" class="w-full" alt="">
         </div>
-          <div class="absolute top-12 mt-2 left-16">
-              <div class="w-96 bg-white shadow-xl py-3 px-5">
-                <div>
-                  <h2 class="text-[30px] font-nato font-bold">{{ img.title }}</h2>
-                 <p class="text-[15px] text-background my-2">{{ img.subTitle }}</p>
-                </div>
-                  <div class="mt-5 mb-4">
-                    <router-link to="#" class="bg-background hover:bg-background/90 w-full p-3 font-bold text-white text-[15px]">{{ img.button }}</router-link>
-                  </div>
-              </div>
+        <div class="absolute mt-2 top-52 left-24">
+          <div class="px-5 py-3 bg-white shadow-xl w-96">
+            <div>
+              <h2 class="text-[20px]  font-bold font-KhmerMoul text-background">{{ img.title }}</h2>
+              <p class="text-[15px] text-background my-2">{{ img.subTitle }}</p>
+            </div>
+            <div class="mt-5 mb-4">
+              <router-link to="#"
+                class="bg-background hover:bg-background/90 w-full p-3 font-bold text-white text-[15px]">{{ img.button
+                }}</router-link>
+            </div>
           </div>
+        </div>
       </swiper-slide>
       <div class="button-pre-slide cursor-pointer rounded-full text-white absolute top-[43%] left-4 z-10">
-        <div class="flex justify-center w-9 h-9 items-center  bg-background rounded-full hover:bg-background/90">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-        </svg>
+        <div class="flex items-center justify-center rounded-full w-9 h-9 bg-background hover:bg-background/90">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+          </svg>
         </div>
       </div>
 
       <div class="button-next-slide cursor-pointer rounded-full text-white absolute top-[43%] right-4 z-10">
-        <div class="flex justify-center w-9 h-9 items-center  bg-background rounded-full hover:bg-background/90">
+        <div class="flex items-center justify-center rounded-full w-9 h-9 bg-background hover:bg-background/90">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" class="size-5 font-bold">
+            stroke="currentColor" class="font-bold size-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
           </svg>
 
@@ -48,91 +48,94 @@
     </swiper>
   </div>
 
-<!-- laptop -->
-  <div class="xl:hidden lg:block hidden md:hidden">
+  <!-- laptop -->
+  <div class="hidden xl:hidden lg:block md:hidden">
     <swiper :navigation="{
       nextEl: '.button-next-slide',
       prevEl: '.button-pre-slide'
 
-    }" :loop="true" :modules="modules" :speed="800"  class="mySwiper relative  xl:w-[1200px] ">
+    }" :loop="true" :modules="modules" :speed="800" class="mySwiper relative  xl:w-[1200px] ">
 
       <swiper-slide v-for="img in arr_image" :key="img">
         <div class="flex justify-center">
           <img :src="img.image" class="w-full" alt="">
         </div>
-          <div class="absolute top-8 mt-2 left-16">
-              <div class="w-96 bg-white shadow-xl py-3 px-5">
-                <div>
-                  <h2 class="text-[30px] font-nato font-bold">{{ img.title }}</h2>
-                 <p class="text-[15px] text-background my-2">{{ img.subTitle }}</p>
-                </div>
-                  <div class="mt-5 mb-4">
-                    <router-link to="#" class="bg-background hover:bg-background/90  w-full p-3 font-bold text-white text-[15px]">{{ img.button }}</router-link>
-                  </div>
-              </div>
+        <div class="absolute mt-2 top-48 left-24">
+          <div class="px-5 py-3 bg-white shadow-xl w-96">
+            <div>
+              <h2 class="text-[20px]  font-bold font-KhmerMoul text-background">{{ img.title }}</h2>
+              <p class="text-[15px] text-background my-2">{{ img.subTitle }}</p>
+            </div>
+            <div class="mt-5 mb-4">
+              <router-link to="#"
+                class="bg-background hover:bg-background/90  w-full p-3 font-bold text-white text-[15px]">{{ img.button
+                }}</router-link>
+            </div>
           </div>
+        </div>
       </swiper-slide>
-      
+
     </swiper>
   </div>
 
 
-<!-- template, ipad -->
-<div class="xl:hidden lg:hidden w-full hidden relative  md:block">
-  <swiper :navigation="{
+  <!-- template, ipad -->
+  <div class="relative hidden w-full xl:hidden lg:hidden md:block">
+    <swiper :navigation="{
       nextEl: '.button-next-slide',
       prevEl: '.button-pre-slide'
     }" :loop="true" :modules="modules" :speed="800" class="mySwiper ">
-    
-    <swiper-slide v-for="img in arr_image" :key="img">
-      <div class="flex justify-center">
-        <img :src="img.image" class="w-full " alt="">
-      </div>
-  
-      <div class="relative -mt-52  p-6">
-        <div class="w-80 bg-white shadow-md py-3 ml-7 p-5 ">
-          <div>
-            <h2 class="text-[24px] font-nato font-bold">{{ img.title }}</h2>
-            <p class="text-[14px] text-background my-2">{{ img.subTitle }}</p>
-          </div>
-          <div class="mt-5 mb-4">
-            <router-link to="#" class="bg-background w-full p-3 font-bold text-white text-[15px]">{{ img.button }}</router-link>
+
+      <swiper-slide v-for="img in arr_image" :key="img">
+        <div class="flex justify-center">
+          <img :src="img.image" class="w-full " alt="">
+        </div>
+
+        <div class="relative p-6 -mt-52">
+          <div class="p-5 py-3 bg-white shadow-md w-80 ml-7 ">
+            <div>
+              <h2 class="text-[18px]  font-bold font-KhmerMoul text-background">{{ img.title }}</h2>
+              <p class="text-[14px] text-background my-2">{{ img.subTitle }}</p>
+            </div>
+            <div class="mt-5 mb-4">
+              <router-link to="#" class="bg-background w-full p-3 font-bold text-white text-[15px]">{{ img.button
+                }}</router-link>
+            </div>
           </div>
         </div>
-      </div>
-    </swiper-slide>
-    
-  </swiper>
-</div>
+      </swiper-slide>
 
-<!-- mobile phone  -->
+    </swiper>
+  </div>
 
-<div class="xl:hidden lg:hidden w-full     md:hidden">
-  <swiper :navigation="{
+  <!-- mobile phone  -->
+
+  <div class="w-full xl:hidden lg:hidden md:hidden">
+    <swiper :navigation="{
       nextEl: '.button-next-slide',
       prevEl: '.button-pre-slide'
     }" :loop="true" :modules="modules" :speed="800" class="mySwiper ">
-    
-    <swiper-slide v-for="img in arr_image" :key="img">
-      <div class="">
-        <img :src="img.re_image" class="w-full h-[250px] object-cover " alt="">
-      </div>
-  
-      <div class="">
-        <div class="w-full  p-6  ">
-          <div>
-            <h2 class="text-[24px] font-nato font-bold">{{ img.title }}</h2>
-            <p class="text-[14px] text-background my-2">{{ img.subTitle }}</p>
-          </div>
-          <div class="mt-5 mb-4 w-full bg-background flex justify-center p-3 hover:bg-background/90" >
-            <router-link to="#" class=" font-bold text-white text-[16px] ">{{ img.button }}</router-link>
+
+      <swiper-slide v-for="img in arr_image" :key="img">
+        <div class="">
+          <img :src="img.re_image" class="w-full h-[250px] object-cover " alt="">
+        </div>
+
+        <div class="">
+          <div class="w-full p-6 ">
+            <div>
+              <h2 class="text-[16px]  font-bold font-KhmerMoul text-background">{{ img.title }}</h2>
+              <p class="text-[14px] text-background my-2">{{ img.subTitle }}</p>
+            </div>
+            <div class="flex justify-center w-full p-3 mt-5 mb-4 bg-background hover:bg-background/90">
+              <router-link to="#" class=" font-bold text-white text-[16px] ">{{ img.button }}</router-link>
+            </div>
           </div>
         </div>
-      </div>
-    </swiper-slide>
-    
-  </swiper>
-</div>
+      </swiper-slide>
+
+    </swiper>
+  </div>
 
 
 </template>
@@ -160,18 +163,18 @@ export default {
 
     const arr_image = ref([
       {
-        image: 'https://img-b.udemycdn.com/notices/home_carousel_slide/image/12c0830f-aa27-4843-993d-b440aa389991.jpeg',
-        re_image: "https://img-b.udemycdn.com/notices/home_carousel_slide/image_responsive/bc821b9d-badc-4c76-a6b5-b6d241834e11.jpeg",
-        title: 'Skills that drive you forward',
-        subTitle: 'Technology and the world of work change fast — with us, you’re faster. Get the skills to achieve goals and stay competitive.',
-        button: "Plan for organizations "
+        image: 'https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A36%3A57.990Zphoto_2024-04-09_15-34-43.jpg?alt=media&token=6a7130d0-bc6a-40a4-a57c-c3097b3ff7dc',
+        re_image: "https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A36%3A57.990Zphoto_2024-04-09_15-34-43.jpg?alt=media&token=6a7130d0-bc6a-40a4-a57c-c3097b3ff7dc",
+        title: 'វគ្គជំនាញគ្រប់គ្រងទិន្ន័យ',
+        subTitle: 'ជួយឱ្យលោកអ្នកចេះបង្កើតប្រព័ន្ធគ្រប់គ្រងទិន្នន័យមានលក្ខណៈបត់បែនដោយខ្លួនឯង និងត្រូវតាមតម្រូវការ',
+        button: "ចុះឈ្មោះឥឡូវនេះ"
       },
       {
-        image: 'https://img-b.udemycdn.com/notices/home_carousel_slide/image/bb0acdaf-d3e9-41dc-9d51-bfcf2b526ba1.jpg',
-        re_image: 'https://img-b.udemycdn.com/notices/home_carousel_slide/image_responsive/77a9388f-7601-4394-9288-21004e2f8a57.jpg',
-        title: 'This podcast is for the leaders',
-        subTitle: 'And those who will be. Learn to work, lead, and live better with new episodes of Leading Up dropping each Wednesday.',
-        button: "Liten now "
+        image: 'https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A32%3A42.169Zphoto_2024-04-09_15-27-46.jpg?alt=media&token=7eb1341c-bc24-4a6f-b20e-6863ffec46fd',
+        re_image: 'https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A32%3A42.169Zphoto_2024-04-09_15-27-46.jpg?alt=media&token=7eb1341c-bc24-4a6f-b20e-6863ffec46fd',
+        title: 'សិក្សាលើវគ្គរចនាគេហទំព័រ',
+        subTitle: 'លោកអ្នកអាចចេះរចនានិងបង្កើតគេហទំព័របានស្រស់ស្អាត ទាក់ទាញ ទាន់សម័យ ។',
+        button: "ចុះឈ្មោះឥឡូវនេះ"
       }
     ])
 
@@ -183,6 +186,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,32 +1,29 @@
 <template>
     <div class="p-10 xl:p-0">
         <div class="xl:w-[1200px] mx-auto">
-            <div v-if="isLoading" class="text-center py-10">
-                <p>Loading...</p>
-            </div>
+            <div>
 
-            <div v-else>
-                <h1 class="text-2xl lg:text-4xl font-bold mb-2 font-playfair">
-                    A broad selection of courses
-                </h1>
-                <p class="text-md my-3 text-background">
-                    Choose from over 250,000 online video courses with new additions
-                    published every month</p>
+                <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">វគ្គសិក្សាទាំងអស់</h1>
 
+                <p class="my-3 text-md text-background font-NotoSansKhmer ">
+                    ទាំងនេះជាវគ្គសិក្សាដែលមាននៅក្នុងសាលាម៉ាស្ទ័រ អាយធី
+                </p>
                 <div>
                     <TabGroup>
-                        <!-- Product Tab List -->
-                        <TabList class="flex space-x-10">
+
+                        <TabList class="flex w-full space-x-10 overflow-x-auto">
                             <Tab v-for="product in allProducts" :key="product.id" as="template" v-slot="{ selected }">
                                 <button :class="[
-                                    'space-x-3 py-2.5 text-sm font-medium leading-5',
-                                    'ring-white/60 ring-offset-2 focus:outline-none',
+                                    'space-x-3 py-2.5 text-sm font-medium leading-5 text-nowrap',
+                                    'ring-white/60 ring-offset-2 focus:outline-none text-nowrap',
                                     selected ? 'text-black text-lg' : 'text-background/80 hover:bg-white/[0.12]',
                                 ]">
                                     {{ product.productName }}
                                 </button>
                             </Tab>
                         </TabList>
+
+
 
                         <!-- Product Tab Panels -->
                         <TabPanels class="mt-2">
@@ -36,67 +33,69 @@
                                     <swiper :slidesPerView="4" :spaceBetween="10" :navigation="{
                                         nextEl: '.button-next-slidess',
                                         prevEl: '.button-pre-slidess'
-                                    }" :pagination="{ clickable: true }" 
-                                    
-                                      
-                                    :breakpoints="{
-                                                '240': {
-                                                    slidesPerView: 2,
-                                                    spaceBetween: 20,
-                                                },
-                                                '640px': {
-                                                    slidesPerView: 3,
-                                                    spaceBetween: 20,
-                                                },
-                                                '768': {
-                                                    slidesPerView: 3,
-                                                    spaceBetween: 10,
-                                                },
-                                                '1024': {
-                                                    slidesPerView: 4,
-                                                    spaceBetween: 40,
-                                                }
+                                    }" :pagination="{ clickable: true }" :breakpoints="{
+                                        '240': {
+                                            slidesPerView: 1,
+                                            spaceBetween: 20,
+                                        },
+                                        '640px': {
+                                            slidesPerView: 3,
+                                            spaceBetween: 20,
+                                        },
+                                        '768': {
+                                            slidesPerView: 3,
+                                            spaceBetween: 10,
+                                        },
+                                        '1024': {
+                                            slidesPerView: 4,
+                                            spaceBetween: 20,
+                                        }
 
-                                            }" 
-                                    
-                                    :modules="modules" class="mySwiper">
+                                    }" :modules="modules" class="mySwiper">
                                         <swiper-slide v-for="detail in product.productDetail" :key="detail.id">
                                             <div class="">
                                                 <div class="border-[1px]">
                                                     <div v-if="detail.imageUrl">
-                                                    <img :src="detail.imageUrl" alt="Course Image"
-                                                        class="w-full h-40 object-cover" />
-                                                </div>
-                                                <div v-else>
-                                                    <img src="https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg"
-                                                        alt="">
-                                                </div>
+                                                        <img :src="detail.imageUrl" alt="Course Image"
+                                                            class="object-center w-full h-full" />
+                                                    </div>
+                                                    <div v-else>
+                                                        <img src="https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg"
+                                                            alt="">
+                                                    </div>
                                                 </div>
                                                 <div class="mt-2 space-y-1">
                                                     <router-link
                                                         :to="{ name: 'courseDetail', params: { id: detail.id } }"
-                                                        class="text-[14px] font-semibold line-clamp-2 cursor-pointer text-background">
+                                                        class="text-[14px] font-semibold  cursor-pointer text-background line-clamp-1">
                                                         {{ detail.title }}
                                                     </router-link>
                                                     <div class="space-y-1.5">
-                                                        <p class="text-gray-500 text-[12px] line-clamp-1">Lectures: {{
+                                                        <p class="text-gray-500 text-[12px] line-clamp-1">បង្រៀនដោយ: {{
                                                             detail.lectures }}</p>
                                                         <div class="flex space-x-[2px] items-center">
-                                                            <p class="text-xs">5.0</p>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            <!-- <p class="text-xs">5.0</p> -->
+                                                            <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
-                                                            </svg>
-                                                            <p class="text-xs">({{ detail.studentCount }})</p>
+                                                            </svg> -->
+                                                            <div v-if="!detail.studentCount">
+                                                                <p class="text-xs">មិនមាន</p>
+                                                            </div>
+                                                            <div v-else>
+                                                                <p class="text-xs">({{ detail.studentCount }}) នាក់</p>
+                                                            </div>
+
                                                         </div>
                                                         <div>
-                                                            <p class="font-bold text-lg">${{ detail.price }}.99</p>
+                                                            <p class="text-lg font-bold">${{ detail.price }}</p>
                                                         </div>
-                                                        <div v-if="detail.studentCount > 2" class="text-xs w-20 text-center font-bold text-[#3D3C0A] bg-yellow-300/60 p-1">
-                                                            Best Seller</div>
-                                                        
+                                                        <div v-if="detail.studentCount > 2"
+                                                            class="text-xs w-20 text-center font-bold text-[#3D3C0A] bg-yellow-300/60 p-1">
+                                                            លក់ដាច់បំផុត</div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,7 +119,7 @@
                                         <div
                                             class="flex justify-center w-10 h-10 border-gray-500 border-[1px] items-center bg-background rounded-full hover:bg-background/90">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-5 font-bold">
+                                                stroke-width="1.5" stroke="currentColor" class="font-bold size-5">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                             </svg>

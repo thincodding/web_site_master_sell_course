@@ -1,19 +1,14 @@
 <template>
     <div class="xl:w-[1200px] mx-auto my-10 px-10 lg:px-10 xl:px-0">
-        <div class="my-4">
-            <h1 class="text-[18px] lg:text-[20px]  md:text-[20px]">Top Categories</h1>
+        <div>
+            <div class="my-4">
+            <h1 class="text-[18px] lg:text-[20px]  md:text-[20px] font-KhmerMoul font-bold text-background">ប្រភេទវគ្គសិក្សាពេញនិយម</h1>
         </div>
 
-
-        <div v-if="isLoading" class="text-center py-10">
-            <p>Loading...</p>
-        </div>
-
-        <div v-else>
-            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <div v-for="category in filteredCategories" :key="category.id">
                     <div class="p-4 bg-[#E4E8EB]/30">
-                        <img :src="category.image" alt="" class="w-full h-40 object-contain rounded-md mb-4" />
+                        <img :src="category.image" alt="" class="object-contain w-full h-40 mb-4 rounded-md" />
                     </div>
                     <h2 class="text-sm my-2 mb-2 capitalize font-[500]">{{ category.categoryName }}</h2>
                 </div>

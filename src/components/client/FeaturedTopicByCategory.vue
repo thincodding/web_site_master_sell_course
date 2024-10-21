@@ -1,25 +1,16 @@
 <template>
     <div class="bg-[#E4E8EB]/30 py-5 ">
         <div class="xl:w-[1200px] mx-auto my-5 px-10 lg:px-10 xl:px-0">
-
-            <!-- Loading Indicator -->
-            <div v-if="isLoading" class="text-center py-10">
-                <p>Loading...</p>
-            </div>
-
-            <!-- Categories Display -->
-            <div v-else>
-                <h1 class="text-[20px]  my-3">Featured topics by category</h1>
-                <div v-if="filteredCategories.length === 0" class="text-center py-10">
-                    <p>No Featured topics by category.</p>
-                </div>
-                <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div>
+                <h1 class="text-[20px]  my-3 font-KhmerMoul font-bold">វគ្គសិក្សាពេញនិយមតាមប្រភេទ</h1>
+               
+                <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
                     <div v-for="category in filteredCategories" :key="category.id" class="">
                         <h2 class="text-md font-[400] mb-1 capitalize">{{ category.categoryName }}</h2>
                         <div>
                             <div>
                                 <div v-for="product in category.product" :key="product.id">
-                                    <p class=" text-sm md:text-md text-indigo-600 underline cursor-pointer">{{ product.productName }}</p>
+                                    <p class="text-sm text-indigo-600 underline cursor-pointer md:text-md">{{ product.productName }}</p>
 
                                     <span class="text-gray-500 text-[13px]">
                                         {{ product.productDetail.reduce((sum, detail) => sum + detail.studentCount, 0)}} learners 

@@ -1,0 +1,19 @@
+{
+  "projects": {
+    "default": "fir-fe2ab",
+    "n": "fir-fe2ab"
+  },
+  "targets": {
+    "fir-fe2ab": {
+      "hosting": {
+        "main": [
+          "fir-fe2ab.firebaseapp.com"
+        ],
+        "admin": [
+          "admin.fir-fe2ab.firebaseapp.com"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

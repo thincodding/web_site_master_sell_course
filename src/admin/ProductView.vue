@@ -3,7 +3,7 @@
   <div class="bg-white  shadow-sm p-5 border-t-2 border-t-blue-500  animate-fade-up animate-duration-[2000ms]">
 
     <div class="my-5 flex justify-between">
-      <h1 class="text-[20px] font-NotoSansKhmer font-bold">តារាងបញ្ជីផលិតផល</h1>
+      <h1 class="text-[20px] font-NotoSansKhmer font-bold">តារាងបញ្ជីវគ្គសិក្សា</h1>
 
       <div class="flex gap-3">
         <button @click="onMountedCurrentComponents('AddLessionModal')"

@@ -3,7 +3,7 @@
         <div class="flex justify-center items-center mt-10">
             <div class="bg-white w-[45%]" v-motion :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
                 <div class="p-4 space-y-3">
-                    <h1 class="font-bold font-NotoSansKhmer">{{ !editData ? ' បង្កើតផលិតផល' : 'កែប្រែផលិតផល' }}</h1>
+                    <h1 class="font-bold font-NotoSansKhmer">{{ !editData ? ' បង្កើតវគ្គសិក្សា' : 'កែប្រែវគ្គសិក្សា' }}</h1>
                     <!-- <h1 v-else class="font-bold font-NotoSansKhmer">{{ !enabled ? '' : 'បង្កើតមេរៀន' }}</h1> -->
                     <div>
 

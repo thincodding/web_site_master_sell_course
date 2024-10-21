@@ -1,11 +1,11 @@
 <template>
-  <div class="hidden lg:block px-6 py-4 bg-white"
+  <div class="hidden px-6 py-4 bg-white lg:block"
     style="box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;">
-    <div class="flex justify-between items-center">
+    <div class="flex items-center justify-between">
 
-      <div class="flex space-x-5 items-center w-full  xl:mr-5 ">
+      <div class="flex items-center w-full space-x-5 xl:mr-5 ">
         <router-link to="/">
-          <img class="w-[91px] h-[34px]" src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" alt="">
+          <img class="w-[91px] h-[50px] object-contain" src="../assets/logo_mater_it.jpg" alt="">
         </router-link>
         <!-- <div class="text-[14px] font-[400] text-[#2D2f31] cursor-pointer hover:text-indigo-400"></div> -->
 
@@ -14,29 +14,29 @@
             class="text-[14px] group-hover:block  font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap">
             Categories</div>
 
-          <div class="h-14 w-20 right-0 bg-transparent absolute top-5 z-10 cursor-pointer ">
+          <div class="absolute right-0 z-10 w-20 bg-transparent cursor-pointer h-14 top-5 ">
           </div>
-          <div class="absolute top-14 hidden group-hover:block  ">
+          <div class="absolute hidden top-14 group-hover:block ">
             <CategoryDropdownVue />
           </div>
         </div>
 
-        <div class="px-1 w-full ">
+        <div class="w-full px-1 ">
           <SearchComponentsVue />
 
         </div>
       </div>
 
 
-      <div class="flex space-x-5 items-center">
+      <div class="flex items-center space-x-5">
         <div class="relative group lg:hidden xl:block">
           <div
             class="text-[14px] group-hover:block font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap lg:hidden xl:block">
             Udemy Business</div>
 
-          <div class="h-14 w-28 right-0  bg-transparent absolute top-2 cursor-pointer z-10">
+          <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
           </div>
-          <div class="absolute right-60 top-14 hidden group-hover:block ">
+          <div class="absolute hidden right-60 top-14 group-hover:block ">
             <BussinessDropdownVue />
           </div>
         </div>
@@ -47,15 +47,15 @@
             Teach on
             Udemy</div>
 
-          <div class="h-14 w-28 right-0  bg-transparent absolute top-2 cursor-pointer z-10">
+          <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
           </div>
-          <div class="absolute right-64 hidden top-14 group-hover:block ">
+          <div class="absolute hidden right-64 top-14 group-hover:block ">
             <TeachUdemyDropdownVue />
           </div>
         </div>
 
 
-        <div class="relative group  ">
+        <div class="relative group ">
           <div
             class="text-[14px] group-hover:block  font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap">
 
@@ -66,9 +66,9 @@
             </svg>
           </div>
 
-          <div class="h-14 w-10 right-0  bg-transparent absolute top-2 cursor-pointer ">
+          <div class="absolute right-0 w-10 bg-transparent cursor-pointer h-14 top-2 ">
           </div>
-          <div class="absolute right-64 top-14 hidden  group-hover:block ">
+          <div class="absolute hidden right-64 top-14 group-hover:block ">
             <CartDropdownVue />
           </div>
         </div>
@@ -91,7 +91,7 @@
             </div>
 
             <div v-else @click="isDrowdown = !isDrowdown"
-              class="border-[1px] border-background bg-gray-50 w-10 h-10 flex justify-center items-center rounded-full  hover:bg-gray-200 cursor-pointer">
+              class="border-[1px] border-background bg-gray-50 w-10 h-10 mr-3 flex justify-center items-center rounded-full  hover:bg-gray-200 cursor-pointer">
               <div class="capitalize">{{ user?.email[0] }}</div>
             </div>
 
@@ -129,8 +129,8 @@
   <div class="lg:hidden">
     <!-- Navigation bar -->
     <div style="box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;"
-      class="bg-white px-5 py-3">
-      <div class="flex justify-between items-center">
+      class="px-5 py-3 bg-white">
+      <div class="flex items-center justify-between">
         <div @click="handleIsopen">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6">
@@ -139,8 +139,9 @@
         </div>
 
         <div class="ml-10">
-          <router-link to="/">
-            <img class="w-[80px] h-[30px]" src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" alt="">
+          <router-link to="/" class="flex items-center">
+            <img class="w-[80px] h-[40px] object-contain" src="../assets/logo_mater_it.jpg" alt="">
+            <p class="font-bold text-background/90">Master-IT Learn Online</p>
           </router-link>
         </div>
 
@@ -177,7 +178,7 @@
         </div>
         <button @click="handleIsopen" :class="!isOpen ? 'hidden' : ''" v-motion :initial="{ scale: 0.9, opacity: 0 }"
           :visible="{ opacity: 1, scale: 1, transition: { delay: 450, ease: 'easeInOut', duration: 140 } }"
-          class="bg-white w-12 h-12 rounded-full absolute top-4 -right-16 flex justify-center items-center">
+          class="absolute flex items-center justify-center w-12 h-12 bg-white rounded-full top-4 -right-16">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -252,7 +253,7 @@ export default {
     const handleSignout = async () => {
       if (window.confirm('Are you sure to sign out')) {
         await signOut()
-        router.push({name: 'login'});
+        router.push({ name: 'login' });
         isDrowdown.value = false
       }
     }
