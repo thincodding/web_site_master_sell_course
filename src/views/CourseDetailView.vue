@@ -214,11 +214,13 @@
                                                         }}.99</h3>
                                                     <div class="mt-2 space-y-2">
                                                         <button
-                                                            class="bg-[#A435F0] p-2.5 w-full text-white font-bold hover:bg-[#A435F0]/90">Add
-                                                            to cart</button>
+                                                            class="bg-[#A435F0] p-2.5 w-full text-white font-bold hover:bg-[#A435F0]/90 font-NotoSansKhmer">
+                                                            
+                                                         ប្រឹក្សាតាមតេលេក្រាម    
+                                                        </button>
                                                         <button
-                                                            class="border-[1px] border-black p-2.5 w-full font-bold hover:bg-background/10">Buy
-                                                            Now</button>
+                                                            class="border-[1px] border-black p-2.5 w-full font-bold hover:bg-background/10">
+                                                            ប្រឹក្សាតាមឆាត</button>
 
                                                     </div>
                                                     <p class="text-center text-xs font-[300] mt-3">30-Day Money-Back
@@ -311,7 +313,7 @@
                                                                     completion</p>
                                                             </div>
                                                         </div>
-                                                        <div
+                                                        <!-- <div
                                                             class="flex items-center justify-between mt-3 space-x-2 text-xs">
                                                             <p class="underline cursor-pointer decoration-indigo-500">
                                                                 Share</p>
@@ -326,18 +328,18 @@
                                                                 placeholder="Enter Coupon">
                                                             <button
                                                                 class="bg-background h-[38px] px-7 text-xs text-white absolute top-0">Apply</button>
-                                                        </form>
+                                                        </form> -->
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                <div class="p-5 mb-4 space-y-2">
+                                                <!-- <div class="p-5 mb-4 space-y-2">
                                                     <h4 class="font-bold">Training 5 or more people?</h4>
                                                     <p class="text-xs font-[300] mt-2">Get your team access to 27,000+
                                                         top Udemy courses anytime, anywhere.</p>
                                                     <button
                                                         class="p-1.5 border-[1px] hover:bg-background/10 w-full border-background font-bold text-sm">Try
                                                         Udemy Bussiness</button>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -518,7 +520,7 @@
                                                         </div>
                                                         <button
                                                             class="w-full p-3 font-bold text-[16px] text-white bg-[#A435F0] mt-2 ">Try
-                                                            Personal Plan for free</button>
+                                                            ប្រឹក្សាតាមតេលេក្រាម</button>
                                                         <div class="mt-2 text-center">
                                                             <p class="text-[12px] text-background/80">Starting at $10.00
                                                                 per month after trial <br>
@@ -540,8 +542,8 @@
                                                             <h1 class="text-[19px] text-background font-bold">${{
                                                                 detail.price }}.99</h1>
                                                             <button
-                                                                class="w-full p-3 font-bold text-[16px] text-black border-[1px] border-background mt-2 ">Add
-                                                                to cart</button>
+                                                                class="w-full p-3 font-bold text-[16px] text-black border-[1px] border-background mt-2 ">
+                                                                ប្រឹក្សាតាមឆាត</button>
 
                                                             <div class="mt-2 text-center">
                                                                 <p class="text-[12px] text-background/80">
@@ -550,7 +552,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div
+                                                        <!-- <div
                                                             class="flex space-x-2 items-center text-[16px] justify-between mt-3 px-20">
                                                             <p class="underline cursor-pointer decoration-indigo-500">
                                                                 Share</p>
@@ -558,15 +560,15 @@
                                                                 Gift this course</p>
                                                             <p class="underline cursor-pointer decoration-indigo-300">
                                                                 Apply Coupon</p>
-                                                        </div>
-
+                                                        </div> -->
+<!-- 
                                                         <form action="" class="relative mt-4 ">
                                                             <input required type="text"
                                                                 class="border-[1px] p-1.5 w-full  border-black outline-none placeholder:text-xs"
                                                                 placeholder="Enter Coupon">
                                                             <button
                                                                 class="bg-background h-[38px] px-7 text-xs text-white absolute top-0 right-0">Apply</button>
-                                                        </form>
+                                                        </form> -->
 
                                                     </TabPanel>
                                                     <TabPanel>
@@ -579,8 +581,8 @@
                                                             </p>
                                                         </div>
                                                         <button
-                                                            class="w-full p-3 font-bold text-[16px] text-white bg-[#A435F0] mt-2 ">Try
-                                                            Udemy Business</button>
+                                                            class="w-full p-3 font-bold text-[16px] text-white bg-[#A435F0] mt-2 ">
+                                                            ប្រឹក្សាតាមតេលេក្រាម</button>
                                                     </TabPanel>
                                                 </TabPanels>
 

@@ -11,21 +11,21 @@
                 <div class="flex gap-5 mt-2">
                     <div
                         class="relative w-full overflow-hidden   h-6  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                        <div class="h-6 w-full  bg-gray-300"></div>
+                        <div class="w-full h-6 bg-gray-300"></div>
                     </div>
                 </div>
 
                 <div class="flex gap-5">
                     <div
                         class="relative w-full overflow-hidden   h-4  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                        <div class="h-6 w-full  bg-gray-300"></div>
+                        <div class="w-full h-6 bg-gray-300"></div>
                     </div>
                 </div>
 
                 <div class="flex gap-5 mt-2">
                     <div
                         class="relative w-full overflow-hidden   h-6  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                        <div class="h-6 w-full  bg-gray-300"></div>
+                        <div class="w-full h-6 bg-gray-300"></div>
                     </div>
                 </div>
 
@@ -41,8 +41,8 @@
                         pro.productName }} Course</h1>
                     <p class="text-[14px] md:text-[16px] lg:text-[15px] text-color_text mt-2">{{ pro.productName }}
                         relates to <span
-                            class="text-indigo-600 cursor-pointer font-bold hover:text-indigo-800">Development,</span>
-                        <span class="text-indigo-600 cursor-pointer font-bold hover:text-indigo-800">IT &
+                            class="font-bold text-indigo-600 cursor-pointer hover:text-indigo-800">Development,</span>
+                        <span class="font-bold text-indigo-600 cursor-pointer hover:text-indigo-800">IT &
                             Software</span>
                     </p>
                     <div v-for="detail in pro.productDetail" :key="detail.id" class="space-y-3">
@@ -59,15 +59,15 @@
                         </svg>
                         <p>3000,400 Learners</p>
                     </div>
-                    <div class="mt-5 xl:mt-10 space-y-1">
+                    <div class="mt-5 space-y-1 xl:mt-10">
                         <h3 class="font-bold text-[22px] text-background">Courses to get you started</h3>
                         <p class="text-[15px] text-color_text">Explore courses from experienced, real-world experts.</p>
                     </div>
 
                     <!-- md up -->
-                    <div class="w-full relative mt-4 hidden md:block">
+                    <div class="relative hidden w-full mt-4 md:block">
                         <TabGroup>
-                            <TabList class="flex space-x-5  p-1">
+                            <TabList class="flex p-1 space-x-5">
                                 <Tab v-for="(category, idx) in categories" :key="idx" as="template"
                                     v-slot="{ selected }">
                                     <button :class="[
@@ -120,12 +120,12 @@
                                                 :key="detail.id">
                                                 <div class="border-[1px]">
                                                     <img :src="detail.imageUrl" alt=""
-                                                        class="w-full h-40 object-contain" />
+                                                        class="object-contain w-full h-40" />
 
                                                 </div>
                                                 <div class="mt-2 space-y-1">
                                                     <router-link
-                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }" target="_blank" rel="noopener noreferrer"
+                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }"  rel="noopener noreferrer"
                                                         class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
                                                         {{
                                                             detail.title }}</router-link>
@@ -136,26 +136,26 @@
                                                         <p class="text-xs">5.0</p>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
 
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
@@ -169,7 +169,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="mt-1">
-                                                    <h1 class="text-md font-bold">${{ detail.price }}.99</h1>
+                                                    <h1 class="font-bold text-md">${{ detail.price }}.99</h1>
                                                 </div>
                                             </swiper-slide>
                                         </swiper>
@@ -191,7 +191,7 @@
                                             <div class="flex justify-center w-10 h-10 border-gray-500 border-[1px] items-center bg-background rounded-full hover:bg-background/90"
                                                 @click="nextSlide">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" class="size-5 font-bold">
+                                                    stroke-width="1.5" stroke="currentColor" class="font-bold size-5">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                                 </svg>
@@ -239,7 +239,7 @@
                                                 :key="detail.id">
                                                 <div class="border-[1px]">
                                                     <img :src="detail.imageUrl" alt=""
-                                                        class="w-full h-40 object-contain" />
+                                                        class="object-contain w-full h-40" />
 
                                                 </div>
                                                 <div class="mt-2 space-y-1">
@@ -255,26 +255,26 @@
                                                         <p class="text-xs">5.0</p>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
 
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
@@ -288,7 +288,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="mt-1">
-                                                    <h1 class="text-md font-bold">${{ detail.price }}.99</h1>
+                                                    <h1 class="font-bold text-md">${{ detail.price }}.99</h1>
                                                 </div>
                                             </swiper-slide>
                                         </swiper>
@@ -310,7 +310,7 @@
                                             <div class="flex justify-center w-10 h-10 border-gray-500 border-[1px] items-center bg-background rounded-full hover:bg-background/90"
                                                 @click="nextSlide">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" class="size-5 font-bold">
+                                                    stroke-width="1.5" stroke="currentColor" class="font-bold size-5">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                                 </svg>
@@ -358,7 +358,7 @@
                                                 :key="detail.id">
                                                 <div class="border-[1px]">
                                                     <img :src="detail.imageUrl" alt=""
-                                                        class="w-full h-40 object-contain" />
+                                                        class="object-contain w-full h-40" />
                                                 </div>
                                                 <div class="mt-2 space-y-1">
                                                     <router-link
@@ -373,26 +373,26 @@
                                                         <p class="text-xs">5.0</p>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
 
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3 text-orange-700">
+                                                            class="text-orange-700 size-3">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                         </svg>
@@ -406,7 +406,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="mt-1">
-                                                    <h1 class="text-md font-bold">${{ detail.price }}.99</h1>
+                                                    <h1 class="font-bold text-md">${{ detail.price }}.99</h1>
                                                 </div>
                                             </swiper-slide>
                                         </swiper>
@@ -428,7 +428,7 @@
                                             <div class="flex justify-center w-10 h-10 border-gray-500 border-[1px] items-center bg-background rounded-full hover:bg-background/90"
                                                 @click="nextSlide">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" class="size-5 font-bold">
+                                                    stroke-width="1.5" stroke="currentColor" class="font-bold size-5">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                                 </svg>
@@ -498,7 +498,7 @@
                                                     :key="detail.id">
                                                     <div class="border-[1px]">
                                                         <img :src="detail.imageUrl" alt=""
-                                                            class="w-full h-48 object-cover" />
+                                                            class="object-cover w-full h-48" />
 
                                                     </div>
                                                     <div class="mt-2 space-y-1">
@@ -514,26 +514,26 @@
                                                             <p class="text-xs">5.0</p>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
 
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
@@ -565,7 +565,7 @@
                             <div @click="handleIsOpenDropdownNew('New')" :class="{
                                 ' text-background': isOpentDrodownNewLession === 'New',
                                 'hover:text-white': !isOpentDrodownNewLession === 'New'
-                            }" class="cursor-pointer flex items-center justify-between   border-t-gray-300  mt-4">
+                            }" class="flex items-center justify-between mt-4 cursor-pointer border-t-gray-300">
 
                                 <p class="font-NotoSansKhmer text-[14px] font-bold font select-none ">
                                     {{ New }}
@@ -606,7 +606,7 @@
                                                     :key="detail.id">
                                                     <div class="border-[1px]">
                                                         <img :src="detail.imageUrl" alt=""
-                                                            class="w-full h-48 object-cover" />
+                                                            class="object-cover w-full h-48" />
 
                                                     </div>
                                                     <div class="mt-2 space-y-1">
@@ -622,26 +622,26 @@
                                                             <p class="text-xs">5.0</p>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
 
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
@@ -673,7 +673,7 @@
                             <div @click="handleIsOpenDropdownBeginer('Beginer Favorites')" :class="{
                                 ' text-background': isOpenDropdownFavorite === 'Beginer Favorites',
                                 'hover:text-white': !isOpenDropdownFavorite === 'Beginer Favorites'
-                            }" class="cursor-pointer flex items-center justify-between   border-t-gray-300  mt-4">
+                            }" class="flex items-center justify-between mt-4 cursor-pointer border-t-gray-300">
 
                                 <p class="font-NotoSansKhmer text-[14px] font-bold font select-none ">
                                     {{ Beginer_favorite }}
@@ -714,7 +714,7 @@
                                                     :key="detail.id">
                                                     <div class="border-[1px]">
                                                         <img :src="detail.imageUrl" alt=""
-                                                            class="w-full h-48 object-cover" />
+                                                            class="object-cover w-full h-48" />
 
                                                     </div>
                                                     <div class="mt-2 space-y-1">
@@ -730,26 +730,26 @@
                                                             <p class="text-xs">5.0</p>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
 
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                                                stroke="currentColor" class="size-3 text-orange-700">
+                                                                stroke="currentColor" class="text-orange-700 size-3">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                                             </svg>

@@ -11,7 +11,7 @@ const useNestedSubDocument = (rootCollectionName, parentId, subCollectionName, d
             console.error("Both parentId and documentId are required");
             return null;
         }
-
+        
         // Correct Firestore path structure: collection -> document -> collection -> document -> collection -> document -> collection
         const parentRef = doc(projectFirestore, rootCollectionName, parentId);
         const subCollectionRef = doc(parentRef, subCollectionName, documentId);
