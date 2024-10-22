@@ -519,7 +519,7 @@
                                                                     more</span></p>
                                                         </div>
                                                         <button
-                                                            class="w-full p-3 font-bold text-[16px] text-white bg-[#A435F0] mt-2 ">Try
+                                                            class="w-full p-3 font-bold text-[16px] text-white bg-[#A435F0] mt-2 ">
                                                             ប្រឹក្សាតាមតេលេក្រាម</button>
                                                         <div class="mt-2 text-center">
                                                             <p class="text-[12px] text-background/80">Starting at $10.00

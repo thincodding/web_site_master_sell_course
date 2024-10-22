@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-background px-5 md:px-12 py-7">
+  <div class="px-5 bg-background md:px-12 py-7">
     <div class="md:flex md:justify-between ">
-      <div class="md:hidden mb-5">
+      <div class="mb-5 md:hidden">
         <div class="border-[1px] border-white w-[140px] pl-2 h-[40px] cursor-pointer flex  space-x-2 items-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="w-[20px] h-[20px] text-white">
@@ -13,8 +13,8 @@
 
         </div>
       </div>
-      <div class=" md:flex md:justify-between  lg:gap-40 md:grap-10  md:space-x-10 lg:space-x-0 md:space-y-0 ">
-        <div class="md:flex md:flex-col flex flex-col md space-y-2">
+      <div class=" md:flex md:justify-between lg:gap-40 md:grap-10 md:space-x-10 lg:space-x-0 md:space-y-0">
+        <div class="flex flex-col space-y-2 md:flex md:flex-col md">
           <router-link to="#" class="hover-text-underline">Udemy Bussiness</router-link>
           <router-link to="#" class="hover-text-underline">Teach on Udemy</router-link>
           <router-link to="#" class="hover-text-underline">Get the app</router-link>
@@ -22,14 +22,14 @@
           <router-link to="#" class="hover-text-underline">Contact us</router-link>
 
         </div>
-        <div class="md:flex md:flex-col flex flex-col space-y-2 mt-2 md:mt-0">
+        <div class="flex flex-col mt-2 space-y-2 md:flex md:flex-col md:mt-0">
           <router-link to="#" class="hover-text-underline">Careers</router-link>
           <router-link to="#" class="hover-text-underline">Blog</router-link>
           <router-link to="#" class="hover-text-underline">Help and Support</router-link>
           <router-link to="#" class="hover-text-underline">Affiliate</router-link>
           <router-link to="#" class="hover-text-underline">Inventors</router-link>
         </div>
-        <div class="md:flex md:flex-col flex flex-col space-y-2 mt-2 md:mt-0">
+        <div class="flex flex-col mt-2 space-y-2 md:flex md:flex-col md:mt-0">
           <router-link to="#" class="hover-text-underline">Terms</router-link>
           <router-link to="#" class="hover-text-underline">Privacy policy</router-link>
           <router-link to="#" class="hover-text-underline">Cookies settings</router-link>
@@ -54,12 +54,12 @@
     </div>
 
 
-    <div class="md:flex justify-between md:mb-5 md:mt-14 mb-3 mt-5 space-y-2 md:space-y-0 items-center">
+    <div class="items-center justify-between mt-5 mb-3 space-y-2 md:flex md:mb-5 md:mt-14 md:space-y-0">
         <div>
-          <img class="w-[91px] h-[34px]" src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy-inverted.svg" alt="">
+          <img class="w-[91px] h-[34px] object-contain lg:w-full rounded-full" src="../assets/logo_mater_it.jpg" alt="">
         </div>
         <div class="">
-          <p class="text-white text-[12px]">© 2024 Udemy, Inc.</p>
+          <p class="text-white text-[12px]">© 2024 Master-IT Online, Inc.</p>
         </div>
     </div>
 
