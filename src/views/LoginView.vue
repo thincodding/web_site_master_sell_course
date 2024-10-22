@@ -1,10 +1,8 @@
 <template>
     <NavbarView />
-    <div class="h-screen flex justify-center">
+    <div class="flex justify-center h-screen">
 
-        <div class=" flex  lg:justify-center  gap-10 p-4">
-
-
+        <div class="flex gap-10 p-4 lg:justify-center">
 
 
             <div class=" hidden lg:block animate-infinite animate-duration-[7000ms]">
@@ -13,7 +11,7 @@
             </div>
 
 
-            <div class=" p-5 rounded-sm mt-5">
+            <div class="p-5 mt-5 rounded-sm ">
                 <div class=" lg:hidden animate-infinite animate-duration-[7000ms] flex justify-center">
                     <img class="w-[450px] md:w-[300px]"
                         src="https://frontends.udemycdn.com/components/auth/mobile-illustration-x1.webp" alt="">
@@ -58,7 +56,7 @@
 
 
 
-                        <div class="flex justify-center items-center gap-3 my-5">
+                        <div class="flex items-center justify-center gap-3 my-5">
                             <div class="h-[1px] w-full bg-color_text/30">
 
                             </div>
@@ -111,7 +109,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-10 bg-slate-100 p-3 flex justify-center items-center">
+                        <div class="flex items-center justify-center p-3 mt-10 bg-slate-100">
                             <div class="font-[400] text-[16px] text-background">Don't have an account? <router-link
                                     class="font-bold text-indigo-600" :to="{ name: 'signup' }">Sign up</router-link>
                             </div>
@@ -187,8 +185,7 @@ export default {
             finishSignIn();
         }
 
-
-
+        
         // const handleSignWithGoogle = async () => {
         //     await singIngoogle();
         // }

@@ -35,10 +35,8 @@
           <router-link to="#" class="hover-text-underline">Cookies settings</router-link>
           <router-link to="#" class="hover-text-underline">Sitemap</router-link>
           <router-link to="#" class="hover-text-underline">Accessibility statement</router-link>
-
         </div>
       </div>
-
       <div>
       </div>
       <div class="hidden md:block">

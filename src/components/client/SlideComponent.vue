@@ -16,12 +16,13 @@
           <div class="px-5 py-3 bg-white shadow-xl w-96">
             <div>
               <h2 class="text-[20px]  font-bold font-KhmerMoul text-background">{{ img.title }}</h2>
-              <p class="text-[15px] text-background my-2">{{ img.subTitle }}</p>
+              <p class="text-[15px] text-background my-2" v-html="img.descripton"></p>
             </div>
             <div class="mt-5 mb-4">
               <router-link to="#"
-                class="bg-background hover:bg-background/90 w-full p-3 font-bold text-white text-[15px]">{{ img.button
-                }}</router-link>
+                class="bg-background hover:bg-background/90 w-full p-3 font-bold text-white text-[15px]">
+                ចុះឈ្មោះឥឡូវនេះ
+                </router-link>
             </div>
           </div>
         </div>
@@ -64,12 +65,13 @@
           <div class="px-5 py-3 bg-white shadow-xl w-96">
             <div>
               <h2 class="text-[20px]  font-bold font-KhmerMoul text-background">{{ img.title }}</h2>
-              <p class="text-[15px] text-background my-2">{{ img.subTitle }}</p>
+              <p class="text-[15px] text-background my-2" v-html="img.descripton"></p>
             </div>
             <div class="mt-5 mb-4">
               <router-link to="#"
-                class="bg-background hover:bg-background/90  w-full p-3 font-bold text-white text-[15px]">{{ img.button
-                }}</router-link>
+                class="bg-background hover:bg-background/90  w-full p-3 font-bold text-white text-[15px]">
+                ចុះឈ្មោះឥឡូវនេះ
+                </router-link>
             </div>
           </div>
         </div>
@@ -95,11 +97,12 @@
           <div class="p-5 py-3 bg-white shadow-md w-80 ml-7 ">
             <div>
               <h2 class="text-[18px]  font-bold font-KhmerMoul text-background">{{ img.title }}</h2>
-              <p class="text-[14px] text-background my-2">{{ img.subTitle }}</p>
+              <p class="text-[14px] text-background my-2" v-html="img.descripton"></p>
             </div>
             <div class="mt-5 mb-4">
-              <router-link to="#" class="bg-background w-full p-3 font-bold text-white text-[15px]">{{ img.button
-                }}</router-link>
+              <router-link to="#" class="bg-background w-full p-3 font-bold text-white text-[15px]">
+                ចុះឈ្មោះឥឡូវនេះ
+              </router-link>
             </div>
           </div>
         </div>
@@ -118,17 +121,17 @@
 
       <swiper-slide v-for="img in arr_image" :key="img">
         <div class="">
-          <img :src="img.re_image" class="w-full h-[250px] object-cover " alt="">
+          <img :src="img.image" class="w-full h-[250px] object-cover" alt="">
         </div>
 
         <div class="">
           <div class="w-full p-6 ">
             <div>
               <h2 class="text-[16px]  font-bold font-KhmerMoul text-background">{{ img.title }}</h2>
-              <p class="text-[14px] text-background my-2">{{ img.subTitle }}</p>
+              <p class="text-[14px] text-background my-2" v-html="img.descripton"></p>
             </div>
             <div class="flex justify-center w-full p-3 mt-5 mb-4 bg-background hover:bg-background/90">
-              <router-link to="#" class=" font-bold text-white text-[16px] ">{{ img.button }}</router-link>
+              <router-link to="#" class=" font-bold text-white text-[16px] ">ចុះឈ្មោះឥឡូវនេះ</router-link>
             </div>
           </div>
         </div>
@@ -152,7 +155,8 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Navigation } from 'swiper/modules';
-import { ref } from 'vue';
+
+import getCollection from '@/firebase/getCollection';
 
 export default {
   components: {
@@ -161,22 +165,25 @@ export default {
   },
   setup() {
 
-    const arr_image = ref([
-      {
-        image: 'https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A36%3A57.990Zphoto_2024-04-09_15-34-43.jpg?alt=media&token=6a7130d0-bc6a-40a4-a57c-c3097b3ff7dc',
-        re_image: "https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A36%3A57.990Zphoto_2024-04-09_15-34-43.jpg?alt=media&token=6a7130d0-bc6a-40a4-a57c-c3097b3ff7dc",
-        title: 'វគ្គជំនាញគ្រប់គ្រងទិន្ន័យ',
-        subTitle: 'ជួយឱ្យលោកអ្នកចេះបង្កើតប្រព័ន្ធគ្រប់គ្រងទិន្នន័យមានលក្ខណៈបត់បែនដោយខ្លួនឯង និងត្រូវតាមតម្រូវការ',
-        button: "ចុះឈ្មោះឥឡូវនេះ"
-      },
-      {
-        image: 'https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A32%3A42.169Zphoto_2024-04-09_15-27-46.jpg?alt=media&token=7eb1341c-bc24-4a6f-b20e-6863ffec46fd',
-        re_image: 'https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A32%3A42.169Zphoto_2024-04-09_15-27-46.jpg?alt=media&token=7eb1341c-bc24-4a6f-b20e-6863ffec46fd',
-        title: 'សិក្សាលើវគ្គរចនាគេហទំព័រ',
-        subTitle: 'លោកអ្នកអាចចេះរចនានិងបង្កើតគេហទំព័របានស្រស់ស្អាត ទាក់ទាញ ទាន់សម័យ ។',
-        button: "ចុះឈ្មោះឥឡូវនេះ"
-      }
-    ])
+
+    const {document:arr_image } = getCollection('banners')
+    
+    // const arr_image = ref([
+    //   {
+    //     image: 'https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A36%3A57.990Zphoto_2024-04-09_15-34-43.jpg?alt=media&token=6a7130d0-bc6a-40a4-a57c-c3097b3ff7dc',
+    //     re_image: "https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A36%3A57.990Zphoto_2024-04-09_15-34-43.jpg?alt=media&token=6a7130d0-bc6a-40a4-a57c-c3097b3ff7dc",
+    //     title: 'វគ្គជំនាញគ្រប់គ្រងទិន្ន័យ',
+    //     subTitle: 'ជួយឱ្យលោកអ្នកចេះបង្កើតប្រព័ន្ធគ្រប់គ្រងទិន្នន័យមានលក្ខណៈបត់បែនដោយខ្លួនឯង និងត្រូវតាមតម្រូវការ',
+    //     button: "ចុះឈ្មោះឥឡូវនេះ"
+    //   },
+    //   {
+    //     image: 'https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A32%3A42.169Zphoto_2024-04-09_15-27-46.jpg?alt=media&token=7eb1341c-bc24-4a6f-b20e-6863ffec46fd',
+    //     re_image: 'https://firebasestorage.googleapis.com/v0/b/quasar-master-it-learn-online.appspot.com/o/files%2F2024-04-09T08%3A32%3A42.169Zphoto_2024-04-09_15-27-46.jpg?alt=media&token=7eb1341c-bc24-4a6f-b20e-6863ffec46fd',
+    //     title: 'សិក្សាលើវគ្គរចនាគេហទំព័រ',
+    //     subTitle: 'លោកអ្នកអាចចេះរចនានិងបង្កើតគេហទំព័របានស្រស់ស្អាត ទាក់ទាញ ទាន់សម័យ ។',
+    //     button: "ចុះឈ្មោះឥឡូវនេះ"
+    //   }
+    // ])
 
     return {
       modules: [Navigation],

@@ -14,6 +14,7 @@ import MessageComponent from '@/components/admin/MessageComponent.vue'
 import TestVue from '@/admin/TestVue.vue'
 import PartnerView from '@/admin/PartnerView.vue'
 import StudentRegiseterView from '@/admin/StudentRegiseterView.vue'
+import BannerView from '@/admin/BannerView.vue'
 
 const requireAuth = (to, from, next) => {
   const user = projectAuth.currentUser;
@@ -102,6 +103,11 @@ const routes = [
         path: 'student_register',
         name: 'student_register',
         component: StudentRegiseterView
+      },
+      {
+        path: "banner",
+        name: 'banner',
+        component: BannerView,
       }
     ]
   },

@@ -12,7 +12,7 @@ export const useUpdateDocument = () => {
             } else {
                 documentRef = doc(projectFirestore, `${collectionName}/${docId}`);
             }
-
+            
             await updateDoc(documentRef, data);
             console.log(`Document ${docId} updated in ${collectionName}${subcollectionPath ? `/${subcollectionPath}` : ''}`);
 
