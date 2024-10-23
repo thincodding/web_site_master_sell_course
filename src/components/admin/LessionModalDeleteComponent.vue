@@ -1,13 +1,13 @@
 <template>
-    <div class="h-screen bg-black/20 w-full z-10 fixed top-0 left-0">
-        <div class="flex justify-center items-center mt-10">
+    <div class="fixed top-0 left-0 z-10 w-full h-screen bg-black/20">
+        <div class="flex items-center justify-center mt-10">
             <div class="bg-white w-[30%]" v-motion :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
                 <div class="p-4 space-y-3">
                     <h1 class="font-bold font-NotoSansKhmer">លុបទិន្ន័យ </h1>
                     <div>
-                        <h1 class="font-NotoSansKhmer  text-xl capitalize">
+                        <h1 class="text-xl capitalize font-NotoSansKhmer">
                             តើអ្នកចង់លុបចំណងជើង
-                            <span class="font-NotoSansKhmer font-bold text-red-500 capitalize">
+                            <span class="font-bold text-red-500 capitalize font-NotoSansKhmer">
                                 {{ productDetail.title }}
                                 និង ថ្នាក់សិក្សា {{ product.productName }}
                             </span>
@@ -17,7 +17,8 @@
                     <div>
                         <div class="flex justify-end gap-2">
                             <button @click="handleClose" class="button_only_close">បោះបង់</button>
-                            <button v-if="!isLoading" @click="handleDelete(category.id, product.id, productDetail.id, productDetail.imageUrl)"
+                            <button v-if="!isLoading"
+                                @click="handleDelete(category.id, product.id, productDetail.id, productDetail.imageUrl)"
                                 class="button_only_submit">
                                 លុបទិន្ន័យ
                             </button>
@@ -39,8 +40,8 @@ import { ref } from 'vue';
 import useNestedDocument from '@/firebase/useNestedSubcollection';
 import { handleMessageError, handleMessageSuccess } from '../js/messageHandler';
 import useStorage from '@/firebase/useStorage';
-import { collection, getDocs } from 'firebase/firestore';
-import { projectFirestore } from '@/config/config';
+
+import checkValidateExistStudents from '@/firebase/useValidateStudent';
 
 
 export default {
@@ -51,7 +52,7 @@ export default {
         // const products = ref([])
         const { removeImage } = useStorage()
 
-        
+
         const handleClose = () => {
             emit('close')
         }
@@ -61,20 +62,17 @@ export default {
 
             try {
                 isLoading.value = true
+                const { deleteDocs } = useNestedDocument('categories', categoryId, 'product', productId, 'productDetail');
+                const hasEnrolledStudents = await checkValidateExistStudents(categoryId, productId, productDetailId);
 
-                const docRef = collection(projectFirestore, 'categories', categoryId, 'product', productId, 'productDetail', productDetailId, 'student');
-                const productSnapshot = await getDocs(docRef);
-
-                // Check if the product has any associated cateogory
-                if (!productSnapshot.empty) {
-                    
+                if (hasEnrolledStudents) {
                     handleMessageError(`មេរៀន ${props.productDetail.title} មានសិស្សចុះឈ្មោះរៀនរួចហើយ។ មិនអាចលុបបានទេ!`);
-
                     isLoading.value = false
                     return;
                 }
-                const { deleteDocs } = useNestedDocument('categories', categoryId, 'product', productId, 'productDetail');
-                 await deleteDocs(productDetailId);
+
+
+                await deleteDocs(productDetailId);
                 // Success message
                 handleMessageSuccess(`បានលុបមេរៀន ${props.productDetail.title} ដោយជោគជ័យ`);
                 await removeImage(imageUrl)

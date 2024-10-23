@@ -15,7 +15,7 @@
       </div>
       <div class=" md:flex md:justify-between lg:gap-40 md:grap-10 md:space-x-10 lg:space-x-0 md:space-y-0">
         <div class="flex flex-col space-y-2 md:flex md:flex-col md">
-          <router-link to="#" class="hover-text-underline">Udemy Bussiness</router-link>
+          <router-link to="#" class="hover-text-underline">Master-IT Bussiness</router-link>
           <router-link to="#" class="hover-text-underline">Teach on Udemy</router-link>
           <router-link to="#" class="hover-text-underline">Get the app</router-link>
           <router-link to="#" class="hover-text-underline">About us</router-link>

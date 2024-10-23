@@ -35,6 +35,8 @@
         </div>
 
         <div v-else>
+           
+
             <div v-for="cat in productDetails" :key="cat.id" class="mb-5">
                 <div v-for="pro in cat.product" :key="pro.id" class="mb-2">
                     <h1 class="text-[24px] lg:text-[32px] font-playfair font-[500] text-background md:text-[32px]">{{
@@ -46,7 +48,7 @@
                             Software</span>
                     </p>
                     <div v-for="detail in pro.productDetail" :key="detail.id" class="space-y-3">
-
+                        
                     </div>
                     <div class=" text-[14px] flex items-center text-background space-x-1 mt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -57,11 +59,11 @@
                             <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                         </svg>
-                        <p>3000,400 Learners</p>
+                        <p>មានសិស្សរៀន {{ pro.totalStudentCount }} នាក់</p>
                     </div>
-                    <div class="mt-5 space-y-1 xl:mt-10">
-                        <h3 class="font-bold text-[22px] text-background">Courses to get you started</h3>
-                        <p class="text-[15px] text-color_text">Explore courses from experienced, real-world experts.</p>
+                    <div class="mt-5 space-y-1 xl:mt-8">
+                        <h3 class="font-bold text-[15px] text-background/90" v-html="pro.description"></h3>
+                        <!-- <p class="text-[15px] text-color_text">Explore courses from experienced, real-world experts.</p> -->
                     </div>
 
                     <!-- md up -->
@@ -125,7 +127,8 @@
                                                 </div>
                                                 <div class="mt-2 space-y-1">
                                                     <router-link
-                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }"  rel="noopener noreferrer"
+                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                        rel="noopener noreferrer"
                                                         class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
                                                         {{
                                                             detail.title }}</router-link>
@@ -447,8 +450,6 @@
                     </div>
 
 
-
-
                     <!-- Dropdown Menu Most Popular -->
                     <div class="md:hidden">
                         <div>
@@ -503,10 +504,10 @@
                                                     </div>
                                                     <div class="mt-2 space-y-1">
                                                         <router-link
-                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }"
-                                                        class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
-                                                        {{
-                                                            detail.title }}</router-link>
+                                                            :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                            class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
+                                                            {{
+                                                                detail.title }}</router-link>
                                                         <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                             detail.lectures }}</p>
                                                         <div class="flex space-x-[2px] items-center">
@@ -611,10 +612,10 @@
                                                     </div>
                                                     <div class="mt-2 space-y-1">
                                                         <router-link
-                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }"
-                                                        class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
-                                                        {{
-                                                            detail.title }}</router-link>
+                                                            :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                            class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
+                                                            {{
+                                                                detail.title }}</router-link>
                                                         <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                             detail.lectures }}</p>
                                                         <div class="flex space-x-[2px] items-center">
@@ -719,10 +720,10 @@
                                                     </div>
                                                     <div class="mt-2 space-y-1">
                                                         <router-link
-                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }"
-                                                        class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
-                                                        {{
-                                                            detail.title }}</router-link>
+                                                            :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                            class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
+                                                            {{
+                                                                detail.title }}</router-link>
                                                         <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                             detail.lectures }}</p>
                                                         <div class="flex space-x-[2px] items-center">
@@ -774,8 +775,6 @@
                         </div>
                     </div>
 
-
-
                 </div>
             </div>
         </div>
@@ -785,8 +784,12 @@
 <script>
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 import NavbarView from '@/views/NavbarView.vue';
+// import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDocument';
+// import getNestedSubcollection from '@/firebase/getNestedSubcollection';
+
 import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDocument';
 import getNestedSubcollection from '@/firebase/getNestedSubcollection';
+import getNestedSubSubcollection from '@/firebase/getNestedSubsubCollection';
 import moment from 'moment';
 import { onMounted, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
@@ -909,9 +912,48 @@ export default {
 
                     try {
                         await fetchSubcollections();
+
+                        // Fetch student count for each product detail
+                        const productDetailWithStudentCount = await Promise.all(productDetail.value.map(async (detail) => {
+                            const { subSubcollectionData: students, fetchSubSubcollections } = getNestedSubSubcollection(
+                                'categories',
+                                cate.id,
+                                'product',
+                                pro.id,
+                                'productDetail',
+                                detail.id,
+                                'student'
+                            );
+
+                            try {
+                                await fetchSubSubcollections();
+
+                                // Count the students
+                                const studentCount = students.value.length;
+                                const isBestSeller = studentCount > 2; // Mark as best seller if more than 2 students
+
+                                return {
+                                    ...detail,
+                                    studentCount, // Include the count of students
+                                    isBestSeller // Add best seller status
+                                };
+                            } catch (err) {
+                                console.error(`Error fetching students for productDetail ${detail.id}:`, err);
+                                return {
+                                    ...detail,
+                                    studentCount: 0, // No students found
+                                    isBestSeller: false // Not a best seller
+                                };
+                            }
+                        }));
+
+                        // Calculate total student count for this product
+                        const totalStudentCount = productDetailWithStudentCount.reduce((acc, curr) => acc + curr.studentCount, 0);
+
                         return {
                             ...pro,
-                            productDetail: productDetail.value
+                            productDetail: productDetailWithStudentCount, // Return updated product detail with counts
+                            totalStudentCount // Include the total student count
                         };
                     } catch (err) {
                         console.error(`Error processing product ${pro.id}:`, err);
@@ -935,7 +977,9 @@ export default {
             await Promise.all(fetchPromises);
             isLoading.value = false;
             productDetails.value = categoryProduct;
-        }
+        };
+
+
 
 
         return {
@@ -963,7 +1007,7 @@ export default {
             New,
             dropdownClassesNew,
             handleIsOpenDropdownNew,
-           
+
             isOpentDrodownNewLession,
             Beginer_favorite,
             isOpenDropdownFavorite,

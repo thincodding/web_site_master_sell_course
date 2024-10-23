@@ -17,7 +17,7 @@ import { Switch } from '@headlessui/vue'
 
 export default {
     components: {
-        Switch, // You need to register it here
+        Switch, 
     },
     setup() {
         const enabled = ref(false);

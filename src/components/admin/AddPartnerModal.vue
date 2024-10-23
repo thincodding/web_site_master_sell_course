@@ -1,6 +1,6 @@
 <template>
-    <div class="h-screen bg-black/50 w-full z-10 fixed top-0 left-0">
-        <div class="flex justify-center items-center mt-10">
+    <div class="fixed top-0 left-0 z-10 w-full h-screen bg-black/50">
+        <div class="flex items-center justify-center mt-10">
             <div class="bg-white w-[40%]" v-motion :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
                 <div class="p-4 space-y-3">
                     <h1 class="font-bold font-NotoSansKhmer">{{ partners ? 'កែប្រែ' :
@@ -26,17 +26,17 @@
                             </div>
                             <!-- Display img_category if available -->
                             <div v-if="part_category">
-                                <img :src="part_category" class="w-40 h-40 object-contain" alt="Category Image">
+                                <img :src="part_category" class="object-contain w-40 h-40" alt="Category Image">
                             </div>
                             <div v-else-if="selectFile">
-                                <img :src="selectFile" class="w-24 h-24 object-contain">
+                                <img :src="selectFile" class="object-contain w-24 h-24">
                             </div>
 
 
 
                             <!-- Display selectFile if available, otherwise show "No Image" -->
                             <!-- <div v-if="selectFile">
-                                <img :src="selectFile" class="w-24 h-24 object-contain">
+                                <img :src="selectFile" class="object-contain w-24 h-24">
                             </div>
                             <div v-else>
                                 <p>No Image</p>
@@ -63,12 +63,11 @@
 import { ref } from 'vue';
 import useStorage from '@/firebase/useStorage';
 import useCollection from '@/firebase/useCollection';
-import { projectFirestore, timestamp } from '@/config/config';
+import {  timestamp } from '@/config/config';
 import { handleMessageError, handleMessageSuccess } from '../js/messageHandler';
 import { watchEffect } from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { collection, getDocs } from 'firebase/firestore';
 
 export default {
 
@@ -117,7 +116,6 @@ export default {
                 let imageUrl = '';
                 isLoading.value = true;
 
-                // Check if a new file is selected and it's different from the current image
                 if (selectFile.value && selectFile.value !== (props.partners?.image || "")) {
 
                     // Check if file size exceeds 1MB
@@ -147,21 +145,9 @@ export default {
                     names: names.value.toLowerCase(),
                     descripton: descripton.value,
                     image: imageUrl,
-                    createdAt: timestamp(), // Using updatedAt instead of createdAt for updates
+                    createdAt: timestamp(), 
                 };
-
-                if (props.partners) {
-
-                    const docRef = collection(projectFirestore, 'categories', props.partners.id, 'product');
-                    const categorySnapshot = await getDocs(docRef);
-                    // Check if the category has any associated products
-                    if (!categorySnapshot.empty) {
-
-                        handleMessageError(`ប្រភេទ ${names.value} មានផលិតផលដែលទាក់ទង។ មិនអាចកែប្រែបានទេ!`);
-                        return;
-                    }
-                    
-                    // Update the category data
+                if (props.partners) {                  
                     await updateDocs(props.partners.id, data);
                     handleMessageSuccess(`បានកែប្រែ ${names.value} ដោយជោគជ័យ`);
                 } else {

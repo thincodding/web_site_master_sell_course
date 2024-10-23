@@ -1,13 +1,13 @@
 <template>
-    <div class="h-screen bg-black/20 w-full z-10 fixed top-0 left-0">
-        <div class="flex justify-center items-center mt-10">
+    <div class="fixed top-0 left-0 z-10 w-full h-screen bg-black/20">
+        <div class="flex items-center justify-center mt-10">
             <div class="bg-white w-[30%]" v-motion :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
                 <div class="p-4 space-y-3">
                     <h1 class="font-bold font-NotoSansKhmer">លុបទិន្ន័យ</h1>
                     <div>
-                        <h1 class="font-NotoSansKhmer text-xl">
+                        <h1 class="text-xl font-NotoSansKhmer">
                             តើអ្នកចង់លុបប្រភេទ
-                            <span class="font-NotoSansKhmer font-bold text-red-500">{{ cate.categoryName }}</span>
+                            <span class="font-bold text-red-500 font-NotoSansKhmer">{{ cate.categoryName }}</span>
                             នេះមែនទេ?
                         </h1>
                     </div>
@@ -36,10 +36,10 @@ import useStorage from '@/firebase/useStorage';
 import getCollection from '@/firebase/getCollection';
 // import { handleMessageSuccess } from '../js/messageHandler';
 import useDocument from '@/firebase/useDocument';
-import { projectFirestore } from '@/config/config';
-import { collection, getDocs } from 'firebase/firestore';
+
 import { ref } from 'vue';
 import { handleMessageError, handleMessageSuccess } from '../js/messageHandler';
+import useValidateExist from '@/firebase/useValidateExist';
 
 export default {
     props: ['cate', 'handleQueryCategory', 'handleBackPaginate'], // Accept handleQueryCategory as a prop
@@ -85,18 +85,13 @@ export default {
             try {
 
                 isLoading.value = true
-                // Get the 'cateogory' subcollection for the cateogory
-                const docRef = collection(projectFirestore, 'categories', categoryId, 'product');
-                const categorySnapshot = await getDocs(docRef);
 
-                // Check if the category has any associated cateogory
-                if (!categorySnapshot.empty) {
-                    
-                    // handleMessageError(`មិនអាចលុបប្រភេទ ${props.cate.categoryName} បានទេ។ ដោយសារមានទំនាក់ទំនងរួចហើយ`)
+                //check if use already exist
+                if (await useValidateExist(categoryId)) {
                     handleMessageError(`ប្រភេទ ${props.cate.categoryName} មានផលិតផលដែលទាក់ទង។ មិនអាចលុបបានទេ!`);
-
                     isLoading.value = false
                     return;
+                 
                 }
 
                 await deleteDocs('categories', categoryId);

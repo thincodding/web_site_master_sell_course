@@ -1,6 +1,6 @@
 <template>
-    <div class="h-screen bg-black/50 w-full z-10 fixed top-0 left-0">
-        <div class="flex justify-center items-center mt-10">
+    <div class="fixed top-0 left-0 z-10 w-full h-screen bg-black/50">
+        <div class="flex items-center justify-center mt-10">
             <div class="bg-white w-[40%]" v-motion :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
                 <div class="p-4 space-y-3">
                     <h1 class="font-bold font-NotoSansKhmer">{{ editCategory ? 'កែប្រែប្រភេទវគ្គសិក្សា' :
@@ -26,17 +26,17 @@
                             </div>
                             <!-- Display img_category if available -->
                             <div v-if="img_category">
-                                <img :src="img_category" class="w-40 h-40 object-contain" alt="Category Image">
+                                <img :src="img_category" class="object-contain w-40 h-40" alt="Category Image">
                             </div>
                             <div v-else-if="selectFile">
-                                <img :src="selectFile" class="w-24 h-24 object-contain">
+                                <img :src="selectFile" class="object-contain w-24 h-24">
                             </div>
 
 
 
                             <!-- Display selectFile if available, otherwise show "No Image" -->
                             <!-- <div v-if="selectFile">
-                                <img :src="selectFile" class="w-24 h-24 object-contain">
+                                <img :src="selectFile" class="object-contain w-24 h-24">
                             </div>
                             <div v-else>
                                 <p>No Image</p>

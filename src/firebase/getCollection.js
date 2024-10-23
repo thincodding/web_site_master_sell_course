@@ -26,4 +26,6 @@ const getCollection = (collectionName) => {
     return {document}
 }
 
+
+
 export default getCollection;

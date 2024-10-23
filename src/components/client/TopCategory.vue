@@ -2,8 +2,15 @@
     <div class="xl:w-[1200px] mx-auto my-10 px-10 lg:px-10 xl:px-0">
         <div>
             <div class="my-4">
-            <h1 class="text-[18px] lg:text-[20px]  md:text-[20px] font-KhmerMoul font-bold text-background">ប្រភេទវគ្គសិក្សាពេញនិយម</h1>
-        </div>
+
+                <div v-for="con in content" :key="con.id">
+                    <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
+                        {{ con.data.title }}</h1>
+                    <p v-html="con.data.descripton" class="my-3 text-md text-background font-NotoSansKhmer ">
+
+                    </p>
+                </div>
+            </div>
 
             <div class="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <div v-for="category in filteredCategories" :key="category.id">
@@ -22,20 +29,32 @@ import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDoc
 import getNestedSubcollection from '@/firebase/getNestedSubcollection';
 import getNestedSubSubcollection from '@/firebase/getNestedSubsubCollection';
 import { onMounted, ref, computed } from 'vue';
+import getCollectionWhere from '@/firebase/getCollectionWhere';
 
 export default {
     setup() {
         const products = ref([]);
         const productDetails = ref([]);
         const isLoading = ref(false);
+        const content = ref(null)
 
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
 
         onMounted(async () => {
+            await fetchContent();
+
             await fetchCollection();
             await fetchCategoryProduct();
             await fetchCategoryProductAndProductDetail();
         });
+
+        //fetct category
+        const fetchContent = async () => {
+            const results = await getCollectionWhere('content', "Uqoh6AFeCeSwGHOC7ClL");
+            console.log(results);
+            content.value = results
+        };
+
 
         const fetchCategoryProduct = async () => {
             const orderByField = 'productName';
@@ -162,13 +181,14 @@ export default {
                 const totalStudents = category.product.reduce((sum, product) => {
                     return sum + product.productDetail.reduce((detailSum, detail) => detailSum + detail.studentCount, 0);
                 }, 0);
-                return totalStudents > 10; 
+                return totalStudents > 10;
             });
         });
 
         return {
             filteredCategories,
             isLoading,
+            content
         };
     },
 };

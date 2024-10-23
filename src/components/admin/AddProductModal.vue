@@ -1,9 +1,10 @@
 <template>
-    <div class="h-screen bg-black/50 w-full z-10 fixed top-0 left-0">
-        <div class="flex justify-center items-center mt-10">
+    <div class="fixed top-0 left-0 z-10 w-full h-screen bg-black/50">
+        <div class="flex items-center justify-center mt-10">
             <div class="bg-white w-[45%]" v-motion :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
                 <div class="p-4 space-y-3">
-                    <h1 class="font-bold font-NotoSansKhmer">{{ !editData ? ' បង្កើតវគ្គសិក្សា' : 'កែប្រែវគ្គសិក្សា' }}</h1>
+                    <h1 class="font-bold font-NotoSansKhmer">{{ !editData ? ' បង្កើតវគ្គសិក្សា' : 'កែប្រែវគ្គសិក្សា' }}
+                    </h1>
                     <!-- <h1 v-else class="font-bold font-NotoSansKhmer">{{ !enabled ? '' : 'បង្កើតមេរៀន' }}</h1> -->
                     <div>
 
@@ -27,7 +28,7 @@
                                         </select>
                                         <select v-else required class="input_text p-[9.5px]" v-model="categoryName">
                                             <option value="" selected disabled>--ជ្រើសរើស--</option>
-                                            <option class="capitalize hidden" v-for="c in course" :key="c"
+                                            <option class="hidden capitalize" v-for="c in course" :key="c"
                                                 :value="c.categoryName">{{
                                                     c.categoryName }}</option>
                                             <option class="capitalize" v-for="c in course" :key="c"
@@ -100,7 +101,7 @@
                                         <label for="" class="font-NotoSansKhmer font-[500]">តម្លៃសិក្សា</label>
                                         <input type="text" placeholder="តម្លៃសិក្សា" class="input_text">
                                     </div>
-                                    
+
                                 </div>
                                 <div class="space-y-1">
                                     <label class="font-NotoSansKhmer font-[500]">ពិពណ៌នា</label>
@@ -300,58 +301,43 @@ export default {
                         console.error('Error updating product:', err);
                     }
                 } else {
-                    // Add new product
 
-                    //check if product Name already exist
-                    const productQuery = query(
-                        collection(projectFirestore, `categories/${course_id.value}/product`),
-                        where('productName', '==', productName.value)
-                    );
-                    const querySnapshot = await getDocs(productQuery);
-
-                    if (!querySnapshot.empty) {
-                        handleMessageError(`ផលិតផលឈ្មោះ ${productName.value} មានរួចហើយ។`);
-                        isLoading.value = false;
-                        return;
-
-                    }
-                    else {
-                        if (selectFileImage.value && selectFileImage.value !== (props.editData?.proImage || "")) {
-                            // Check if file size exceeds 1MB
-                            if (selectFileImage.value.size > 1024 * 1024) {
-                                handleMessageError("មិនអាចបញ្ចូលរូបភាពលើសពី 1MB បានទេ");
-                                isLoading.value = false;
-                                return;
-                            }
-
-                            const storagePath = `product/${selectFileImage.value.name}`;
-                            imageUrl = await uploadImage(storagePath, selectFileImage.value);
-
-                            // Remove old image if it exists
-                            if (props.editData?.proImage) {
-                                await removeImage(props.editData.proImage);
-                            }
-
-                        } else if (props.editData?.proImage) {
-                            imageUrl = props.editData.proImage;
-                        } else {
-                            imageUrl = '';
+                    if (selectFileImage.value && selectFileImage.value !== (props.editData?.proImage || "")) {
+                        // Check if file size exceeds 1MB
+                        if (selectFileImage.value.size > 1024 * 1024) {
+                            handleMessageError("មិនអាចបញ្ចូលរូបភាពលើសពី 1MB បានទេ");
+                            isLoading.value = false;
+                            return;
                         }
 
-                        // Data to be saved or updated
-                        const data = {
-                            productName: productName.value,
-                            spacialProduct: spacial_product.value,
-                            description: description.value,
-                            categoryName: categoryName.value,
-                            proImage: imageUrl,
-                            createdAt: timestamp(),
-                        };
-                        await addDocs(data);
-                        console.log('Product added:', data);
-                        handleMessageSuccess(`បានរក្សាទុកផលិតផលឈ្មោះ ${productName.value} ដោយជោគជ័យ`);
-                        await props.handleFetch();
+                        const storagePath = `product/${selectFileImage.value.name}`;
+                        imageUrl = await uploadImage(storagePath, selectFileImage.value);
+
+                        // Remove old image if it exists
+                        if (props.editData?.proImage) {
+                            await removeImage(props.editData.proImage);
+                        }
+
+                    } else if (props.editData?.proImage) {
+                        imageUrl = props.editData.proImage;
+                    } else {
+                        imageUrl = '';
                     }
+
+                    // Data to be saved or updated
+                    const data = {
+                        productName: productName.value,
+                        spacialProduct: spacial_product.value,
+                        description: description.value,
+                        categoryName: categoryName.value,
+                        proImage: imageUrl,
+                        createdAt: timestamp(),
+                    };
+                    await addDocs(data);
+                    console.log('Product added:', data);
+                    handleMessageSuccess(`បានរក្សាទុកផលិតផលឈ្មោះ ${productName.value} ដោយជោគជ័យ`);
+                    await props.handleFetch();
+
                 }
 
                 isLoading.value = false;

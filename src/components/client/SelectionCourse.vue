@@ -2,12 +2,14 @@
     <div class="p-10 xl:p-0">
         <div class="xl:w-[1200px] mx-auto">
             <div>
-
-                <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">វគ្គសិក្សាទាំងអស់</h1>
-
-                <p class="my-3 text-md text-background font-NotoSansKhmer ">
-                    ទាំងនេះជាវគ្គសិក្សាដែលមាននៅក្នុងសាលាម៉ាស្ទ័រ អាយធី
-                </p>
+                <div v-for="con in content" :key="con.id">
+                    <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
+                        {{ con.data.title }}</h1>
+                    <p v-html="con.data.descripton" class="my-3 text-md text-background font-NotoSansKhmer ">
+                        
+                    </p>
+                </div>
+        
                 <div>
                     <TabGroup>
 
@@ -145,6 +147,9 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import getCollectionWhere from '@/firebase/getCollectionWhere';
+
+
 
 export default {
     components: {
@@ -160,21 +165,38 @@ export default {
         const products = ref([]);
         const isLoading = ref(false);
         const error = ref(null);
-
+        const content = ref(null)
+        
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
 
+        const fetchContent = async () => {
+            const results = await getCollectionWhere('content', "Z6TSQWgyq3fI71FrpAVd");
+            console.log(results);
+            content.value = results
+        };
+
         onMounted(async () => {
+          
             try {
+                await fetchContent();
                 isLoading.value = true;
+               
                 await fetchCollection();
                 await fetchAllProducts();
+              
             } catch (err) {
                 console.error('Error during initialization:', err);
                 error.value = 'Failed to load data.';
             } finally {
                 isLoading.value = false;
             }
+
+
+
+
         });
+
+
 
         const fetchAllProducts = async () => {
             const orderByField = 'productName';
@@ -256,6 +278,7 @@ export default {
             totalStudents,
             isLoading,
             error,
+            content,
             modules: [Navigation],
         };
     },

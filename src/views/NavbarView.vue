@@ -12,7 +12,7 @@
         <div class="relative group ">
           <div
             class="text-[14px] group-hover:block  font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap">
-            Categories</div>
+            ប្រភេទ</div>
 
           <div class="absolute right-0 z-10 w-20 bg-transparent cursor-pointer h-14 top-5 ">
           </div>
@@ -32,7 +32,7 @@
         <div class="relative group lg:hidden xl:block">
           <div
             class="text-[14px] group-hover:block font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap lg:hidden xl:block">
-            Udemy Business</div>
+            Master-IT Business</div>
 
           <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
           </div>
@@ -45,7 +45,7 @@
           <div
             class="text-[14px] group-hover:block  font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap">
             Teach on
-            Udemy</div>
+            Master-IT</div>
 
           <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
           </div>

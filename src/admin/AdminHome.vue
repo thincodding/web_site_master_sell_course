@@ -35,6 +35,19 @@
                     </div>
 
                     <div :class="isOpenNav ? '' : 'justify-center flex'">
+                        <router-link class="flex items-center gap-4 p-3 hover:text-primary " :to="{ name: 'content' }">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-captions">
+                                <rect width="18" height="14" x="3" y="5" rx="2" ry="2" />
+                                <path d="M7 15h4M15 15h2M7 11h2M13 11h4" />
+                            </svg>
+                            <p :class="isOpenNav ? 'block' : 'hidden'" class="font-NotoSansKhmer text-[18px]">
+                                មាតិការ</p>
+                        </router-link>
+                    </div>
+
+                    <div :class="isOpenNav ? '' : 'justify-center flex'">
 
                         <router-link class="flex items-center gap-4 p-3 hover:text-primary " :to="{ name: 'banner' }">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -99,26 +112,12 @@
                                 {{ course }}
                             </p>
 
-                            <!-- <div :class="isOpenDropdown ? 'text-white' : 'text-black'"
-                                class="absolute left-52 top-[166px] cursor-pointer">
-                                <svg :class="isOpenNav ? '' : 'hidden'" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                    class="size-4 group-hover:text-primary ">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                                </svg>
-                            </div> -->
-
-
                             <svg :class="isOpenNav ? '' : 'hidden'" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                 class="w-20 pl-10 size-4 group-hover:text-primary text-end ">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                             </svg>
-
-
                         </div>
-
                     </div>
                     <!-- Dropdown Menu -->
                     <div :class="!isOpenNav ? 'hidden' : 'block'">
@@ -207,17 +206,20 @@
                 <div class="flex items-center justify-between w-full p-3 bg-white shadow-sm font-NotoSansKhmer">
 
                     <p v-if="currentRouteName === 'product'" class="font-bold select-none font-NotoSansKhmer">ផលិតផល /
-                        <span class="text-gray-500 font-NotoSansKhmer">បញ្ជីផលិតផល</span>
+                        <span class="text-gray-500 font-NotoSansKhmer">បញ្ជីវគ្គសិក្សា</span>
                     </p>
                     <p v-else-if="currentRouteName === 'categoryList'" class="font-bold select-none font-NotoSansKhmer">
                         ប្រភេទ / <span class="text-gray-500 font-NotoSansKhmer">បញ្ចីវគ្គសិក្សា</span></p>
                     <p v-else-if="currentRouteName === 'lession'" class="font-bold select-none font-NotoSansKhmer">
-                        ប្រភេទ / <span class="text-gray-500 font-NotoSansKhmer">បញ្ចីមេរៀន</span></p>
+                        បញ្ជី / <span class="text-gray-500 font-NotoSansKhmer">បញ្ចីមេរៀន</span></p>
                     <p v-else-if="currentRouteName === 'partner'" class="font-bold select-none font-NotoSansKhmer">
-                        ប្រភេទ / <span class="text-gray-500 font-NotoSansKhmer">បញ្ចីវគ្គសិក្សា</span></p>
+                        បញ្ជី / <span class="text-gray-500 font-NotoSansKhmer">បញ្ចីវគ្គសិក្សា</span></p>
+                    <p v-else-if="currentRouteName === 'banner'" class="font-bold select-none font-NotoSansKhmer">
+                        ផ្ទាំង / <span class="text-gray-500 font-NotoSansKhmer">ផ្ទាំងបង្ហាញ</span></p>
+                    <p v-else-if="currentRouteName === 'content'" class="font-bold select-none font-NotoSansKhmer">
+                        ចំណងជើង / <span class="text-gray-500 font-NotoSansKhmer">មាតិការ</span></p>
                     <p v-else class="font-bold select-none font-NotoSansKhmer">ទំព័រដើម / <span
                             class="text-gray-500 font-NotoSansKhmer">ផ្ទាំងគ្រប់គ្រង</span></p>
-
                     <div class="flex items-center gap-3">
                         <div class="select-none font-NotoSansKhmer">ប្រវត្តិរូប៖ {{ user?.displayName }}</div>
                         <div class="relative">

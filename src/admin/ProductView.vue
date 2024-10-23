@@ -2,7 +2,7 @@
 
   <div class="bg-white  shadow-sm p-5 border-t-2 border-t-blue-500  animate-fade-up animate-duration-[2000ms]">
 
-    <div class="my-5 flex justify-between">
+    <div class="flex justify-between my-5">
       <h1 class="text-[20px] font-NotoSansKhmer font-bold">តារាងបញ្ជីវគ្គសិក្សា</h1>
 
       <div class="flex gap-3">
@@ -28,7 +28,7 @@
     </div>
     <div class="flex justify-between">
       <div>
-        <select class="border-2 p-2 px-5 outline-none bg-gray-50/20 focus:border-blue-500">
+        <select class="p-2 px-5 border-2 outline-none bg-gray-50/20 focus:border-blue-500">
           <option value="25">25</option>
           <option value="50">50</option>
           <option value="100">100</option>
@@ -37,11 +37,11 @@
 
       <div class="relative">
         <input v-model="searchText" type="text"
-          class="p-2 w-96 border-2 placeholder:font-NotoSansKhmer bg-gray-50/40 outline-none focus:border-blue-500 pl-4"
+          class="p-2 pl-4 border-2 outline-none w-96 placeholder:font-NotoSansKhmer bg-gray-50/40 focus:border-blue-500"
           placeholder="ស្វែងរក...">
         <div class="absolute top-2.5 right-3">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" class="size-6 text-gray-400">
+            stroke="currentColor" class="text-gray-400 size-6">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
@@ -50,8 +50,8 @@
       </div>
     </div>
 
-    <div class="relative overflow-x-auto mt-3">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-10">
+    <div class="relative mt-3 overflow-x-auto">
+      <table class="w-full mb-10 text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
         <thead class="text-[16px] text-black/70 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
           <tr class="font-NotoSansKhmer">
             <th width="15%" class="py-4">ឈ្មោះផលិតផល</th>
@@ -65,15 +65,15 @@
         </thead>
         <tbody>
           <tr v-if="isLoading" class="text-center">
-            <td colspan="10" class="text-center text-md my-2 font-NotoSansKhmer">សូមរងចាំ...</td>
+            <td colspan="10" class="my-2 text-center text-md font-NotoSansKhmer">សូមរងចាំ...</td>
           </tr>
           <template v-else v-for="cate in filteredProducts" :key="cate.id">
             <tr v-for="pro in cate.product" :key="pro.id"
-              class="border-b dark:bg-gray-800 dark:border-gray-700 select-none">
+              class="border-b select-none dark:bg-gray-800 dark:border-gray-700">
 
               <template v-if="pro.id !== 'dummy'">
                 <td>{{ pro.productName }}</td>
-                <td class="py-2 capitalize text-center">
+                <td class="py-2 text-center capitalize">
                   <p v-if="pro.categoryName === ''"
                     class="pl-1 bg-blue-600 w-full p-0.5 text-xs rounded-full  text-white">
                     {{ cate.categoryName }}
@@ -89,14 +89,14 @@
                   <p v-html="pro.description"></p>
                 </td>
                 <td class="py-2">
-                  <img :src="pro.proImage !== 'N/A' ? pro.proImage : cate.image" class="w-10 h-10 object-cover" />
+                  <img :src="pro.proImage !== 'N/A' ? pro.proImage : cate.image" class="object-cover w-10 h-10" />
                 </td>
                 <td class="py-2">
                   {{ pro.createdAt ? date(pro.createdAt.toDate()).format(`ddd D, MMM YYYY ${"ម៉ោង"} hh:mm`) :
                     'N/A' }}
                 </td>
                 <td align="center">
-                  <div class="flex justify-center items-center">
+                  <div class="flex items-center justify-center">
                     <div v-if="isOpenAction[pro.id]" class="relative inline-block" v-motion :initial="{ scale: 0.9 }"
                       :visible="{ opacity: 1, scale: 1 }">
                       <div class="absolute flex items-center justify-center w-28 p-3 text-gray-600 bg-gray-100 shadow-lg 
@@ -109,7 +109,7 @@
                               <path stroke-linecap="round" stroke-linejoin="round"
                                 d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                             </svg>
-                            <span class="font-NotoSansKhmer text-sm">លុប</span>
+                            <span class="text-sm font-NotoSansKhmer">លុប</span>
                           </button>
                           <button @click="handleEditProduct(cate, pro)"
                             class="flex items-center gap-2 hover:text-red-500">
@@ -119,7 +119,7 @@
                                 d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                             </svg>
 
-                            <span class="font-NotoSansKhmer text-sm">កែប្រែ</span>
+                            <span class="text-sm font-NotoSansKhmer">កែប្រែ</span>
 
                           </button>
                         </div>
@@ -137,7 +137,7 @@
 
                     <svg @click="handleIsOpenAction(pro.id)" xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" class="lucide lucide-ellipsis hover:text-red-700 cursor-pointer">
+                      stroke-linejoin="round" class="cursor-pointer lucide lucide-ellipsis hover:text-red-700">
                       <circle cx="12" cy="12" r="1" />
                       <circle cx="19" cy="12" r="1" />
                       <circle cx="5" cy="12" r="1" />
@@ -238,29 +238,6 @@ export default {
         console.error('Error fetching categories and products:', err);
       }
     };
-
-
-
-    // const fetchCategoryProduct = async () => {
-    //   isLoading.value = true
-    //   const categoryProduct = [];
-    //   for (const cate of categoryDocument.value) {
-    //     const orderByField = 'productName';
-    //     const { subcollectionData: product, fetchSubcollection } = useSubcollection('categories', cate.id, 'product', orderByField);
-
-    //     await fetchSubcollection();
-    //     categoryProduct.push({
-    //       id: cate.id,
-    //       categoryName: cate.categoryName,
-    //       descripton: cate.descripton,
-    //       image: cate.image,
-    //       product: product.value,
-    //     });
-    //   }
-
-    //   isLoading.value = false
-    //   products.value = categoryProduct;
-    // };
 
 
     //search document

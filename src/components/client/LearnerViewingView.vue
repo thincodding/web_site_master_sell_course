@@ -1,7 +1,13 @@
 <template>
     <div class="xl:w-[1200px] mx-auto my-5 px-10 lg:px-10 xl:px-0">
         <div class="my-4">
-            <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-KhmerMoul text-background">វគ្គសិក្សាដែលពេញនិយមនិងលក់ដាច់</h1>
+            <div v-for="con in content" :key="con.id">
+                    <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
+                        {{ con.data.title }}</h1>
+                    <p v-html="con.data.descripton" class="my-3 text-md text-background font-NotoSansKhmer ">
+                        
+                    </p>
+                </div>            
         </div>
         <div class="relative">
             <swiper ref="mySwiper" :navigation="{
@@ -79,6 +85,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import getCollectionWhere from '@/firebase/getCollectionWhere';
 
 export default {
     components: {
@@ -89,14 +96,24 @@ export default {
         const products = ref([]);
         const productDetails = ref([]);
         const isLoading = ref(false);
-
+        const content = ref(null)
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
 
         onMounted(async () => {
+            await fetchContent()
             await fetchCollection();
             await fetchCategoryProduct();
             await fetchCategoryProductAndProductDetail();
         });
+
+        //fetct category
+        const fetchContent = async () => {
+            const results = await getCollectionWhere('content', "GP5cKnVMF99bzFXPzFOt");
+            console.log(results);
+            content.value = results
+        };
+
+        
 
         const fetchCategoryProduct = async () => {
             const orderByField = 'productName';
@@ -208,7 +225,6 @@ export default {
             isLoading.value = false;
         };
 
-        // Computed property to gather all best seller products across all categories
         const bestSellerProducts = computed(() => {
             return productDetails.value
                 .flatMap(category => category.product) // Flatten products array
@@ -217,8 +233,9 @@ export default {
         });
 
         return {
-            bestSellerProducts, // Add to return object
+            bestSellerProducts, 
             isLoading,
+            content,
             modules: [Navigation],
         };
     },

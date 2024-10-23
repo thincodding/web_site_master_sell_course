@@ -1,6 +1,6 @@
 <template>
-    <div class="h-screen bg-black/50 w-full z-10 fixed top-0 left-0">
-        <div class="flex justify-center items-center mt-5">
+    <div class="fixed top-0 left-0 z-10 w-full h-screen bg-black/50">
+        <div class="flex items-center justify-center mt-5">
             <div class="bg-white w-[45%] overflow-y-auto h-[900px]" v-motion :initial="{ scale: 0.9 }"
                 :visible="{ opacity: 1, scale: 1 }">
                 <div class="p-4 space-y-3">
@@ -105,7 +105,7 @@
                                 </div>
 
                                 <div v-else-if="selectFile">
-                                    <img :src="selectFile" class="w-20 h-20 object-contain" alt="">
+                                    <img :src="selectFile" class="object-contain w-20 h-20" alt="">
                                 </div>
                                 <div v-else>
                                     <img class="w-20 h-20"
@@ -313,11 +313,9 @@ export default {
 
                 if (props.productDetail) {
                     try {
-                        // Import updateDocs from useNestedDocument hook
                         const { updateDocs } = useNestedDocument('categories', props.categories.id, 'product', props.product.id, 'productDetail');
-                        videoEmbedCodes.value = videoEmbedCode; // Use the embed code created earlier
+                        videoEmbedCodes.value = videoEmbedCode; 
 
-                        // Call the updateDocs function with the productDetailId and the updated data
                         await updateDocs(props.productDetail.id, data);
 
                         handleMessageSuccess(`បានកែប្រែមេរៀន ${props.productDetail.title} ដោយជោគជ័យ`);

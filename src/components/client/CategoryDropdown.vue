@@ -23,8 +23,8 @@
                     </div>
 
                     <!-- Subcategories -->
-                    <div class="p-4 border-l w-60 relative" v-if="filteredSubcategories.length">
-                        <p class="text-[14px] mt-1 font-bold text-[#6b6b6b]">Popular Topics</p>
+                    <div class="relative p-4 border-l w-60" v-if="filteredSubcategories.length">
+                        <p class="text-[14px] mt-1 font-bold text-[#6b6b6b]">ប្រធានបទពេញនិយម</p>
                         <div v-for="sub in filteredSubcategories" :key="sub.id" class="relative mt-1">
                             <router-link :to="{ name: 'productdetail', params: { id: sub.id }  }"
                                 class="text-[14px] text-[#2D2f31] font-[400] leading-8 hover:text-indigo-400"
@@ -43,14 +43,14 @@
     </div>
 
     <!-- Mobile View -->
-    <div class="w-full lg:hidden h-screen overflow-hidden relative">
-        <div class="flex flex-col space-y-3 p-4">
+    <div class="relative w-full h-screen overflow-hidden lg:hidden">
+        <div class="flex flex-col p-4 space-y-3">
             <router-link to="/login" class="text-indigo-600 text-[15px]">Log in</router-link>
             <router-link to="/signup" class="text-indigo-600 text-[15px]">Sign up</router-link>
         </div>
         <hr>
         <div class="p-4">
-            <p class="font-bold text-sm text-background my-1">Most Popular</p>
+            <p class="my-1 text-sm font-bold text-background">ប្រធានបទពេញនិយម</p>
             <div v-for="cat in category" :key="cat.id">
                 <div @click="handleIsopen(cat.id)"
                     class="leading-9 text-[14px] cursor-pointer flex justify-between capitalize items-center">
@@ -68,7 +68,7 @@
             :class="isOpen ? 'w-full bg-white shadow-md h-full top-0 absolute transition-transform duration-300 ease-out transform translate-x-0' : 'w-full bg-white shadow-md h-screen top-0 absolute transition-transform duration-300 ease-out transform translate-x-full'">
             <div class="bg-[#F7F9FA] p-4 flex items-center space-x-4">
                 <svg @click="handleIsopen(null)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    stroke-width="1.5" stroke="currentColor" class="size-5 font-bold cursor-pointer">
+                    stroke-width="1.5" stroke="currentColor" class="font-bold cursor-pointer size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
                 <p class="text-[15px] text-background">Menu</p>
