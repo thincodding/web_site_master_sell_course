@@ -50,6 +50,11 @@ const routes = [
     path: "/selectionCourse",
     name: "selectionCourse",
     component: () => import('@/components/client/SelectionCourse.vue')
+  },
+  {
+    path: "/searchProduct/:id",
+    name: "searchProduct",
+    component: () => import('@/views/SearchProductDetail.vue')
   }
 ]
 

@@ -1,4 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+
+import tailwindcssAnimated from 'tailwindcss-animated';
+import tailwindcssTypotography from '@tailwindcss/typography'
+
 export default {
   content: [
     "./index.html",
@@ -16,18 +20,17 @@ export default {
         KhmerMoul: 'Moul',
         NotoSansKhmer: 'Noto Sans Khmer',
         playfair: ['"Playfair Display"', 'serif'],
-      }
-
-    },
-     keyframes: {
-      shimmer: {
-        '100%' : {transform: 'translateX(100%)'}
+      },
+      keyframes: {
+        shimmer: {
+          '100%' : {transform: 'translateX(100%)'}
+        }
       }
     }
   },
   plugins: [
-    require('tailwindcss-animated'),
-    require('@tailwindcss/typography'),
-
+    tailwindcssAnimated,
+    // require('@tailwindcss/typography'),
+   tailwindcssTypotography
   ],
 }

@@ -345,6 +345,8 @@
                                                 </div>
 
                                             </div>
+
+                                            
                                             <div>
                                                 <h1 class="text-[23px] md:text-[32px] font-bold my-5 line-clamp-2">
                                                     {{ detail.title }}
@@ -367,7 +369,7 @@
 
                                             </div>
                                             <div class="mt-4 mb-10 space-y-4">
-                                                <div class="text-sm">បង្រៀនដោយ​ <span
+                                                <div class="text-sm">បង្រៀនដោយ <span
                                                         class="text-blue-500 underline capitalize cursor-pointer">{{
                                                             detail.lectures }}</span>
                                                 </div>

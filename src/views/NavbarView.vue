@@ -83,10 +83,10 @@
 
             <div v-if="!user" class="flex items-center space-x-2">
               <div class="border-[1px] border-black p-[6px] px-5 hover:bg-gray-200 cursor-pointer">
-                <router-link to="/login" class="font-bold text-[14px] text-[#2D2f31] text-nowrap">Log in</router-link>
+                <router-link to="/login" class="font-bold text-[14px] text-[#2D2f31] text-nowrap">ចូល</router-link>
               </div>
               <div class=" bg-black p-[7px] px-5  cursor-pointer">
-                <router-link to="/signup" class="font-bold text-[14px] text-white text-nowrap">Sign up</router-link>
+                <router-link to="/signup" class="font-bold text-[14px] text-white text-nowrap">បង្កើតថ្មី</router-link>
               </div>
             </div>
 
@@ -125,7 +125,6 @@
 
 
   <!-- mobile -->
-
   <div class="lg:hidden">
     <!-- Navigation bar -->
     <div style="box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;"
@@ -147,11 +146,14 @@
 
         <div class="flex gap-7 md:gap-6">
           <div>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-5">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
+            </svg> -->
+
+            <SearchComponent/>
+            
           </div>
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -172,7 +174,6 @@
     <div
       :class="isOpen ? 'w-[65%] md:w-[37%] bg-white shadow-sm fixed top-0 left-0 h-screen z-20 transition-transform duration-300 ease-out transform translate-x-0' : 'w-[65%] md:w-[37%] bg-white shadow-sm fixed top-0 left-0 h-screen z-20 transition-transform duration-300 ease-out transform -translate-x-full'">
       <div class="">
-
         <div>
           <CategoryDropdownVue />
         </div>
@@ -204,6 +205,7 @@ import CategoryDropdownVue from '@/components/client/CategoryDropdown.vue'
 import getUser from '@/firebase/getUser'
 import useSignout from '@/firebase/useSignout'
 import { useRouter } from 'vue-router'
+import SearchComponent from '@/components/client/SearchComponent.vue'
 
 export default {
   components: {
@@ -211,7 +213,8 @@ export default {
     BussinessDropdownVue,
     TeachUdemyDropdownVue,
     CartDropdownVue,
-    CategoryDropdownVue
+    CategoryDropdownVue,
+    SearchComponent
   },
 
   setup() {
