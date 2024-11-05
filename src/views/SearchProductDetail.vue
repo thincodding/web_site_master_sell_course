@@ -94,7 +94,7 @@ import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDoc
 import getNestedSubcollection from '@/firebase/getNestedSubcollection';
 import getNestedSubSubcollection from '@/firebase/getNestedSubsubCollection';
 import { onMounted, ref, computed } from 'vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
@@ -104,8 +104,7 @@ import { useRoute } from 'vue-router';
 import FooterView from './FooterView.vue';
 export default {
     components: {
-        Swiper,
-        SwiperSlide,
+    
         NavbarView,
         FooterView
     },

@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDocument';
 
 export default {
