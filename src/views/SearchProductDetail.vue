@@ -23,6 +23,9 @@
                             <div class="w-full h-6 bg-gray-300"></div>
                         </div>
                     </div>
+
+
+                    
                     <div class="flex gap-5">
                         <div
                             class="relative w-full overflow-hidden h-4 before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70 before:animate-[shimmer_1.1s_infinite]">
@@ -39,7 +42,7 @@
                         <p>នៃវគ្គសិក្សា "<b>{{ currentProduct.productName }}</b>"</p>
                     </div>
                     <div class="grid grid-cols-1 gap-5 lg:grid-cols-4 md:grid-cols-3">
-                        <div v-for="detail in currentProduct.productDetail" :key="detail.id" class="p-2 border mb-5">
+                        <div v-for="detail in currentProduct.productDetail" :key="detail.id" class="p-2 mb-5 border">
                             <div class="border-[1px]">
                                 <div v-if="detail.imageUrl">
                                     <img :src="detail.imageUrl" alt="Course Image"
