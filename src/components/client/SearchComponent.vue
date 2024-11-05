@@ -47,18 +47,17 @@
     <div v-if="isOpenDropdownSearch" class="flex items-center justify-center ">
       <div class="relative flex flex-col items-center group">
         <div class="absolute top-0 -right-3 items-center flex flex-col justify-end  mt-6 group-hover:flex z-[2]">
-          <div class="w-4 h-4 mt-1 ml-[201px] -mb-3 rotate-45 border-[0.5px] bg-white   shadow-2xl"></div>
+          <div class="w-4 h-4 mt-2 ml-[201px] -mb-3 rotate-45 border-[0.5px] bg-white   shadow-2xl"></div>
           <span class="relative z-10 p-2 text-xs leading-none whitespace-no-wrap border-[0.5px] rounded-sm bg-white shadow-lg ">
             <input v-model="searchText" type="text" class="p-1.5 border-2 outline-none w-[210px]  focus:border-blue-300"
               placeholder="ស្វែងរកមេរៀន...">
           </span>
         </div>
       </div>
-      <!-- Component End  -->
     </div>
 
     <div v-if="searchText"
-      class="absolute top-[132px] left-[146px] w-72 bg-white shadow-xl z-[2] border max-h-48 overflow-y-auto animate-fade-up animate-delay-[20ms]">
+      class="absolute top-[132px] left-16 md:left-96 w-72 bg-white shadow-xl z-[2] border max-h-48 overflow-y-auto animate-fade-up animate-delay-[20ms]">
       <div v-if="filteredProducts.length > 0" class="">
         <div v-for="category in filteredProducts" :key="category.id">
           <div v-for="product in category.product" :key="product.id" class="p-3 pl-4 text-gray-700 ">
@@ -74,6 +73,7 @@
           </div>
         </div>
       </div>
+      
       <div v-else class="p-3 text-center text-gray-500">
         <p class="text-sm">មិនមានមេរៀនឈ្មោះ {{ searchText }}</p>
       </div>
