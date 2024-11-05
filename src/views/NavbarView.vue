@@ -32,7 +32,7 @@
         <div class="relative group lg:hidden xl:block">
           <div
             class="text-[14px] group-hover:block font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap lg:hidden xl:block">
-            Master-IT Business</div>
+            </div>
 
           <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
           </div>
@@ -44,13 +44,14 @@
         <div class="relative group ">
           <div
             class="text-[14px] group-hover:block  font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap">
-            Teach on
-            Master-IT</div>
+            សិក្សាឥតគិតថ្លៃ
+          </div>
 
           <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
           </div>
           <div class="absolute hidden right-64 top-14 group-hover:block ">
-            <TeachUdemyDropdownVue />
+            <!-- <TeachUdemyDropdownVue /> -->
+
           </div>
         </div>
 
@@ -152,8 +153,8 @@
                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg> -->
 
-            <SearchComponent/>
-            
+            <SearchComponent />
+
           </div>
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -190,16 +191,13 @@
   </div>
 
 
-
-
-
 </template>
 
 <script>
 import { ref } from 'vue'
 import SearchComponentsVue from '@/components/client/SearchComponent.vue'
 import BussinessDropdownVue from '@/components/client/BussinessDropdown.vue'
-import TeachUdemyDropdownVue from '@/components/client/TeachUdemyDropdown.vue'
+// import TeachUdemyDropdownVue from '@/components/client/TeachUdemyDropdown.vue'
 import CartDropdownVue from '@/components/client/CartDropdown.vue'
 import CategoryDropdownVue from '@/components/client/CategoryDropdown.vue'
 import getUser from '@/firebase/getUser'
@@ -211,7 +209,7 @@ export default {
   components: {
     SearchComponentsVue,
     BussinessDropdownVue,
-    TeachUdemyDropdownVue,
+    // TeachUdemyDropdownVue,
     CartDropdownVue,
     CategoryDropdownVue,
     SearchComponent

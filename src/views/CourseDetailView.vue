@@ -148,16 +148,18 @@
 
 
                                                 <div
-                                                    class=" text-black absolute top-[23rem] border-[1px] border-background/20 md:w-[600px] my-10 lg:w-[580px] xl:w-[750px] p-4 ">
+                                                    class=" text-black absolute top-[21rem] border-background/20 md:w-[600px] lg:w-[580px] xl:w-[750px] p-4 my-10 ">
 
                                                     <div class="">
                                                         <p class="mt-6 text-black  leading-5 prose prose-p:text-[16px] "
                                                             v-html="detail.desctiption"></p>
                                                     </div>
-
+                                                    <!-- <div>hello</div> -->
+                                                    <div></div>
+                                                    <div></div>
                                                 </div>
-
-
+                                          
+                                             
                                             </div>
                                         </div>
                                     </div>
@@ -309,10 +311,15 @@
                             </div>
                         </div>
 
+                     
+
                     </div>
 
                 </div>
             </div>
+
+
+            <hr>
 
         </div>
         <!-- mobile -->

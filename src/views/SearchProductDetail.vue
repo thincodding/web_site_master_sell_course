@@ -34,12 +34,12 @@
 
             <div v-else class="xl:w-[1200px] mx-auto ">
                 <div v-if="currentProduct">
-                    <div class="flex items-center gap-1 mb-4 text-lg md:text-2xl lg:my-5">
+                    <div class="flex items-center gap-1 mb-10 text-lg md:text-2xl lg:my-5">
                         <p>លទ្ធផល <b>{{ currentProduct.productDetail.length }}</b> </p>
                         <p>នៃវគ្គសិក្សា "<b>{{ currentProduct.productName }}</b>"</p>
                     </div>
                     <div class="grid grid-cols-1 gap-5 lg:grid-cols-4 md:grid-cols-3">
-                        <div v-for="detail in currentProduct.productDetail" :key="detail.id" class="p-2 border">
+                        <div v-for="detail in currentProduct.productDetail" :key="detail.id" class="p-2 border mb-5">
                             <div class="border-[1px]">
                                 <div v-if="detail.imageUrl">
                                     <img :src="detail.imageUrl" alt="Course Image"
@@ -104,7 +104,7 @@ import { useRoute } from 'vue-router';
 import FooterView from './FooterView.vue';
 export default {
     components: {
-    
+
         NavbarView,
         FooterView
     },

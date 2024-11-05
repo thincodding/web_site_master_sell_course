@@ -18,6 +18,7 @@
         <div v-for="category in filteredProducts" :key="category.id">
           <div v-for="product in category.product" :key="product.id" class="p-3 pl-4 text-gray-700 ">
             <router-link :to="{ name: 'searchProduct', params: { id: product.id } }"
+              @click="handleSearchProductDetail(product.id)"
               class="flex items-center gap-5 duration-300 ease-in-out hover:text-gray-400 hover:transition-all">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-5">
@@ -37,8 +38,8 @@
 
   <!-- mobile -->
   <div class="lg:hidden">
-    <svg @click="isOpenDropdownSearch = !isOpenDropdownSearch" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-      class="cursor-pointer size-5">
+    <svg @click="isOpenDropdownSearch = !isOpenDropdownSearch" xmlns="http://www.w3.org/2000/svg" fill="none"
+      viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cursor-pointer size-5">
       <path stroke-linecap="round" stroke-linejoin="round"
         d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
     </svg>
@@ -48,7 +49,8 @@
       <div class="relative flex flex-col items-center group">
         <div class="absolute top-0 -right-3 items-center flex flex-col justify-end  mt-6 group-hover:flex z-[2]">
           <div class="w-4 h-4 mt-2 ml-[201px] -mb-3 rotate-45 border-[0.5px] bg-white   shadow-2xl"></div>
-          <span class="relative z-10 p-2 text-xs leading-none whitespace-no-wrap border-[0.5px] rounded-sm bg-white shadow-lg ">
+          <span
+            class="relative z-10 p-2 text-xs leading-none whitespace-no-wrap border-[0.5px] rounded-sm bg-white shadow-lg ">
             <input v-model="searchText" type="text" class="p-1.5 border-2 outline-none w-[210px]  focus:border-blue-300"
               placeholder="ស្វែងរកមេរៀន...">
           </span>
@@ -62,6 +64,7 @@
         <div v-for="category in filteredProducts" :key="category.id">
           <div v-for="product in category.product" :key="product.id" class="p-3 pl-4 text-gray-700 ">
             <router-link :to="{ name: 'searchProduct', params: { id: product.id } }"
+              @click="handleSearchProductDetail(product.id)"
               class="flex items-center gap-5 duration-300 ease-in-out hover:text-gray-400 hover:transition-all">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-4">
@@ -73,7 +76,7 @@
           </div>
         </div>
       </div>
-      
+
       <div v-else class="p-3 text-center text-gray-500">
         <p class="text-sm">មិនមានមេរៀនឈ្មោះ {{ searchText }}</p>
       </div>
@@ -85,6 +88,7 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDocument';
+import { useRoute, useRouter } from 'vue-router'
 
 export default {
   setup() {
@@ -93,11 +97,28 @@ export default {
     const isLoading = ref(false);
     const isOpenDropdownSearch = ref(false)
     const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
+    const route = useRoute();
+    const router = useRouter();
 
     onMounted(async () => {
       await fetchCollection();
       await fetchCategoryProduct();
     });
+
+    //search reload product
+    const handleSearchProductDetail = (id) => {
+      if (route.params.id === id) {
+        router.replace({ name: 'searchProduct', params: { id } });
+
+      } else {
+
+        router.push({ name: 'searchProduct', params: { id } });
+
+        searchText.value = null;
+
+      }
+    };
+
 
     const fetchCategoryProduct = async () => {
       isLoading.value = true;
@@ -140,7 +161,8 @@ export default {
       searchText,
       filteredProducts,
       isLoading,
-      isOpenDropdownSearch
+      isOpenDropdownSearch,
+      handleSearchProductDetail
     };
   },
 };
