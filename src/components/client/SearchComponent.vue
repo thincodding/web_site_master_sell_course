@@ -17,16 +17,16 @@
       <div v-if="filteredProducts.length > 0" class="">
         <div v-for="category in filteredProducts" :key="category.id">
           <div v-for="product in category.product" :key="product.id" class="p-3 pl-4 text-gray-700 ">
-            <router-link :to="{ name: 'searchProduct', params: { id: product.id } }"
-              @click="handleSearchProductDetail(product.id)"
+            <a :href="`/searchProduct/${product.id}`"
               class="flex items-center gap-5 duration-300 ease-in-out hover:text-gray-400 hover:transition-all">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-5">
+                stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
               </svg>
               <p>{{ product.productName }}</p>
-            </router-link>
+            </a>
+
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@
       <div v-if="filteredProducts.length > 0" class="">
         <div v-for="category in filteredProducts" :key="category.id">
           <div v-for="product in category.product" :key="product.id" class="p-3 pl-4 text-gray-700 ">
-            <router-link :to="{ name: 'searchProduct', params: { id: product.id } }"
+            <a :href="`/searchProduct/${product.id}`"
               @click="handleSearchProductDetail(product.id)"
               class="flex items-center gap-5 duration-300 ease-in-out hover:text-gray-400 hover:transition-all">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -72,7 +72,7 @@
                   d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
               </svg>
               <p class="text-sm">{{ product.productName }}</p>
-            </router-link>
+            </a>
           </div>
         </div>
       </div>

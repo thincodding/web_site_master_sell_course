@@ -472,6 +472,7 @@
                             </div>
 
                         </div>
+                        
                         <div class="border-b-[1px] border-b-gray-300 pt-3 sm:pb-2">
                             <div :class="dropdownClassesProduct"
                                 class="bg-white transition-[height] duration-500 ease-in-out overflow-hidden ">
