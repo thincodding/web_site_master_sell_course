@@ -227,8 +227,6 @@
 
                                                             </div>
                                                         </div>
-
-
                                                         <hr>
                                                     </div>
                                                 </div>
@@ -277,6 +275,9 @@
                                                         class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px]">
                                                         {{ detail.conetent?.title }}
                                                     </div>
+
+
+                                                    
                                                     <div @click="handleShowAboutLessionDes(detail.lessionVideo?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.lessionVideo?.title,
@@ -787,9 +788,6 @@ export default {
         const handleShowAboutLessionDes = (desc) => {
             displyDesctiptionList.value = desc
         }
-
-
-
 
 
         return {
