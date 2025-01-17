@@ -228,7 +228,7 @@
                                                         </svg>
                                                     </button>
 
-                                                    <button type="button"
+                                                    <button type="button" v-if="productDetail" @click="handleEditContent(index)"
                                                         class="px-2 py-2 text-white bg-blue-600 hover:bg-blue-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -329,7 +329,7 @@
                                                         </svg>
                                                     </button>
 
-                                                    <button type="button"
+                                                    <button type="button" v-if="productDetail" @click="handleEditVideoLession(index)"
                                                         class="px-2 py-2 text-white bg-blue-600 hover:bg-blue-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -379,7 +379,7 @@
 
 
                                         <div class="absolute right-0 top-[94px]">
-                                            <button type="button" @click="addRowAchievmentStudent"
+                                            <button type="button"  @click="addRowAchievmentStudent"
                                                 class="px-4 py-2.5 text-white bg-blue-500 hover:bg-blue-400">+</button>
                                         </div>
 
@@ -431,7 +431,7 @@
                                                         </svg>
                                                     </button>
 
-                                                    <button type="button"
+                                                    <button v-if="productDetail" type="button" @click="handleEditAchievStudent(index)"
                                                         class="px-2 py-2 text-white bg-blue-600 hover:bg-blue-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -446,10 +446,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-
 
                                     </div>
                                 </fieldset>
@@ -500,7 +496,7 @@
                                                         </svg>
                                                     </button>
 
-                                                    <button type="button"
+                                                    <button type="button" v-if="productDetail" @click="handleEditCommentFile(index)"
                                                         class="bg-blue-500 p-1 rounded-full m-0.5 text-white hover:bg-blue-400">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -571,7 +567,7 @@
                                             <div v-for="(list, index) in studyMethodList" :key="index"
                                                 class="flex items-center justify-between gap-2">
                                                 <div>
-                                                    
+
                                                     <!-- <p>{{ list.lessionVideoLink }}</p> -->
                                                     <div v-if="list.isDirectMethod">
                                                         <video :src="list.videoLink" controls
@@ -596,7 +592,7 @@
                                                         </svg>
                                                     </button>
 
-                                                    <button type="button"
+                                                    <button type="button" v-if="productDetail" @click="handleEdiStudyMethod(index)"
                                                         class="px-2 py-2 text-white bg-blue-600 hover:bg-blue-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -713,18 +709,36 @@ export default {
 
         onMounted(() => {
             if (props.categories && props.product && props.productDetail) {
-                title.value = props.productDetail.title
-                categoryId.value = props.categories.id
-                productId.value = props.product.id
-                lectures.value = props.productDetail.lectures
-                price.value = props.productDetail.price
-                discount.value = props.productDetail.discount
-                aboutCourse.value = props.productDetail.aboutCourse
-                show_spacial.value = props.productDetail.show_spacial
-                desctiption.value = props.productDetail.desctiption,
-                    urlCopyLink.value = props.productDetail.urlLinkCopy,
-                    selectFile.value = props.productDetail.imageUrl
-            }
+    title.value = props.productDetail?.title
+    categoryId.value = props.categories?.id
+    productId.value = props.product?.id
+    lectures.value = props.productDetail?.lectures
+    price.value = props.productDetail?.price
+    discount.value = props.productDetail?.discount
+    aboutCourse.value = props.productDetail?.aboutCourse
+    show_spacial.value = props.productDetail?.show_spacial
+    desctiption.value = props.productDetail.description
+    selectFile.value = props.productDetail?.imageUrl
+    introLessionVideo.value = props.productDetail?.introVideoLink
+    lessionBreif.value = props.productDetail?.lessionBreif
+    aboutLession.value = props.productDetail?.aboutLessionList?.title
+    aboutLessionDescription.value = props.productDetail?.aboutLessionList?.description
+    contentTitle.value = props.productDetail?.conetent?.title
+    contentDescriptionList.value = props.productDetail?.conetent?.descriptionList
+
+    lessionVideoTitle.value = props.productDetail?.lessionVideo?.title
+    lesssionVideoList.value = props.productDetail?.lessionVideo?.lesstionDescriptionList
+
+    achievmentTitle.value = props.productDetail?.achievment?.title
+    achievmentList.value = props.productDetail?.achievment?.achievmentList
+
+    studentComment.value = props.productDetail?.studentComment?.title
+    selectFeatureStudentCommentList.value = props.productDetail?.studentComment?.studentCommentList
+
+    studyMethodTittle.value = props.productDetail?.studyMethod?.title
+    studyMethodList.value = props.productDetail?.studyMethod?.studyMethodList
+}
+
         })
 
 
@@ -817,6 +831,14 @@ export default {
             }
         }
 
+        //addcontent to edit
+        const handleEditContent = (index) => {
+            contentVideoTitle.value = contentDescriptionList.value[index].contentVideoTitle;
+            contentDescription.value = contentDescriptionList.value[index].contentDescription;
+            contentDescriptionList.value.splice(index, 1);
+        }
+
+
 
         //show video lession
 
@@ -841,7 +863,6 @@ export default {
 
 
         //add row lession
-
         const addVideoLessionRows = () => {
 
             if (lessionVideoContent.value && lessionVideoContent.value && lessionVideoLink.value && lessionVideoLink.value) {
@@ -858,7 +879,6 @@ export default {
 
         }
 
-
         //remove video lession
 
         const removeVideoLessionList = (index) => {
@@ -872,6 +892,14 @@ export default {
                 console.log(err)
             }
         }
+
+
+        const handleEditVideoLession = (index) => {
+            lessionVideoContent.value = lesssionVideoList.value[index].lessionVideoContent;
+            lessionVideoLink.value = lesssionVideoList.value[index].lessionVideoLink;
+            lesssionVideoList.value.splice(index, 1);
+        }
+
 
 
         //achievment Video
@@ -920,9 +948,15 @@ export default {
             }
         };
 
+        const handleEditAchievStudent = (index) => {
+            achievmentDescription.value = achievmentList.value[index].title;
+            achievmentVideoLink.value = achievmentList.value[index].videoLink;
+            achievmentList.value.splice(index, 1);
+        }
+
+
 
         // student comment
-
         const addStudentCommentFile = (e) => {
             try {
                 const files = Array.from(e.target.files);
@@ -942,7 +976,7 @@ export default {
                     const previewUrl = URL.createObjectURL(file);
                     preFetureStudentComment.value.push(previewUrl);
 
-                    const storagePath = `systemHardware/${file.name}`;
+                    const storagePath = `studentComment/${file.name}`;
                     return uploadImage(storagePath, file);
                 });
 
@@ -982,9 +1016,7 @@ export default {
             }
         }
 
-
         //student method
-
         const isValidIntroDetailLinkMethod = computed(() => {
             const videoPatterns = /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/|.*\.(mp4|webm|ogg|m4v))(.*)?$/i;
             return videoPatterns.test(studyMethodVideoLink.value);
@@ -1008,31 +1040,35 @@ export default {
 
         const addRowStudyMethod = () => {
 
-            if(studyMethodVideoLink.value && studyMethodVideoLink.value){
+            if (studyMethodVideoLink.value && studyMethodVideoLink.value) {
                 studyMethodList.value.push({
                     videoLink: studyMethodVideoLink.value,
                     isDirectMethod: isDirectIntroDetailLinkMethod.value,
-                    youtubeEmbedMethod : youtubeEmbedIntroLinkMethod.value
-                    
+                    youtubeEmbedMethod: youtubeEmbedIntroLinkMethod.value
                 })
-
-                 studyMethodVideoLink.value = ''
+                studyMethodVideoLink.value = ''
             }
-            
+
         }
 
 
         const removeStudyMethod = (index) => {
-            try{
-                if(window.confirm("Are you sure delete")){
+            try {
+                if (window.confirm("Are you sure delete")) {
                     studyMethodList.value.splice(index, 1)
                 }
             }
-            catch(err){
+            catch (err) {
                 console.log(err)
             }
         }
 
+
+
+        const handleEdiStudyMethod = (index) => {
+            studyMethodVideoLink.value = studyMethodList.value[index].videoLink;
+            studyMethodList.value.splice(index, 1);
+        }
 
 
 
@@ -1049,8 +1085,44 @@ export default {
                     discount: discount.value,
                     show_spacial: show_spacial.value,
                     aboutCourse: aboutCourse.value,
+                    description: desctiption.value,
+                    introVideoLink: introLessionVideo.value,
+                    lessionBreif: lessionBreif.value,
+                    aboutLessionList: {
+                        title: aboutLession.value,
+                        description: aboutLessionDescription.value
+                    },
+
+                    conetent: {
+
+                        title: contentTitle.value,
+                        descriptionList: contentDescriptionList.value
+                    },
+                    lessionVideo:
+                    {
+                        title: lessionVideoTitle.value,
+                        lesstionDescriptionList: lesssionVideoList.value
+                    },
+
+
+                    achievment:
+                    {
+                        title: achievmentTitle.value,
+                        achievmentList: achievmentList.value
+                    },
+
+                    studentComment: {
+                        title: studentComment.value,
+                        studentCommentList: selectFeatureStudentCommentList.value
+                    },
+
+
+                    studyMethod: {
+                        title: studyMethodTittle.value,
+                        studyMethodList: studyMethodList.value
+                    },
+
                     createdAt: timestamp(),
-                    contentDescription: contentDescriptionList.value
                 }
 
                 if (selectFile.value && selectFile.value !== (props.productDetail?.imageUrl || "")) {
@@ -1074,6 +1146,8 @@ export default {
                 } else {
                     await addDocs(data);
                     handleMessageSuccess(`បានរក្សាទុក ${title.value} ដោយជោគជ័យ`);
+
+                    console.log('data', data)
                 }
 
                 handleClose();
@@ -1088,6 +1162,50 @@ export default {
             }
         }
 
+
+
+        //add to edit target business
+        const handleEditCommentFile = (index) => {
+            const newFileInput = document.createElement('input');
+            newFileInput.type = 'file';
+            newFileInput.accept = 'image/png, image/jpeg';
+
+            // Listen for the user to select a new image
+            newFileInput.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+
+                if (!file || !(file.type === 'image/png' || file.type === 'image/jpeg')) {
+                    alert("Only PNG and JPEG formats are allowed.");
+                    return;
+                }
+
+                if (file.size > 5 * 1024 * 1024) {
+                    alert("Image size exceeds 5MB limit.");
+                    return;
+                }
+
+                const previewUrl = URL.createObjectURL(file);
+                const storagePath = `studentComment/${file.name}`;
+
+                try {
+                    const url = await uploadImage(storagePath, file);
+
+                    if (url) {
+                        // Update the comment list with the new image URL
+                        selectFeatureStudentCommentList.value.splice(index, 1, { image: url });
+                    }
+                } catch (err) {
+                    console.error("Error uploading image:", err);
+                    alert("Failed to upload the image. Please try again.");
+                } finally {
+                    // Revoke the object URL to free up memory
+                    URL.revokeObjectURL(previewUrl);
+                }
+            });
+
+            // Programmatically trigger the file selection dialog
+            newFileInput.click();
+        };
 
 
 
@@ -1123,7 +1241,7 @@ export default {
             youtubeEmbedIntroLinkLession,
             isValidIntroDetailLinkLession,
             addVideoLessionRows,
-
+            handleEditVideoLession,
             removeVideoLessionList,
 
             //actievment
@@ -1137,6 +1255,7 @@ export default {
             youtubeEmbedIntroLinkAchievment,
             addRowAchievmentStudent,
             removeAchievmentStudent,
+            handleEditAchievStudent,
 
             //stuent comment
             studentComment,
@@ -1144,6 +1263,8 @@ export default {
             preFetureStudentComment,
             addStudentCommentFile,
             removeStudentCommentFile,
+            handleEditCommentFile,
+            handleEditContent,
 
             //studyMethod
             studyMethodTittle,
@@ -1154,7 +1275,8 @@ export default {
             studyMethodList,
 
             addRowStudyMethod,
-            removeStudyMethod
+            removeStudyMethod,
+            handleEdiStudyMethod
 
         }
     }

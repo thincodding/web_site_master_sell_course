@@ -20,7 +20,7 @@
         <div class="flex justify-between">
             <div>
                 <select class="p-2 px-5 border-2 outline-none bg-gray-50/20 focus:border-blue-500">
-                    <option value="25">25</option>
+                    <option value="10">10</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
@@ -63,8 +63,6 @@
                     <tr v-if="isLoading" class="text-center">
                         <td colspan="10" class="my-2 text-center text-md font-NotoSansKhmer">សូមរងចាំ...</td>
                     </tr>
-
-                    <!-- Display product details once the data is loaded -->
                     <template v-else>
                         <template v-for="cat in filterProductDetail" :key="cat.id">
                             <template v-for="pro in cat.product" :key="pro.id">
@@ -93,19 +91,12 @@
                                                 <p>មិនមានទិន្ន័យ</p>
                                             </div>
                                         </td>
-                                        <!-- <td>
-                                            <div v-if="detail.urlLinkCopy?.length > 0">
-                                                <div v-html="detail.urlLinkCopy"></div>
-                                            </div>
-                                            <div v-else>
-                                                <p>មិនមានលីងវីដែអូ</p>
-                                            </div>
-                                        </td> -->
+
                                         <td>
                                             <div v-if="detail.imageUrl?.length > 0">
                                                 <img :src="detail.imageUrl" class="object-contain w-10 h-10" alt="">
                                             </div>
-                                            
+
                                             <div v-else>
                                                 <img class="w-10 h-10"
                                                     src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
@@ -188,6 +179,10 @@
 </template>
 
 
+
+
+
+
 <script>
 import AddProductModalVue from '@/components/admin/AddProductModal.vue';
 import ProductModalDeleteComponent from '@/components/admin/ProductModalDeleteComponent.vue';
@@ -218,6 +213,10 @@ export default {
         const product = ref(null);
         const productDetail = ref(null);
         const date = moment;
+
+        // Pagination States
+        const currentPage = ref(1);  // Current page
+        const itemsPerPage = ref(10); // Number of items per page
 
         // Firestore Collections
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
@@ -259,7 +258,6 @@ export default {
             }
         };
 
-        
         // Fetch ProductDetails and Students, and Compute isBestSeller
         const fetchCategoryProductAndProductDetail = async () => {
             isLoading.value = true;
@@ -287,7 +285,7 @@ export default {
                                         pro.id,
                                         'productDetail',
                                         detail.id,
-                                        'student' 
+                                        'student'
                                     );
 
                                     try {
@@ -301,11 +299,11 @@ export default {
                                         }, {});
 
                                         const isBestSeller = titleCounts[detail.title] > 2;
-                                        
+
                                         return {
                                             ...detail,
                                             student: students.value,
-                                            isBestSeller 
+                                            isBestSeller
                                         };
                                     } catch (err) {
                                         console.error(`Error fetching students for productDetail ${detail.id}:`, err);
@@ -350,24 +348,28 @@ export default {
             isLoading.value = false;
         };
 
-        // Filter Logic Based on Search Text
+        // Filter Logic Based on Search Text and Pagination
         const filterProductDetail = computed(() => {
-            if (!searchText.value) {
-                return productDetails.value;
+            let filteredData = productDetails.value;
+
+            if (searchText.value) {
+                const lowerSearch = searchText.value.toLowerCase();
+                filteredData = filteredData.map(category => ({
+                    ...category,
+                    product: category.product.map(pro => ({
+                        ...pro,
+                        productDetail: pro.productDetail.filter(detail =>
+                            detail.title.toLowerCase().includes(lowerSearch) ||
+                            pro.productName.toLowerCase().includes(lowerSearch)
+                        )
+                    })).filter(pro => pro.productDetail.length > 0)
+                })).filter(category => category.product.length > 0);
             }
 
-            const lowerSearch = searchText.value.toLowerCase();
-
-            return productDetails.value.map(category => ({
-                ...category,
-                product: category.product.map(pro => ({
-                    ...pro,
-                    productDetail: pro.productDetail.filter(detail =>
-                        detail.title.toLowerCase().includes(lowerSearch) ||
-                        pro.productName.toLowerCase().includes(lowerSearch)
-                    )
-                })).filter(pro => pro.productDetail.length > 0)
-            })).filter(category => category.product.length > 0);
+            // Paginate
+            const start = (currentPage.value - 1) * itemsPerPage.value;
+            const end = start + itemsPerPage.value;
+            return filteredData.slice(start, end);
         });
 
         // Handle Action Buttons
@@ -401,6 +403,19 @@ export default {
             productDetail.value = detail;
         };
 
+        // Pagination Controls
+        const nextPage = () => {
+            if (currentPage.value * itemsPerPage.value < productDetails.value.length) {
+                currentPage.value++;
+            }
+        };
+
+        const prevPage = () => {
+            if (currentPage.value > 1) {
+                currentPage.value--;
+            }
+        };
+
         return {
             onMountedCurrentComponents,
             currentComponents,
@@ -418,7 +433,11 @@ export default {
             product,
             productDetail,
             handleLoadProductDetail,
-            handleEditProductDetail
+            handleEditProductDetail,
+            nextPage,
+            prevPage,
+            currentPage,
+            itemsPerPage
         };
     },
 };
