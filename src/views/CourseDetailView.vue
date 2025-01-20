@@ -3,7 +3,7 @@
         <NavbarView />
 
         <div class="mx-auto mb-auto">
-            <div v-if="isLoading" class="animate-pulse p-5 md:mt-3 lg:mt-10 xl:w-[1200px] mx-auto md:p-5">
+            <div v-if="isLoading" class="animate-pulse p-5 md:mt-3 lg:mt-10 xl:w-[90%] mx-auto md:p-5">
                 <div class="h-8 xl:h-9 bg-gray-300 w-72   xl:w-[600px] mb-4"></div>
                 <div v-for="n in 4" :key="n" class="mb-4 space-y-6">
                     <div class="flex gap-5 mt-2">
@@ -53,7 +53,7 @@
 
 
 
-            <div v-else>
+            <div v-else class="hidden lg:block">
                 <div class="hidden p-5 bg-background lg:block">
                     <div class="xl:w-[90%] h-[350px] mx-auto  my-2  gap-10">
 
@@ -66,8 +66,10 @@
 
                                         <div class="px-4">
                                             <div v-for="detail in product.productDetail" :key="detail.id">
+
                                                 <!-- Display the product detail only if it matches the route param id -->
                                                 <div v-if="detail.id === $route.params.id">
+
                                                     <div class="text-white">
                                                         <div class="flex items-center space-x-1">
                                                             <h3
@@ -82,7 +84,7 @@
                                                                     <path d="m9 18 6-6-6-6" />
                                                                 </svg></div>
                                                             <h3
-                                                                class="capitalize text-indigo-300/90 text-sm font-[500]">
+                                                                class="capitalize text-indigo-300/90 text-sm font-[500] font-NotoSansKhmer">
                                                                 {{
                                                                     product.productName }}</h3>
                                                         </div>
@@ -104,10 +106,11 @@
                                                                 </div>
 
 
-                                                                <div class="flex items-center space-x-2 text-xs">
+                                                                <div v-if="detail.student.length > 0"
+                                                                    class="flex items-center space-x-2 text-xs">
                                                                     <p class="text-indigo-300 underline">មានសិស្សរៀន
                                                                     </p>
-                                                                    <span class="text-[14px]">{{ detail.student.length
+                                                                    <span class="text-[16px]">{{ detail.student.length
                                                                         }}
                                                                         នាក់</span>
                                                                 </div>
@@ -200,7 +203,7 @@
                                                         <div class="p-5">
                                                             <h3 class="font-bold text-[32px] text-background">${{
                                                                 detail.price
-                                                            }}.99</h3>
+                                                                }}</h3>
                                                             <div class="mt-2 space-y-2">
                                                                 <a href="https://t.me/masteritsystems_saleconsultant"
                                                                     target="_blank" rel="noopener noreferrer">
@@ -221,10 +224,7 @@
 
                                                                     <p v-html="detail.lessionBreif" class="space-y-1">
                                                                     </p>
-
-
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                         <hr>
@@ -259,55 +259,55 @@
 
                                             <div class="">
                                                 <div class="grid lg:grid-cols-4 xl:grid-cols-6">
-                                                    <div @click="handleShowAboutLessionDes(detail.aboutLessionList?.title)"
+                                                    <div v-if="detail.aboutLessionList?.title" @click="handleShowAboutLessionDes(detail.aboutLessionList?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.aboutLessionList?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.aboutLessionList?.title,
                                                         }"
-                                                        class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px]">
+                                                        class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px] xl:text-[16px]">
                                                         {{ detail.aboutLessionList?.title }}
                                                     </div>
-                                                    <div @click="handleShowAboutLessionDes(detail.conetent?.title)"
+                                                    <div v-if="detail.conetent?.title" @click="handleShowAboutLessionDes(detail.conetent?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.conetent?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.conetent?.title,
                                                         }"
-                                                        class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px]">
+                                                        class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px] xl:text-[16px]">
                                                         {{ detail.conetent?.title }}
                                                     </div>
 
 
-                                                    
-                                                    <div @click="handleShowAboutLessionDes(detail.lessionVideo?.title)"
+
+                                                    <div v-if="detail.lessionVideo?.title" @click="handleShowAboutLessionDes(detail.lessionVideo?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.lessionVideo?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.lessionVideo?.title,
                                                         }"
-                                                        class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px]">
+                                                        class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px] xl:text-[16px]">
                                                         {{ detail.lessionVideo?.title }}
                                                     </div>
-                                                    <div @click="handleShowAboutLessionDes(detail.achievment?.title)"
+                                                    <div v-if="detail.achievment?.title" @click="handleShowAboutLessionDes(detail.achievment?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.achievment?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.achievment?.title,
                                                         }"
-                                                        class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px]">
+                                                        class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px] xl:text-[16px]">
                                                         {{ detail.achievment?.title }}
                                                     </div>
-                                                    <div @click="handleShowAboutLessionDes(detail.studentComment?.title)"
+                                                    <div v-if="detail.studentComment?.title" @click="handleShowAboutLessionDes(detail.studentComment?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.studentComment?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.studentComment?.title,
                                                         }"
-                                                        class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px]">
+                                                        class="p-4 text-center border-t  border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px] xl:text-[16px]">
                                                         {{ detail.studentComment?.title }}
                                                     </div>
-                                                    <div @click="handleShowAboutLessionDes(detail.studyMethod?.title)"
+                                                    <div v-if="detail.studyMethod?.title" @click="handleShowAboutLessionDes(detail.studyMethod?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.studyMethod?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.studyMethod?.title,
                                                         }"
-                                                        class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px]">
+                                                        class="p-4 text-center  border-t border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px] xl:text-[16px]">
                                                         {{ detail.studyMethod?.title }}
                                                     </div>
                                                 </div>
@@ -324,20 +324,45 @@
                                                     </p>
                                                 </div>
 
-                                                <div v-else-if="displyDesctiptionList === detail.conetent?.title">
-                                                    <div class=" text-[16px]"
-                                                        v-for="content in detail.conetent?.descriptionList"
-                                                        :key="content.id">
-                                                        <p class="font-bold" v-html="content?.contentVideoTitle"></p>
-                                                        <hr class="my-2">
 
-                                                        <div  class="space-y-2 text-gray-500 underline cursor-not-allowed" v-html="content?.contentDescription">
-                                                          
+                                                <div v-else-if="displyDesctiptionList === detail.conetent?.title"
+                                                    class="border-b border-l border-r">
+                                                    <div class="text-[16px] border-t p-4 w-full "
+                                                        v-for="(content, index) in detail.conetent?.descriptionList"
+                                                        :key="content.id">
+
+                                                        <!-- Title with Toggle -->
+                                                        <div @click="handleShowCollapse(index)"
+                                                            class="flex items-center justify-between w-full space-y-2">
+                                                            <p class="w-full font-bold cursor-pointer"
+                                                                v-html="content?.contentVideoTitle"></p>
+                                                            <div class="cursor-pointer"
+                                                                :class="{ 'rotate-180 transition-all duration-300 ease-out': collapsedIndex === index, 'rotate-0 transition-all duration-300 ease-out': collapsedIndex !== index }">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                    viewBox="0 0 24 24" stroke-width="1.5"
+                                                                    stroke="currentColor"
+                                                                    class="transition-transform duration-200 size-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                                                </svg>
+                                                            </div>
                                                         </div>
+
+                                                        <!-- Collapsible Content with Animate Transition -->
+                                                        <transition name="fade-collapse" @enter="onEnter"
+                                                            @leave="onLeave">
+
+                                                            <div v-if="collapsedIndex === index"
+                                                                class="overflow-hidden">
+                                                                <div class="mt-3 space-y-2 text-blue-400 underline cursor-not-allowed "
+                                                                    v-html="content?.contentDescription">
+                                                                </div>
+                                                            </div>
+                                                        </transition>
                                                     </div>
                                                 </div>
 
-                                      
+
 
                                                 <div v-else-if="displyDesctiptionList === detail.lessionVideo?.title">
                                                     <div v-for="video in detail.lessionVideo?.lesstionDescriptionList"
@@ -424,8 +449,10 @@
                                                     </div>
                                                 </div>
 
-                                                <p class="mt-6 text-black leading-5 prose prose-p:text-[16px]"
+                                                <p class="mt-6 text-black space-y-2 text-[16px] font-NotoSansKhmer"
                                                     v-html="detail?.description"></p>
+
+
                                             </div>
 
 
@@ -449,12 +476,13 @@
 
 
             <!-- mobile -->
-            <div class="mt-5 md:px-10 lg:hidden">
+            <div class="mt-5 md:px-20 lg:hidden">
                 <div v-if="productDetails && productDetails.length">
                     <div v-for="category in productDetails" :key="category.id">
                         <div v-for="product in category.product" :key="product.id">
-                            <div class="px-10">
+                            <div class="px-5">
                                 <div v-for="detail in product.productDetail" :key="detail.id">
+                                    <!-- <pre>{{ detail }}</pre> -->
                                     <!-- Display the product detail only if it matches the route param id -->
                                     <div v-if="detail.id === $route.params.id">
                                         <div class="">
@@ -472,10 +500,20 @@
                                             </div>
                                             <div class="mt-4">
 
-                                                <div v-if="detail.urlLinkCopy?.length > 0">
-                                                    <div class="w-full ">
-                                                        <div v-html="detail.urlLinkCopy" class=""></div>
-                                                    </div>
+                                                <div v-if="detail.introVideoLink?.length > 0">
+                                                    <iframe
+                                                        v-if="detail.introVideoLink && getVideoEmbedLink(detail.introVideoLink)"
+                                                        :src="getVideoEmbedLink(detail.introVideoLink)" frameborder="0"
+                                                        allow="autoplay; encrypted-media" allowfullscreen
+                                                        class="w-full h-[300px] md:h-[400px]"></iframe>
+
+                                                    <video
+                                                        v-else-if="detail.introVideoLink && /\.(mp4|webm|ogg|m4v)$/i.test(detail.introVideoLink)"
+                                                        :src="detail.introVideoLink" controls
+                                                        class="w-full h-[300px] md:h-[400px]"></video>
+
+                                                    <img v-else class="w-[400px]" src="https://fakeimg.pl/200x200/"
+                                                        alt="">
 
                                                 </div>
 
@@ -494,10 +532,11 @@
                                                         class="text-sm px-2 font-bold text-[#3D3C0A] bg-yellow-300/90 p-1">
                                                         លក់ដាច់បំផុត</div>
 
-                                                    <div class="flex items-center space-x-2 text-xs">
+                                                    <div v-if="detail.student.length > 0"
+                                                        class="flex items-center space-x-2 text-xs">
                                                         <p class="underline">មានសិស្សរៀន
                                                         </p>
-                                                        <span class="text-[14px]">{{ detail.student.length }}
+                                                        <span class="text-[16px]">{{ detail.student.length }}
                                                             នាក់</span>
                                                     </div>
 
@@ -547,11 +586,12 @@
 
 
                                         <div>
+
                                             <div class="relative w-full px-2 sm:px-0">
                                                 <TabGroup>
                                                     <TabList class="flex p-1 space-x-1 ">
                                                         <!-- Loop through the categories array -->
-                                                        <Tab v-for="category in categories" as="template"
+                                                        <!-- <Tab v-for="category in categories" as="template"
                                                             :key="category.names" v-slot="{ selected }">
                                                             <button :class="[
                                                                 'w-full py-2.5 text-sm font-medium leading-5',
@@ -562,8 +602,9 @@
                                                             ]">
                                                                 {{ category.names }}
                                                             </button>
-                                                        </Tab>
+                                                        </Tab> -->
                                                     </TabList>
+
 
                                                     <TabPanels class="mt-2 ">
                                                         <!-- Example content for each tab -->
@@ -576,7 +617,7 @@
                                                                 <a href="https://t.me/masteritsystems_saleconsultant"
                                                                     target="_blank" rel="noopener noreferrer">
                                                                     <button
-                                                                        class="w-full p-3 font-bold text-[16px] text-white bg-[#A435F0] mt-2 ">
+                                                                        class="w-full p-3 font-bold text-[16px] text-white bg-background mt-2 ">
                                                                         ប្រឹក្សាតាមតែលេក្រាម
                                                                     </button>
                                                                 </a>
@@ -597,23 +638,253 @@
                                         </div>
 
 
-                                        <div class=" text-black my-8  border-[1px] border-background/20 px-4 pb-4">
+                                        <div v-if="detail.lessionBreif?.length > 0"
+                                            class=" text-black my-8  border-[1px] border-background/20 px-4 pb-4 text-[15px]">
 
                                             <div>
-                                                <p class="mt-6 text-black  leading-6 prose prose-p:text-[14px] "
-                                                    v-html="detail.desctiption"></p>
+                                                <!-- <p class="mt-6 text-black  leading-6 prose prose-p:text-[16px] "
+                                                    v-html="detail.desctiption"></p> -->
+                                                <div>
+                                                    <p class="mt-4 space-y-1" v-html="detail.lessionBreif"></p>
+                                                </div>
                                             </div>
                                         </div>
-                                        <hr>
+
+
+                                        <div class="w-full">
+                                            <div class="overflow-x-auto ">
+                                                <div class="flex gap-1">
+                                                    <div v-if="detail.aboutLessionList?.title" @click="handleShowAboutLessionDes(detail.aboutLessionList?.title)"
+                                                        :class="{
+                                                            'bg-gray-600': displyDesctiptionList === detail.aboutLessionList?.title,
+                                                            'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.aboutLessionList?.title,
+                                                        }"
+                                                        class="p-2 text-center text-nowrap rounded-md border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[15px]">
+                                                        {{ detail.aboutLessionList?.title }}
+                                                    </div>
+                                                    <div v-if="detail.conetent?.title" @click="handleShowAboutLessionDes(detail.conetent?.title)"
+                                                        :class="{
+                                                            'bg-gray-600': displyDesctiptionList === detail.conetent?.title,
+                                                            'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.conetent?.title,
+                                                        }"
+                                                        class="p-2 text-center text-nowrap rounded-md border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[15px]">
+                                                        {{ detail.conetent?.title }}
+                                                    </div>
+
+
+
+                                                    <div v-if="detail.lessionVideo?.title" @click="handleShowAboutLessionDes(detail.lessionVideo?.title)"
+                                                        :class="{
+                                                            'bg-gray-600': displyDesctiptionList === detail.lessionVideo?.title,
+                                                            'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.lessionVideo?.title,
+                                                        }"
+                                                        class="p-2 text-center text-nowrap rounded-md border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[15px]">
+                                                        {{ detail.lessionVideo?.title }}
+                                                    </div>
+                                                    <div v-if="detail.achievment?.title" @click="handleShowAboutLessionDes(detail.achievment?.title)"
+                                                        :class="{
+                                                            'bg-gray-600': displyDesctiptionList === detail.achievment?.title,
+                                                            'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.achievment?.title,
+                                                        }"
+                                                        class="p-2 text-center text-nowrap rounded-md border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[15px]">
+                                                        {{ detail.achievment?.title }}
+                                                    </div>
+                                                    <div v-if="detail.studentComment?.title" @click="handleShowAboutLessionDes(detail.studentComment?.title)"
+                                                        :class="{
+                                                            'bg-gray-600': displyDesctiptionList === detail.studentComment?.title,
+                                                            'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.studentComment?.title,
+                                                        }"
+                                                        class="p-2 text-center text-nowrap border-t rounded-md  border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[15px]">
+                                                        {{ detail.studentComment?.title }}
+                                                    </div>
+                                                    <div v-if="detail.studyMethod?.title" @click="handleShowAboutLessionDes(detail.studyMethod?.title)"
+                                                        :class="{
+                                                            'bg-gray-600': displyDesctiptionList === detail.studyMethod?.title,
+                                                            'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.studyMethod?.title,
+                                                        }"
+                                                        class="p-2 text-center text-nowrap  border-t rounded-md border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[15px]">
+                                                        {{ detail.studyMethod?.title }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- detail -->
+
+                                        <div class="mt-5 ">
+                                            <div v-if="displyDesctiptionList === detail.aboutLessionList?.title" class="p-4 border">
+                                                <p class="space-y-3 text-[15px]" v-html="detail.aboutLessionList?.description">
+                                                </p>
+                                            </div>
+
+
+                                            <div v-else-if="displyDesctiptionList === detail.conetent?.title"
+                                                class="border-b border-l border-r">
+                                                <div class="text-[15px] border-t p-4 w-full "
+                                                    v-for="(content, index) in detail.conetent?.descriptionList"
+                                                    :key="content.id">
+
+                                                    <!-- Title with Toggle -->
+                                                    <div @click="handleShowCollapse(index)"
+                                                        class="flex items-center justify-between w-full space-y-2">
+                                                        <p class="w-full font-bold cursor-pointer"
+                                                            v-html="content?.contentVideoTitle"></p>
+                                                        <div class="cursor-pointer"
+                                                            :class="{ 'rotate-180 transition-all duration-300 ease-out': collapsedIndex === index, 'rotate-0': collapsedIndex !== index }">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor"
+                                                                class="transition-transform duration-200 size-4">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Collapsible Content with Animate Transition -->
+                                                    <transition name="fade-collapse" @enter="onEnter" @leave="onLeave">
+
+                                                        <div v-if="collapsedIndex === index" class="overflow-hidden">
+                                                            <div class="mt-3 space-y-2 text-blue-400 underline cursor-not-allowed "
+                                                                v-html="content?.contentDescription">
+                                                            </div>
+                                                        </div>
+                                                    </transition>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div v-else-if="displyDesctiptionList === detail.lessionVideo?.title">
+                                                <div v-for="video in detail.lessionVideo?.lesstionDescriptionList"
+                                                    :key="video.id">
+                                                    <div class="space-y-2">
+                                                        <h2 class="font-bold text-[15px] " v-html="video?.lessionVideoContent">
+                                                        </h2>
+                                                        <iframe
+                                                            v-if="video?.lessionVideoLink && getVideoEmbedLink(video?.lessionVideoLink)"
+                                                            :src="getVideoEmbedLink(video?.lessionVideoLink)"
+                                                            frameborder="0" allow="autoplay; encrypted-media"
+                                                            allowfullscreen class="w-full h-[200px]"></iframe>
+
+                                                        <video
+                                                            v-else-if="video?.lessionVideoLink && /\.(mp4|webm|ogg|m4v)$/i.test(video?.lessionVideoLink)"
+                                                            :src="video?.lessionVideoLink" controls
+                                                            class="w-full h-[200px]"></video>
+
+                                                        <img v-else class="w-full h-[200px]"
+                                                            src="https://fakeimg.pl/200x200/" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div v-else-if="displyDesctiptionList === detail.achievment?.title">
+                                                <div v-for="achiev in detail.achievment?.achievmentList"
+                                                    :key="achiev.id">
+                                                    <div class="space-y-2 text-[15px]">
+                                                        <h2 v-html="achiev?.title"></h2>
+                                                        <iframe
+                                                            v-if="achiev?.videoLink && getVideoEmbedLink(achiev?.videoLink)"
+                                                            :src="getVideoEmbedLink(achiev?.videoLink)" frameborder="0"
+                                                            allow="autoplay; encrypted-media" allowfullscreen
+                                                            class="w-full h-[200px]"></iframe>
+
+                                                        <video
+                                                            v-else-if="achiev?.videoLink && /\.(mp4|webm|ogg|m4v)$/i.test(achiev?.videoLink)"
+                                                            :src="achiev?.videoLink" controls
+                                                            class="w-full h-[200px]"></video>
+
+                                                        <img v-else class="w-full h-[200px]"
+                                                            src="https://fakeimg.pl/200x200/" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div v-else-if="displyDesctiptionList === detail.studentComment?.title">
+                                                <div class="grid grid-cols-2 gap-5 mt-3 sm:grid-cols-3 lg:grid-cols-4">
+                                                    <div v-for="student in detail.studentComment?.studentCommentList"
+                                                        :key="student.id" class="flex flex-col items-center">
+                                                        <div class="relative w-full h-full max-w-[600px] max-h-[500px]">
+                                                            <img v-if="student?.image" :src="student?.image"
+                                                                class="object-contain w-full h-full" alt="Student" />
+                                                            <img v-else class="object-cover w-full h-full"
+                                                                src="https://fakeimg.pl/200x200/" alt="Placeholder" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div v-else-if="displyDesctiptionList === detail.studyMethod?.title"
+                                                class="mt-2">
+                                                <div v-for="method in detail.studyMethod?.studyMethodList"
+                                                    :key="method.id">
+                                                    <div>
+                                                        <iframe
+                                                            v-if="method?.videoLink && getVideoEmbedLink(method?.videoLink)"
+                                                            :src="getVideoEmbedLink(method?.videoLink)" frameborder="0"
+                                                            allow="autoplay; encrypted-media" allowfullscreen
+                                                            class="w-full h-[200px]"></iframe>
+
+                                                        <video
+                                                            v-else-if="method?.videoLink && /\.(mp4|webm|ogg|m4v)$/i.test(method?.videoLink)"
+                                                            :src="method?.videoLink" controls
+                                                            class="w-full h-[200px]"></video>
+
+                                                        <img v-else class="w-full"
+                                                            src="https://fakeimg.pl/200x200/" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+            
+                                        </div>
+
+
+
+
+                                        <!-- <hr> -->
+                                        <div v-html="detail.description" class="my-5 space-y-2 text-[15px]">
+
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
                 </div>
             </div>
 
+            <div v-if="isLoading" class="animate-pulse p-5  lg:mt-10 xl:w-[90%] mx-auto md:p-5 -mt-10 block lg:hidden">
+
+                <div v-for="n in 2" :key="n" class="space-y-6 ">
+
+                    <div class="flex gap-5">
+                        <div
+                            class="relative w-full overflow-hidden   h-4  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
+                            <div class="w-full h-6 bg-gray-300"></div>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <div
+                            class="relative w-full overflow-hidden   h-4  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
+                            <div class="w-full h-6 bg-gray-300"></div>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <div
+                            class="relative w-full overflow-hidden   h-4  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
+                            <div class="w-full h-6 bg-gray-300"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-else class="block lg:hidden">
+                <FooterView />
+            </div>
         </div>
 
 
@@ -653,8 +924,9 @@ export default {
         const date = moment;
 
         const displyDesctiptionList = ref("អំពីមេរៀនសិក្សា")
+        const showCollaspedContent = ref(false)
+        const collapsedIndex = ref(null)
 
- 
 
         // Firestore Collections
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
@@ -790,6 +1062,33 @@ export default {
         }
 
 
+        const handleShowCollapse = (index) => {
+            collapsedIndex.value = collapsedIndex.value === index ? null : index;
+        }
+
+
+        //using transition here
+        const onEnter = (el) => {
+            el.style.height = '0';
+            el.style.opacity = '0';
+            el.offsetHeight; // Force reflow
+            el.style.transition = 'height 0.3s ease, opacity 0.3s ease';
+            el.style.height = el.scrollHeight + 'px';
+            el.style.opacity = '1';
+        }
+        const onLeave = (el) => {
+            el.style.height = el.scrollHeight + 'px';
+            el.style.opacity = '1';
+            el.offsetHeight; // Force reflow
+            el.style.transition = 'height 0.5s ease, opacity 0.3s ease';
+            el.style.height = '0';
+            el.style.opacity = '0';
+        }
+
+
+        //end transition here
+
+
         return {
             currentComponents,
             searchText,
@@ -805,8 +1104,24 @@ export default {
             productDetail,
             getVideoEmbedLink,
             handleShowAboutLessionDes,
-            displyDesctiptionList
+            displyDesctiptionList,
+            showCollaspedContent,
+            handleShowCollapse,
+            collapsedIndex,
+            onEnter,
+            onLeave
         };
     },
 };
 </script>
+
+<style scoped>
+/* Tailwind-inspired animation styles */
+/* .fade-collapse-enter-active, .fade-collapse-leave-active {
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+.fade-collapse-enter, .fade-collapse-leave-to {
+  height: 0;
+  opacity: 0;
+} */
+</style>

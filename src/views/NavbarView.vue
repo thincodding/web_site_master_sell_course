@@ -32,7 +32,7 @@
         <div class="relative group lg:hidden xl:block">
           <div
             class="text-[14px] group-hover:block font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap lg:hidden xl:block">
-            </div>
+          </div>
 
           <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
           </div>
@@ -90,10 +90,22 @@
                 <router-link to="/signup" class="font-bold text-[14px] text-white text-nowrap">បង្កើតថ្មី</router-link>
               </div>
             </div>
+            <div v-else class="flex items-center gap-2">
+              <div class="flex items-center space-x-1">
+                <span class="font-bold">ប្រវត្តិរូប៖</span>
+                <span> {{ user?.displayName }}</span>
+              </div>
 
-            <div v-else @click="isDrowdown = !isDrowdown"
-              class="border-[1px] border-background bg-gray-50 w-10 h-10 mr-3 flex justify-center items-center rounded-full  hover:bg-gray-200 cursor-pointer">
-              <div class="capitalize">{{ user?.email[0] }}</div>
+              <div @click="isDrowdown = !isDrowdown"
+                class="border-[1px] border-background bg-gray-50 w-10 h-10 mr-3 flex justify-center items-center rounded-full  hover:bg-gray-200 cursor-pointer">
+                <!-- <div class="capitalize">{{ user?.email[0] }}</div> -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="text-background lucide lucide-user">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
             </div>
 
             <div class="border-[1px] border-black p-[8px] px-2 hover:bg-gray-200 cursor-pointer">
