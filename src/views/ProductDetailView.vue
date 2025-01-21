@@ -62,7 +62,7 @@
                         <p>មានសិស្សរៀន {{ pro.totalStudentCount }} នាក់</p>
                     </div>
                     <div class="mt-5 space-y-1 xl:mt-8">
-                        <h3 class="font-bold text-[15px] text-background/90" v-html="pro.description"></h3>
+                        <h3 class="text-[15px] text-background/90" v-html="pro.description"></h3>
                         <!-- <p class="text-[15px] text-color_text">Explore courses from experienced, real-world experts.</p> -->
                     </div>
 

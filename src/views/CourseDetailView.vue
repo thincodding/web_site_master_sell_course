@@ -63,7 +63,6 @@
                                 <div v-for="category in productDetails" :key="category.id">
 
                                     <div v-for="product in category.product" :key="product.id">
-
                                         <div class="px-4">
                                             <div v-for="detail in product.productDetail" :key="detail.id">
 
@@ -203,18 +202,29 @@
                                                         <div class="p-5">
                                                             <h3 class="font-bold text-[32px] text-background">${{
                                                                 detail.price
-                                                                }}</h3>
+                                                            }}</h3>
                                                             <div class="mt-2 space-y-2">
-                                                                <a href="https://t.me/masteritsystems_saleconsultant"
-                                                                    target="_blank" rel="noopener noreferrer">
+                                                                <router-link :to="{ name: 'advisorRegister' }">
                                                                     <button
                                                                         class="w-full p-3 font-bold text-[16px] text-white bg-black mt-2 ">
-                                                                        ប្រឹក្សាតាមតែលេក្រាម
+                                                                        ទិញវគ្គសិក្សា
                                                                     </button>
-                                                                </a>
-                                                                <button
+                                                                </router-link>
+                                                                <!-- <button
                                                                     class="border-[1px] border-black p-2.5 w-full font-bold hover:bg-background/10">
-                                                                    ប្រឹក្សាតាមឆាត</button>
+                                                                    ប្រឹក្សាតាមតែលេក្រាម</button> -->
+
+                                                                <div>
+                                                                    <a href="https://t.me/masteritsystems_saleconsultant"
+                                                                        class="mt-3" target="_blank"
+                                                                        rel="noopener noreferrer">
+                                                                        <button
+                                                                            class="border-[1px] border-black p-2.5 w-full font-bold hover:bg-background/10">
+                                                                            ប្រឹក្សាតាមតែលេក្រាម
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+
 
                                                             </div>
 
@@ -259,7 +269,8 @@
 
                                             <div class="">
                                                 <div class="grid lg:grid-cols-4 xl:grid-cols-6">
-                                                    <div v-if="detail.aboutLessionList?.title" @click="handleShowAboutLessionDes(detail.aboutLessionList?.title)"
+                                                    <div v-if="detail.aboutLessionList?.title"
+                                                        @click="handleShowAboutLessionDes(detail.aboutLessionList?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.aboutLessionList?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.aboutLessionList?.title,
@@ -267,7 +278,8 @@
                                                         class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px] xl:text-[16px]">
                                                         {{ detail.aboutLessionList?.title }}
                                                     </div>
-                                                    <div v-if="detail.conetent?.title" @click="handleShowAboutLessionDes(detail.conetent?.title)"
+                                                    <div v-if="detail.conetent?.title"
+                                                        @click="handleShowAboutLessionDes(detail.conetent?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.conetent?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.conetent?.title,
@@ -278,7 +290,8 @@
 
 
 
-                                                    <div v-if="detail.lessionVideo?.title" @click="handleShowAboutLessionDes(detail.lessionVideo?.title)"
+                                                    <div v-if="detail.lessionVideo?.title"
+                                                        @click="handleShowAboutLessionDes(detail.lessionVideo?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.lessionVideo?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.lessionVideo?.title,
@@ -286,7 +299,8 @@
                                                         class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px] xl:text-[16px]">
                                                         {{ detail.lessionVideo?.title }}
                                                     </div>
-                                                    <div v-if="detail.achievment?.title" @click="handleShowAboutLessionDes(detail.achievment?.title)"
+                                                    <div v-if="detail.achievment?.title"
+                                                        @click="handleShowAboutLessionDes(detail.achievment?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.achievment?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.achievment?.title,
@@ -294,7 +308,8 @@
                                                         class="p-4 text-center border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px] xl:text-[16px]">
                                                         {{ detail.achievment?.title }}
                                                     </div>
-                                                    <div v-if="detail.studentComment?.title" @click="handleShowAboutLessionDes(detail.studentComment?.title)"
+                                                    <div v-if="detail.studentComment?.title"
+                                                        @click="handleShowAboutLessionDes(detail.studentComment?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.studentComment?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.studentComment?.title,
@@ -302,7 +317,8 @@
                                                         class="p-4 text-center border-t  border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[14px] xl:text-[16px]">
                                                         {{ detail.studentComment?.title }}
                                                     </div>
-                                                    <div v-if="detail.studyMethod?.title" @click="handleShowAboutLessionDes(detail.studyMethod?.title)"
+                                                    <div v-if="detail.studyMethod?.title"
+                                                        @click="handleShowAboutLessionDes(detail.studyMethod?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.studyMethod?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.studyMethod?.title,
@@ -451,10 +467,7 @@
 
                                                 <p class="mt-6 text-black space-y-2 text-[16px] font-NotoSansKhmer"
                                                     v-html="detail?.description"></p>
-
-
                                             </div>
-
 
                                         </div>
                                     </div>
@@ -466,13 +479,14 @@
                     </div>
                 </div>
 
-
+                <div class="my-20">
+                    <CourseRelatedCategory />
+                </div>
                 <div class="">
                     <FooterView />
                 </div>
 
             </div>
-
 
 
             <!-- mobile -->
@@ -614,13 +628,12 @@
                                                                 <h1 class="text-[19px] text-background font-bold">${{
                                                                     detail.price }}</h1>
 
-                                                                <a href="https://t.me/masteritsystems_saleconsultant"
-                                                                    target="_blank" rel="noopener noreferrer">
+                                                                <router-link :to="{ name: 'advisorRegister' }">
                                                                     <button
-                                                                        class="w-full p-3 font-bold text-[16px] text-white bg-background mt-2 ">
-                                                                        ប្រឹក្សាតាមតែលេក្រាម
+                                                                        class="w-full p-3 font-bold text-[16px] text-white bg-black mt-2 ">
+                                                                        ទិញវគ្គសិក្សា
                                                                     </button>
-                                                                </a>
+                                                                </router-link>
 
                                                                 <div class="mt-2 text-center">
                                                                     <p class="text-[12px] text-background/80">
@@ -654,7 +667,8 @@
                                         <div class="w-full">
                                             <div class="overflow-x-auto ">
                                                 <div class="flex gap-1">
-                                                    <div v-if="detail.aboutLessionList?.title" @click="handleShowAboutLessionDes(detail.aboutLessionList?.title)"
+                                                    <div v-if="detail.aboutLessionList?.title"
+                                                        @click="handleShowAboutLessionDes(detail.aboutLessionList?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.aboutLessionList?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.aboutLessionList?.title,
@@ -662,7 +676,8 @@
                                                         class="p-2 text-center text-nowrap rounded-md border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[15px]">
                                                         {{ detail.aboutLessionList?.title }}
                                                     </div>
-                                                    <div v-if="detail.conetent?.title" @click="handleShowAboutLessionDes(detail.conetent?.title)"
+                                                    <div v-if="detail.conetent?.title"
+                                                        @click="handleShowAboutLessionDes(detail.conetent?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.conetent?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.conetent?.title,
@@ -673,7 +688,8 @@
 
 
 
-                                                    <div v-if="detail.lessionVideo?.title" @click="handleShowAboutLessionDes(detail.lessionVideo?.title)"
+                                                    <div v-if="detail.lessionVideo?.title"
+                                                        @click="handleShowAboutLessionDes(detail.lessionVideo?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.lessionVideo?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.lessionVideo?.title,
@@ -681,7 +697,8 @@
                                                         class="p-2 text-center text-nowrap rounded-md border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[15px]">
                                                         {{ detail.lessionVideo?.title }}
                                                     </div>
-                                                    <div v-if="detail.achievment?.title" @click="handleShowAboutLessionDes(detail.achievment?.title)"
+                                                    <div v-if="detail.achievment?.title"
+                                                        @click="handleShowAboutLessionDes(detail.achievment?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.achievment?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.achievment?.title,
@@ -689,7 +706,8 @@
                                                         class="p-2 text-center text-nowrap rounded-md border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[15px]">
                                                         {{ detail.achievment?.title }}
                                                     </div>
-                                                    <div v-if="detail.studentComment?.title" @click="handleShowAboutLessionDes(detail.studentComment?.title)"
+                                                    <div v-if="detail.studentComment?.title"
+                                                        @click="handleShowAboutLessionDes(detail.studentComment?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.studentComment?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.studentComment?.title,
@@ -697,7 +715,8 @@
                                                         class="p-2 text-center text-nowrap border-t rounded-md  border-r-[1px] border-gray-500 text-white cursor-pointer font-NotoSansKhmer transition duration-300 text-[15px]">
                                                         {{ detail.studentComment?.title }}
                                                     </div>
-                                                    <div v-if="detail.studyMethod?.title" @click="handleShowAboutLessionDes(detail.studyMethod?.title)"
+                                                    <div v-if="detail.studyMethod?.title"
+                                                        @click="handleShowAboutLessionDes(detail.studyMethod?.title)"
                                                         :class="{
                                                             'bg-gray-600': displyDesctiptionList === detail.studyMethod?.title,
                                                             'bg-background hover:bg-gray-600': displyDesctiptionList !== detail.studyMethod?.title,
@@ -713,8 +732,10 @@
                                         <!-- detail -->
 
                                         <div class="mt-5 ">
-                                            <div v-if="displyDesctiptionList === detail.aboutLessionList?.title" class="p-4 border">
-                                                <p class="space-y-3 text-[15px]" v-html="detail.aboutLessionList?.description">
+                                            <div v-if="displyDesctiptionList === detail.aboutLessionList?.title"
+                                                class="p-4 border">
+                                                <p class="space-y-3 text-[15px]"
+                                                    v-html="detail.aboutLessionList?.description">
                                                 </p>
                                             </div>
 
@@ -744,7 +765,6 @@
 
                                                     <!-- Collapsible Content with Animate Transition -->
                                                     <transition name="fade-collapse" @enter="onEnter" @leave="onLeave">
-
                                                         <div v-if="collapsedIndex === index" class="overflow-hidden">
                                                             <div class="mt-3 space-y-2 text-blue-400 underline cursor-not-allowed "
                                                                 v-html="content?.contentDescription">
@@ -760,7 +780,8 @@
                                                 <div v-for="video in detail.lessionVideo?.lesstionDescriptionList"
                                                     :key="video.id">
                                                     <div class="space-y-2">
-                                                        <h2 class="font-bold text-[15px] " v-html="video?.lessionVideoContent">
+                                                        <h2 class="font-bold text-[15px] "
+                                                            v-html="video?.lessionVideoContent">
                                                         </h2>
                                                         <iframe
                                                             v-if="video?.lessionVideoLink && getVideoEmbedLink(video?.lessionVideoLink)"
@@ -831,13 +852,13 @@
                                                             :src="method?.videoLink" controls
                                                             class="w-full h-[200px]"></video>
 
-                                                        <img v-else class="w-full"
-                                                            src="https://fakeimg.pl/200x200/" alt="" />
+                                                        <img v-else class="w-full" src="https://fakeimg.pl/200x200/"
+                                                            alt="" />
                                                     </div>
                                                 </div>
                                             </div>
 
-            
+
                                         </div>
 
 
@@ -883,8 +904,14 @@
                 </div>
             </div>
             <div v-else class="block lg:hidden">
+
+                <div class="my-20">
+                    <CourseRelatedCategory />
+                </div>
+
                 <FooterView />
             </div>
+
         </div>
 
 
@@ -905,11 +932,23 @@ import { onMounted, ref, computed } from 'vue';
 import NavbarView from './NavbarView.vue';
 
 import FooterView from './FooterView.vue';
+import CourseRelatedCategory from '@/components/client/CourseRelatedCategory.vue';
+
+
 
 export default {
     components: {
         NavbarView,
-        FooterView
+        FooterView,
+        CourseRelatedCategory
+    },
+    props: {
+        id: {
+            type: String
+        },
+        proDetail: {
+            type: Object,
+        },
     },
     setup() {
         const products = ref([]);
@@ -927,13 +966,14 @@ export default {
         const showCollaspedContent = ref(false)
         const collapsedIndex = ref(null)
 
+        const categoryProduct = ref([]);
+
 
         // Firestore Collections
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
         onMounted(async () => {
             await fetchCollection();
             await fetchCategoryProductAndProductDetail();
-
 
         });
 
@@ -1061,7 +1101,6 @@ export default {
             displyDesctiptionList.value = desc
         }
 
-
         const handleShowCollapse = (index) => {
             collapsedIndex.value = collapsedIndex.value === index ? null : index;
         }
@@ -1088,6 +1127,12 @@ export default {
 
         //end transition here
 
+        //go back
+        // const goBack = () => {
+        //     window.history.back();
+        // }
+
+
 
         return {
             currentComponents,
@@ -1109,7 +1154,10 @@ export default {
             handleShowCollapse,
             collapsedIndex,
             onEnter,
-            onLeave
+            onLeave,
+            categoryProduct,
+            // goBack
+
         };
     },
 };

@@ -55,11 +55,17 @@ const routes = [
     path: "/searchProduct/:id",
     name: "searchProduct",
     component: () => import('@/views/SearchProductDetail.vue')
+  },
+  {
+    path: "/advisorRegister",
+    name: "advisorRegister",
+    component: () => import('@/views/AdvisorRegister.vue')
   }
 ]
 
 
 const router = createRouter({
+  mode: 'history',
   history: createWebHistory(process.env.BASE_URL),
   routes
 })

@@ -2,12 +2,12 @@
     <div class="xl:w-[1200px] mx-auto my-5 px-10 lg:px-10 xl:px-0">
         <div class="my-4">
             <div v-for="con in content" :key="con.id">
-                    <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
-                        {{ con.data.title }}</h1>
-                    <p v-html="con.data.descripton" class="my-3 text-md text-background font-NotoSansKhmer ">
-                        
-                    </p>
-                </div>            
+                <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
+                    {{ con.data.title }}</h1>
+                <p v-html="con.data.descripton" class="my-3 text-md text-background font-NotoSansKhmer ">
+
+                </p>
+            </div>
         </div>
         <div class="relative">
             <swiper ref="mySwiper" :navigation="{
@@ -26,9 +26,11 @@
                         </div>
                         <div class="p-4 mt-2 space-y-1">
                             <router-link :to="{ name: 'courseDetail', params: { id: detail.id } }"
-                                class="text-[14px] font-semibold line-clamp-2 cursor-pointer ">
+                                class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
                                 {{ detail.title }}
                             </router-link>
+
+
 
                             <div class="space-y-1.5">
                                 <p class="text-gray-500 text-[12px] line-clamp-1">{{ detail.lectures }}</p>
@@ -64,7 +66,8 @@
                 </div>
             </div>
 
-            <div class="button-next-slides cursor-pointer rounded-full text-white absolute top-[45%] -right-5  xl:-right-5 z-[2]">
+            <div
+                class="button-next-slides cursor-pointer rounded-full text-white absolute top-[45%] -right-5  xl:-right-5 z-[2]">
                 <div class="flex justify-center w-10 h-10 border-gray-500 border-[1px] items-center bg-background rounded-full hover:bg-background/90"
                     @click="nextSlide">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -76,6 +79,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDocument';
 import getNestedSubcollection from '@/firebase/getNestedSubcollection';
@@ -106,6 +110,7 @@ export default {
             await fetchCategoryProductAndProductDetail();
         });
 
+        
         //fetct category
         const fetchContent = async () => {
             const results = await getCollectionWhere('content', "GP5cKnVMF99bzFXPzFOt");
@@ -113,7 +118,6 @@ export default {
             content.value = results
         };
 
-        
 
         const fetchCategoryProduct = async () => {
             const orderByField = 'productName';
@@ -225,15 +229,33 @@ export default {
             isLoading.value = false;
         };
 
+        // const bestSellerProducts = computed(() => {
+        //     return productDetails.value
+        //         .flatMap(category => category.product) // Flatten products array
+        //         .flatMap(product => product.productDetail) // Flatten product details array
+        //         .filter(detail => detail.isBestSeller); // Filter for best sellers
+        // });
+
         const bestSellerProducts = computed(() => {
             return productDetails.value
                 .flatMap(category => category.product) // Flatten products array
                 .flatMap(product => product.productDetail) // Flatten product details array
-                .filter(detail => detail.isBestSeller); // Filter for best sellers
+                .filter(detail => detail.isBestSeller) // Filter for best sellers
+                .map(detail => {
+                    // Add category name to each best seller product detail
+                    const category = productDetails.value.find(cat =>
+                        cat.product.some(prod => prod.productDetail.some(d => d.id === detail.id))
+                    );
+                    return {
+                        ...detail,
+                        categoryName: category ? category.categoryName : 'Unknown Category', // Include category name
+                    };
+                });
         });
 
+
         return {
-            bestSellerProducts, 
+            bestSellerProducts,
             isLoading,
             content,
             modules: [Navigation],
@@ -241,6 +263,4 @@ export default {
     },
 };
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>
