@@ -57,7 +57,7 @@
           <img class="w-[91px] h-[34px] object-contain lg:w-full rounded-full" src="../assets/logo_mater_it.jpg" alt="">
         </div>
         <div class="">
-          <p class="text-white text-[12px]">© 2024 Master-IT Online, Inc.</p>
+          <p class="text-white text-[12px]">© 2025 {{ $t('masterFooter') }}</p>
         </div>
     </div>
 

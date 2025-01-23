@@ -11,8 +11,8 @@
 
         <div class="relative group ">
           <div
-            class="text-[14px] group-hover:block  font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap">
-            ប្រភេទ</div>
+            class="text-[15px] font-bold group-hover:block   text-[#2D2f31] cursor-pointer group-hover:text-background/70 text-nowrap">
+            {{ $t('category') }}</div>
 
           <div class="absolute right-0 z-10 w-20 bg-transparent cursor-pointer h-14 top-5 ">
           </div>
@@ -34,37 +34,42 @@
             class="text-[14px] group-hover:block font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap lg:hidden xl:block">
           </div>
 
-          <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
+          <!-- <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
           </div>
           <div class="absolute hidden right-60 top-14 group-hover:block ">
             <BussinessDropdownVue />
-          </div>
+          </div> -->
         </div>
 
-        <div class="relative group ">
-          <div
-            class="text-[14px] group-hover:block  font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap">
-            សិក្សាឥតគិតថ្លៃ
-          </div>
+        <div v-if="user" class="relative group ">
+          <router-link :to="{ name: 'freeCourse' }"
+            class="text-[16px] group-hover:block font-bold  text-[#2D2f31] cursor-pointer group-hover:text-background/70 text-nowrap">
+            {{ $t('free') }}
+          </router-link>
 
-          <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
+          <!-- <div class="absolute right-0 z-10 bg-transparent cursor-pointer h-14 w-28 top-2">
           </div>
           <div class="absolute hidden right-64 top-14 group-hover:block ">
-            <!-- <TeachUdemyDropdownVue /> -->
+            <TeachUdemyDropdownVue />
 
-          </div>
+          </div> -->
         </div>
 
 
-        <div class="relative group ">
+        <div v-if="user" class="relative group ">
           <div
-            class="text-[14px] group-hover:block  font-[400] text-[#2D2f31] cursor-pointer group-hover:text-indigo-400 text-nowrap">
+            class="relative text-[14px] group-hover:block  -right-3 font-[400] text-[#2D2f31] cursor-pointer group-hover:text-background/70 text-nowrap">
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-[24px] h-[24px] ">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
             </svg>
+            <div class="absolute -right-1 -top-2 ">
+              <div class="flex items-center justify-center w-5 h-5 text-xs text-white bg-black rounded-full ">
+                  0
+              </div>
+            </div>
           </div>
 
           <div class="absolute right-0 w-10 bg-transparent cursor-pointer h-14 top-2 ">
@@ -84,40 +89,43 @@
 
             <div v-if="!user" class="flex items-center space-x-2">
               <div class="border-[1px] border-black p-[6px] px-5 hover:bg-gray-200 cursor-pointer">
-                <router-link to="/login" class="font-bold text-[14px] text-[#2D2f31] text-nowrap">ចូល</router-link>
+                <router-link to="/login" class="font-bold text-[14px] text-[#2D2f31] text-nowrap">{{ $t('login') }}</router-link>
               </div>
               <div class=" bg-black p-[7px] px-5  cursor-pointer">
-                <router-link to="/signup" class="font-bold text-[14px] text-white text-nowrap">បង្កើតថ្មី</router-link>
+                <router-link to="/signup" class="font-bold text-[14px] text-white text-nowrap">{{ $t('signup') }}</router-link>
               </div>
             </div>
-            <div v-else class="flex items-center gap-2">
-              <div class="flex items-center space-x-1">
-                <span class="font-bold">ប្រវត្តិរូប៖</span>
-                <span> {{ user?.displayName }}</span>
-              </div>
+            <div v-else class="">
+              <!-- <div class="flex items-center space-x-1">
+                <span class="font-bold">{{$t('profile')}}:</span>
+                <span class="capitalize "> {{ user?.displayName }}</span>
+              </div> -->
 
               <div @click="isDrowdown = !isDrowdown"
-                class="border-[1px] border-background bg-gray-50 w-10 h-10 mr-3 flex justify-center items-center rounded-full  hover:bg-gray-200 cursor-pointer">
-                <!-- <div class="capitalize">{{ user?.email[0] }}</div> -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                class="border-[1px] border-background bg-gray-50 w-10 h-10 mr-5 flex justify-center items-center rounded-full  hover:bg-gray-200 cursor-pointer">
+                <div class="capitalize">{{ user?.displayName[0] }}</div>
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="text-background lucide lucide-user">
                   <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
-                </svg>
+                </svg> -->
               </div>
             </div>
 
-            <div class="border-[1px] border-black p-[8px] px-2 hover:bg-gray-200 cursor-pointer">
+            <div @click="handleSwitchLanguage" class="border-[1px] border-black p-[8px] px-2 hover:bg-gray-200 cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-[20px] h-[20px]">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
               </svg>
             </div>
-
+            
 
           </div>
+          <div v-if="isOpenDropdownFlag" class="absolute top-16 -right-0">
+              <SwitchLanguage :handleSwitchLanguages="handleSwitchLanguage"/>
+            </div>
           <div v-if="isDrowdown">
             <div
               class=" w-28 shadow p-3 z-[10] absolute top-16 right-5 bg-white flex items-center gap-2 cursor-pointer hover:text-gray-400">
@@ -128,7 +136,7 @@
                 <polyline points="16 17 21 12 16 7" />
                 <line x1="21" x2="9" y1="12" y2="12" />
               </svg>
-              <p @click="handleSignout">ចាកចេញ</p>
+              <p @click="handleSignout">{{ $t("logout") }}</p>
             </div>
           </div>
         </div>
@@ -208,7 +216,7 @@
 <script>
 import { ref } from 'vue'
 import SearchComponentsVue from '@/components/client/SearchComponent.vue'
-import BussinessDropdownVue from '@/components/client/BussinessDropdown.vue'
+// import BussinessDropdownVue from '@/components/client/BussinessDropdown.vue'
 // import TeachUdemyDropdownVue from '@/components/client/TeachUdemyDropdown.vue'
 import CartDropdownVue from '@/components/client/CartDropdown.vue'
 import CategoryDropdownVue from '@/components/client/CategoryDropdown.vue'
@@ -216,27 +224,27 @@ import getUser from '@/firebase/getUser'
 import useSignout from '@/firebase/useSignout'
 import { useRouter } from 'vue-router'
 import SearchComponent from '@/components/client/SearchComponent.vue'
-
+import SwitchLanguage from '@/components/client/SwitchLanguage.vue'
 export default {
   components: {
     SearchComponentsVue,
-    BussinessDropdownVue,
+    // BussinessDropdownVue,
     // TeachUdemyDropdownVue,
     CartDropdownVue,
     CategoryDropdownVue,
-    SearchComponent
+    SearchComponent,
+    SwitchLanguage
   },
 
   setup() {
 
     const isOpen = ref(false)
     const isDrowdown = ref(false)
-
-
     const { user } = getUser()
     const router = useRouter();
-
     const { signOut } = useSignout()
+
+    const isOpenDropdownFlag = ref(false)
 
     const handleIsopen = () => {
       isOpen.value = !isOpen.value
@@ -271,7 +279,11 @@ export default {
       }
     }
 
-    return { isOpen, handleIsopen, isDrowdown, user, handleSignout }
+
+    const handleSwitchLanguage = () => {
+      isOpenDropdownFlag.value = !isOpenDropdownFlag.value;
+    }
+    return { isOpen, handleIsopen, isDrowdown, user, handleSignout,isOpenDropdownFlag,handleSwitchLanguage}
   }
 }
 </script>

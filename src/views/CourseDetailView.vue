@@ -101,22 +101,22 @@
                                                                 <div v-if="detail.isBestSeller"
                                                                     class="text-xs px-2 font-bold text-[#3D3C0A] bg-yellow-300/90 p-1">
 
-                                                                    លក់ដាច់បំផុត
+                                                                    {{ $t('bestSeller') }}
                                                                 </div>
 
 
                                                                 <div v-if="detail.student.length > 0"
                                                                     class="flex items-center space-x-2 text-xs">
-                                                                    <p class="text-indigo-300 underline">មានសិស្សរៀន
+                                                                    <p class="text-indigo-300 underline">
                                                                     </p>
-                                                                    <span class="text-[16px]">{{ detail.student.length
+                                                                    <span class="text-sm">{{ detail.student.length
                                                                         }}
-                                                                        នាក់</span>
+                                                                        {{ $t('people') }}</span>
                                                                 </div>
 
                                                             </div>
                                                             <div class="mt-4 mb-10 space-y-4">
-                                                                <div class="text-sm">បង្រៀនដោយ <span
+                                                                <div class="text-sm">{{ $t('lectures') }} <span
                                                                         class="text-indigo-300 underline capitalize cursor-pointer">{{
                                                                             detail.lectures }}</span>
                                                                 </div>
@@ -135,14 +135,14 @@
                                                                         </svg>
                                                                     </div>
                                                                     <div>
-                                                                        កាលបរិច្ឆេតចុងក្រោយ <span
+                                                                        {{ $t('lastDate') }} <span
                                                                             class="capitalize cursor-pointer">
                                                                             {{ detail.createdAt ? date(detail.createdAt
                                                                                 .toDate()).format('D/YYYY') : 'N/A'
                                                                             }}</span>
                                                                     </div>
 
-                                                                    <div class="flex items-center space-x-2">
+                                                                    <!-- <div class="flex items-center space-x-2">
 
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                             fill="none" viewBox="0 0 24 24"
@@ -154,7 +154,7 @@
                                                                         </svg>
 
                                                                         <p>English</p>
-                                                                    </div>
+                                                                    </div> -->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -200,28 +200,39 @@
                                                                 alt="">
                                                         </div>
                                                         <div class="p-5">
-                                                            <h3 class="font-bold text-[32px] text-background">${{
+                                                            <h3 v-if="detail.price === 0"
+                                                                class="font-bold text-[32px]  text-green-600">
+                                                                {{ $t('freeCourse') }}
+                                                            </h3>
+                                                            <h3 v-else class="font-bold text-[32px] text-background">${{
                                                                 detail.price
-                                                            }}</h3>
-                                                            <div class="mt-2 space-y-2">
+                                                                }}</h3>
+                                                            <div v-if="detail.price !== 0" class="mt-2 space-y-2">
                                                                 <router-link :to="{ name: 'advisorRegister' }">
                                                                     <button
                                                                         class="w-full p-3 font-bold text-[16px] text-white bg-black mt-2 ">
-                                                                        ទិញវគ្គសិក្សា
+                                                                        {{ $t('addToCart') }}
                                                                     </button>
                                                                 </router-link>
                                                                 <!-- <button
                                                                     class="border-[1px] border-black p-2.5 w-full font-bold hover:bg-background/10">
-                                                                    ប្រឹក្សាតាមតែលេក្រាម</button> -->
+                                                                    {{$t('consult')}}</button> -->
 
-                                                                <div>
+                                                                <!-- <div>
                                                                     <a href="https://t.me/masteritsystems_saleconsultant"
                                                                         class="mt-3" target="_blank"
                                                                         rel="noopener noreferrer">
                                                                         <button
                                                                             class="border-[1px] border-black p-2.5 w-full font-bold hover:bg-background/10">
-                                                                            ប្រឹក្សាតាមតែលេក្រាម
+                                                                            {{$t('consult')}}
                                                                         </button>
+                                                                    </a>
+                                                                </div> -->
+
+                                                                <div class="mt-2 text-center">
+                                                                    <a href="/advisorRegister"
+                                                                        class="text-[12px] text-background/80 hover:underline">
+                                                                        {{ $t('constant') }}
                                                                     </a>
                                                                 </div>
 
@@ -544,19 +555,19 @@
                                                 <div class="flex items-center mt-5 space-x-2">
                                                     <div v-if="detail.isBestSeller"
                                                         class="text-sm px-2 font-bold text-[#3D3C0A] bg-yellow-300/90 p-1">
-                                                        លក់ដាច់បំផុត</div>
+                                                        {{ $t('bestSeller') }}</div>
 
                                                     <div v-if="detail.student.length > 0"
                                                         class="flex items-center space-x-2 text-xs">
-                                                        <p class="underline">មានសិស្សរៀន
+                                                        <p class="underline">
                                                         </p>
-                                                        <span class="text-[16px]">{{ detail.student.length }}
-                                                            នាក់</span>
+                                                        <span class="text-sm">{{ detail.student.length }}
+                                                            {{ $t('people') }}</span>
                                                     </div>
 
                                                 </div>
                                                 <div class="mt-4 mb-10 space-y-4">
-                                                    <div class="text-sm">បង្រៀនដោយ <span
+                                                    <div class="text-sm">{{ $t('lectures') }} <span
                                                             class="text-blue-500 underline capitalize cursor-pointer">{{
                                                                 detail.lectures }}</span>
                                                     </div>
@@ -575,14 +586,14 @@
                                                                 </svg>
                                                             </div>
                                                             <div>
-                                                                កាលបរិច្ឆេតចុងក្រោយ <span
+                                                                {{ $t('lastDate') }} <span
                                                                     class="capitalize cursor-pointer">
                                                                     {{ detail.createdAt ? date(detail.createdAt
                                                                         .toDate()).format('D/YYYY') : 'N/A' }}</span>
                                                             </div>
 
                                                         </div>
-                                                        <div class="flex items-center space-x-2">
+                                                        <!-- <div class="flex items-center space-x-2">
 
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
@@ -592,7 +603,7 @@
                                                             </svg>
 
                                                             <p>English</p>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -604,19 +615,7 @@
                                             <div class="relative w-full px-2 sm:px-0">
                                                 <TabGroup>
                                                     <TabList class="flex p-1 space-x-1 ">
-                                                        <!-- Loop through the categories array -->
-                                                        <!-- <Tab v-for="category in categories" as="template"
-                                                            :key="category.names" v-slot="{ selected }">
-                                                            <button :class="[
-                                                                'w-full py-2.5 text-sm font-medium leading-5',
-                                                                'focus:outline-none',
-                                                                selected
-                                                                    ? 'border-b-black z-[1] border-b-2 text-black '
-                                                                    : 'text-background hover:bg-white/[0.12] hover:text-black',
-                                                            ]">
-                                                                {{ category.names }}
-                                                            </button>
-                                                        </Tab> -->
+
                                                     </TabList>
 
 
@@ -625,21 +624,39 @@
                                                         <TabPanel>
 
                                                             <div class="mt-0">
-                                                                <h1 class="text-[19px] text-background font-bold">${{
-                                                                    detail.price }}</h1>
+                                                                <h1 v-if="detail.price === 0"
+                                                                    class="text-[19px] text-green-600 font-bold">
+                                                                    {{ $t('freeCourse') }}
+                                                                </h1>
 
-                                                                <router-link :to="{ name: 'advisorRegister' }">
+                                                                <h1 v-else
+                                                                    class="text-[19px] text-background font-bold">${{
+                                                                        detail.price }}</h1>
+
+                                                                <router-link v-if="detail.price !== 0"
+                                                                    :to="{ name: 'advisorRegister' }">
                                                                     <button
                                                                         class="w-full p-3 font-bold text-[16px] text-white bg-black mt-2 ">
-                                                                        ទិញវគ្គសិក្សា
+                                                                        {{ $t('addToCart') }}
                                                                     </button>
                                                                 </router-link>
 
+                                                                <!-- <div class="mt-4">
+                                                                    <a href="https://t.me/masteritsystems_saleconsultant"
+                                                                        class="mt-3" target="_blank"
+                                                                        rel="noopener noreferrer">
+                                                                        <button
+                                                                            class="border-[1px] border-black p-2.5 w-full font-bold hover:bg-background/10">
+                                                                            {{$t('consult')}}
+                                                                        </button>
+                                                                    </a>
+                                                                </div> -->
+
                                                                 <div class="mt-2 text-center">
-                                                                    <p class="text-[12px] text-background/80">
-                                                                        ទំនាក់ទំនងប្រឹក្សាជាមួយគ្រូផ្ទាល់ ឬ<br>
-                                                                        ចុះឈ្មោះសិក្សាតាមអនឡាញ
-                                                                    </p>
+                                                                    <a href="/advisorRegister"
+                                                                        class="text-[12px] text-background/80 hover:underline">
+                                                                        {{ $t('constant') }}
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                         </TabPanel>
@@ -652,7 +669,7 @@
 
 
                                         <div v-if="detail.lessionBreif?.length > 0"
-                                            class=" text-black my-8  border-[1px] border-background/20 px-4 pb-4 text-[15px]">
+                                            class=" text-black my-8   border-background/20 px-4 pb-4 text-[15px]">
 
                                             <div>
                                                 <!-- <p class="mt-6 text-black  leading-6 prose prose-p:text-[16px] "

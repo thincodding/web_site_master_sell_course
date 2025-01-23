@@ -2,7 +2,7 @@
   <div class="relative hidden lg:block">
     <input type="text" v-model="searchText"
       class="bg-gray-50 border-black border-[1px] w-full p-3 outline-none rounded-full placeholder:text-[14px] pl-14"
-      placeholder="ស្វែងរកមេរៀន..." />
+      :placeholder="$t('search')" />
     <div class="absolute top-[14px] left-4">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="size-5 text-[#454647] font-bold">
@@ -52,7 +52,7 @@
           <span
             class="relative z-10 p-2 text-xs leading-none whitespace-no-wrap border-[0.5px] rounded-sm bg-white shadow-lg ">
             <input v-model="searchText" type="text" class="p-1.5 border-2 outline-none w-[210px]  focus:border-blue-300"
-              placeholder="ស្វែងរកមេរៀន...">
+              :placeholder="$t('search')" />
           </span>
         </div>
       </div>

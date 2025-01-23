@@ -3,13 +3,21 @@
         <div class="xl:w-[1200px] mx-auto">
             <div>
                 <div v-for="con in content" :key="con.id">
-                    <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
-                        {{ con.data.title }}</h1>
-                    <p v-html="con.data.descripton" class="my-3 text-md text-background font-NotoSansKhmer ">
+                    <!-- <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
+                        {{ con.data.title }}</h1> -->
+                    <!-- <p v-html="con.data.descripton" class="my-3 text-md text-background font-NotoSansKhmer ">
                         
+                    </p> -->
+                    <h1 class="text-[18px] flex items-center gap-2 lg:text-[20px] md:text-[20px] font-bold font-NotoSansKhmer text-background">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-to-line"><path d="M17 12H3"/><path d="m11 18 6-6-6-6"/><path d="M21 5v14"/></svg>
+                        <span>{{ $t('allCourse') }}</span>
+                    </h1>
+                    <p class="my-3 text-md text-background font-NotoSansKhmer ">
+                        {{ $t('allCourseDesc') }}
                     </p>
+
                 </div>
-        
+
                 <div>
                     <TabGroup>
 
@@ -73,24 +81,26 @@
                                                         {{ detail.title }}
                                                     </router-link>
                                                     <div class="space-y-1.5">
-                                                        <p class="text-gray-500 text-[12px] line-clamp-1">បង្រៀនដោយ: {{
+                                                        <p class="text-gray-500 text-[12px] line-clamp-1">{{ $t('lectures') }}: {{
                                                             detail.lectures }}</p>
                                                         <div class="flex space-x-[2px] items-center">
-                                                           
+
                                                             <div v-if="!detail.studentCount">
-                                                                <p class="text-xs">មិនមាន</p>
+                                                                <!-- <p class="text-xs">មិនមាន</p> -->
                                                             </div>
                                                             <div v-else>
-                                                                <p class="text-xs">({{ detail.studentCount }}) នាក់</p>
+                                                                <p class="text-xs">({{ detail.studentCount }}) {{ $t('people') }}</p>
                                                             </div>
 
                                                         </div>
                                                         <div>
-                                                            <p class="text-lg font-bold">${{ detail.price }}</p>
+                                                            <p v-if="detail.price === 0"
+                                                                class="text-lg font-bold text-green-600">{{ $t('freeCourse') }}</p>
+                                                            <p v-else class="text-lg font-bold">${{ detail.price }}</p>
                                                         </div>
                                                         <div v-if="detail.studentCount > 2"
                                                             class="text-xs w-20 text-center font-bold text-[#3D3C0A] bg-yellow-300/60 p-1">
-                                                            លក់ដាច់បំផុត</div>
+                                                            {{ $t('bestSeller') }}</div>
 
                                                     </div>
                                                 </div>
@@ -160,7 +170,7 @@ export default {
         const isLoading = ref(false);
         const error = ref(null);
         const content = ref(null)
-        
+
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
 
         const fetchContent = async () => {
@@ -170,14 +180,14 @@ export default {
         };
 
         onMounted(async () => {
-          
+
             try {
                 await fetchContent();
                 isLoading.value = true;
-               
+
                 await fetchCollection();
                 await fetchAllProducts();
-              
+
             } catch (err) {
                 console.error('Error during initialization:', err);
                 error.value = 'Failed to load data.';

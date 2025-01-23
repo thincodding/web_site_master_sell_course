@@ -9,7 +9,7 @@ import 'element-plus/dist/index.css';
 import { browserLocalPersistence, setPersistence } from 'firebase/auth'
 import { projectAuth } from './config/config'
 import '@/ckeditor-tailwind-reset/ckeditor-tailwind-reset.css'
-
+import i18n from './i18n'
 
 let routes;
 
@@ -25,7 +25,7 @@ else{
 
 setPersistence(projectAuth, browserLocalPersistence)
 .then(() => {
-    createApp(App).use(ElementPlus).use(MotionPlugin).use(routes).mount('#app')
+    createApp(App).use(ElementPlus).use(i18n).use(MotionPlugin).use(routes).mount('#app')
 
 })
 .catch(err => {

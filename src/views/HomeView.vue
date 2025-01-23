@@ -1,36 +1,38 @@
 <template>
-  <div class="">
-    <NavbarViewVue />
+  <div class="flex flex-col h-screen">
+    <div class="">
+      <NavbarViewVue />
 
-  </div>
-  <!-- <div class="mb-auto h-screen">
+    </div>
+    <!-- <div class="h-screen mb-auto">
     <SlideComponentVue/>
 
   </div> -->
- 
-  <div>
-    <SlideComponentVue />
-  </div>
-  <div>
-    <BannerHomeView />
-  </div>
-  <div>
-    <SelectionCourse/>
-  </div>
-  <div>
-    <LearnerViewingView/>
-  </div>
-  
-  <div class="mt-5">
-    <TopCategory/>
-  </div>
 
-  <div>
-    <FeaturedTopicByCategory/>
-  </div>
-  
-  <div class="">
-    <FooterViewVue />
+    <div>
+      <SlideComponentVue />
+    </div>
+    <div>
+      <BannerHomeView />
+    </div>
+    <div>
+      <SelectionCourse />
+    </div>
+    <div>
+      <LearnerViewingView />
+    </div>
+
+    <div class="mt-5">
+      <TopCategory />
+    </div>
+
+    <div class="mb-auto">
+      <FeaturedTopicByCategory />
+    </div>
+
+    <div class="">
+      <FooterViewVue />
+    </div>
   </div>
 </template>
 

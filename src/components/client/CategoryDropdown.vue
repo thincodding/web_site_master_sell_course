@@ -24,7 +24,7 @@
 
                     <!-- Subcategories -->
                     <div class="relative p-4 border-l w-60" v-if="filteredSubcategories.length">
-                        <p class="text-[14px] mt-1 font-bold text-[#6b6b6b]">ប្រធានបទពេញនិយម</p>
+                        <p class="text-[14px] mt-1 font-bold text-[#6b6b6b]">{{ $t('popular') }}</p>
                         <div v-for="sub in filteredSubcategories" :key="sub.id" class="relative mt-1">
                             <router-link :to="{ name: 'productdetail', params: { id: sub.id }  }"
                                 class="text-[14px] text-[#2D2f31] font-[400] leading-8 hover:text-indigo-400"
@@ -45,12 +45,12 @@
     <!-- Mobile View -->
     <div class="relative w-full h-screen overflow-hidden lg:hidden">
         <div class="flex flex-col p-4 space-y-3">
-            <router-link to="/login" class="text-indigo-600 text-[15px]">Log in</router-link>
-            <router-link to="/signup" class="text-indigo-600 text-[15px]">Sign up</router-link>
+            <router-link to="/login" class="text-indigo-600 text-[15px]">{{ $t('login') }}</router-link>
+            <router-link to="/signup" class="text-indigo-600 text-[15px]">{{ $t('signup') }}</router-link>
         </div>
         <hr>
         <div class="p-4">
-            <p class="my-1 text-sm font-bold text-background">ប្រធានបទពេញនិយម</p>
+            <p class="my-1 text-sm font-bold text-background">{{ $t('popular') }}</p>
             <div v-for="cat in category" :key="cat.id">
                 <div @click="handleIsopen(cat.id)"
                     class="leading-9 text-[14px] cursor-pointer flex justify-between capitalize items-center">

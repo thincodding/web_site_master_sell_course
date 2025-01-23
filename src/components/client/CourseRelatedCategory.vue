@@ -1,9 +1,17 @@
 <template>
     <div class="w-[88%] mx-auto hidden lg:block">
         <div class="course-related-category">
-            <h2 class="text-center text-[20px] font-bold my-2">វគ្គសិក្សាដែលទាក់ទង</h2>
+            <h2 class="flex justify-center text-[20px] font-bold my-2  gap-2 items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chevrons-left-right">
+                    <path d="m9 7-5 5 5 5" />
+                    <path d="m15 7 5 5-5 5" />
+                </svg>
+                <span>{{ $t('courseRelated') }}</span>
+            </h2>
             <div v-if="isLoading" class="my-5">
-                <p class="text-center text-gray-500">សូមរងចាំ.....</p>
+                <p class="text-center text-gray-500">{{ $t('loading') }}</p>
             </div>
             <div v-else>
                 <div v-if="productDetails && productDetails.length">
@@ -22,8 +30,8 @@
                                                 <!-- <img :src="detail.imageUrl || 'https://placehold.co/400x400'"
                                                     class="w-full h-full" alt="Product Image"> -->
 
-                                                    <img src= 'https://placehold.co/300x300'
-                                                    class="w-full h-full" alt="Product Image">
+                                                <img src='https://placehold.co/300x300' class="w-full h-full"
+                                                    alt="Product Image">
                                             </div>
 
                                             <!-- Product Info Section -->
@@ -33,8 +41,10 @@
                                                     {{ detail.title }}
                                                 </a>
                                                 <p class="text-sm text-gray-600">{{ detail.lectures }}</p>
-                                                <p class="text-[16px] font-bold">{{ '$' +
-                                                    detail.price.toFixed(2) }}</p>
+                                                <p v-if="detail.price === 0"
+                                                    class="text-[16px] font-bold text-green-600">{{ $t('freeCourse') }}</p>
+                                                <p v-else class="text-[16px] font-bold">${{
+                                                    detail.price }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -56,9 +66,18 @@
     <!-- Mobile View -->
     <div class="block w-full mx-auto lg:hidden">
         <div class="course-related-category">
-            <h2 class="text-center text-[20px] font-bold my-2">វគ្គសិក្សាដែលទាក់ទង</h2>
+    
+            <h2 class="flex justify-center text-[20px] font-bold my-2  gap-2 items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chevrons-left-right">
+                    <path d="m9 7-5 5 5 5" />
+                    <path d="m15 7 5 5-5 5" />
+                </svg>
+                <span>{{ $t('courseRelated') }}</span>
+            </h2>
             <div v-if="isLoading" class="my-5">
-                <p class="text-center text-gray-500">សូមរងចាំ.....</p>
+                <p class="text-center text-gray-500">{{ $t('loading') }}</p>
             </div>
             <div v-else>
                 <div v-if="productDetails && productDetails.length">
@@ -73,12 +92,13 @@
                                         <!-- Show product details if the ID does not match params.id -->
                                         <div v-if="detail.id !== $route.params.id" class="space-y-4">
                                             <!-- Image Section -->
-                                            <div class="w-[350px] h-[350px] md:w-[200px] md:h-[200px] xl:w-[300px] xl:h-[300px]">
+                                            <div
+                                                class="w-[350px] h-[350px] md:w-[200px] md:h-[200px] xl:w-[300px] xl:h-[300px]">
                                                 <!-- <img :src="detail.imageUrl || 'https://placehold.co/400x400'"
                                                     class="w-full h-full" alt="Product Image"> -->
 
-                                                    <img src= 'https://placehold.co/300x300'
-                                                    class="w-full h-full" alt="Product Image">
+                                                <img src='https://placehold.co/300x300' class="w-full h-full"
+                                                    alt="Product Image">
                                             </div>
 
                                             <!-- Product Info Section -->
@@ -88,8 +108,10 @@
                                                     {{ detail.title }}
                                                 </a>
                                                 <p class="text-sm text-gray-600">{{ detail.lectures }}</p>
-                                                <p class="text-[16px] font-bold">{{ '$' +
-                                                    detail.price.toFixed(2) }}</p>
+                                                <p v-if="detail.price === 0"
+                                                    class="text-[16px] font-bold text-green-600">ឥតគិតថ្លៃ</p>
+                                                <p v-else class="text-[16px] font-bold text-background">${{ detail.price
+                                                    }}</p>
                                             </div>
                                         </div>
                                     </div>

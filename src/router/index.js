@@ -60,6 +60,16 @@ const routes = [
     path: "/advisorRegister",
     name: "advisorRegister",
     component: () => import('@/views/AdvisorRegister.vue')
+  },
+  {
+    path: "/freeCourse",
+    name: "freeCourse",
+    component: () => import('@/views/FreeCourse.vue')
+  },
+  {
+    path: "/freeCourseDetail/:id",
+    name: "freeCourseDetail",
+    component: () => import('@/views/FreeCourseDetail.vue')
   }
 ]
 

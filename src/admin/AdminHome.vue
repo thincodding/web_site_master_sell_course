@@ -34,7 +34,7 @@
                         </router-link>
                     </div>
 
-                    <div :class="isOpenNav ? '' : 'justify-center flex'">
+                    <!-- <div :class="isOpenNav ? '' : 'justify-center flex'">
                         <router-link class="flex items-center gap-4 p-3 hover:text-primary " :to="{ name: 'content' }">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -45,7 +45,7 @@
                             <p :class="isOpenNav ? 'block' : 'hidden'" class="font-NotoSansKhmer text-[18px]">
                                 មាតិការ</p>
                         </router-link>
-                    </div>
+                    </div> -->
 
                     <div :class="isOpenNav ? '' : 'justify-center flex'">
 

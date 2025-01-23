@@ -10,7 +10,7 @@
                     </svg>
                 </button>
                 <div>
-                    <p class="font-bold text-white font-NotoSansKhmer">ត្រឡប់ក្រោយ</p>
+                    <p class="font-bold text-white font-NotoSansKhmer">{{ $t('back') }}</p>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                                     d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
                                 <path d="m21.854 2.147-10.94 10.939" />
                             </svg>
-                            <span class="font-bold text-lg smd:text-sm md:text-[14px] lg:text-md xl:text-lg">ប្រឹក្សាតាមតែលេក្រាម</span>
+                            <span class="font-bold text-lg smd:text-sm md:text-[14px] lg:text-md xl:text-lg">{{ $t('telegram') }}</span>
                         </button>
                     </a>
                 </div>
@@ -43,7 +43,7 @@
                                     d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                             </svg>
 
-                            <span class="font-bold text-lg smd:text-sm md:text-[14px] lg:text-md xl:text-lg">ប្រឹក្សាចូលរៀន</span>
+                            <span class="font-bold text-lg smd:text-sm md:text-[14px] lg:text-md xl:text-lg">{{ $t('consultantForStudy') }}</span>
                         </button>
                     </router-link>
                 </div>
@@ -60,7 +60,7 @@
                                 <path d="M14.05 2a9 9 0 0 1 8 7.94" />
                                 <path d="M14.05 6A5 5 0 0 1 18 10" />
                             </svg>
-                            <span class="font-bold text-lg smd:text-sm md:text-[14px] lg:text-md xl:text-lg">ប្រឹក្សាតាមលេខទូរស័ព្ទ</span>
+                            <span class="font-bold text-lg smd:text-sm md:text-[14px] lg:text-md xl:text-lg">{{ $t('phoneNumber') }}</span>
                         </button>
                     </router-link>
                 </div>

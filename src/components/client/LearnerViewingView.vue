@@ -2,11 +2,17 @@
     <div class="xl:w-[1200px] mx-auto my-5 px-10 lg:px-10 xl:px-0">
         <div class="my-4">
             <div v-for="con in content" :key="con.id">
-                <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
+                <!-- <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
                     {{ con.data.title }}</h1>
                 <p v-html="con.data.descripton" class="my-3 text-md text-background font-NotoSansKhmer ">
 
-                </p>
+                </p> -->
+
+                <h1 class="text-[18px] flex items-center gap-2 lg:text-[20px] md:text-[20px] font-bold font-NotoSansKhmer text-background">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-to-line"><path d="M17 12H3"/><path d="m11 18 6-6-6-6"/><path d="M21 5v14"/></svg>
+                        <span>{{ $t('bestSellerCourse') }}</span>
+                    </h1>
+                  
             </div>
         </div>
         <div class="relative">
@@ -30,26 +36,28 @@
                                 {{ detail.title }}
                             </router-link>
 
-
-
                             <div class="space-y-1.5">
-                                <p class="text-gray-500 text-[12px] line-clamp-1">{{ detail.lectures }}</p>
+                                <p class="text-gray-500 text-[12px] line-clamp-1">{{ $t('lectures') }} {{ detail.lectures }}</p>
                                 <div class="flex space-x-[2px] items-center">
-                                    <p class="text-xs">5.0</p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    <!-- <p class="text-xs">5.0</p> -->
+                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="text-orange-700 size-3">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
-                                    </svg>
-                                    <p class="text-xs">(2)</p>
+                                    </svg> -->
+                                    <!-- <p class="text-xs">(2)</p> -->
+                                    <!-- <p class="text-xs">({{ detail.studentCount }}) {{ $t('people') }}</p> -->
+
                                 </div>
 
                                 <div>
-                                    <p class="text-lg font-bold">${{ detail.price }}.99</p>
+                                    <p v-if="detail.price === 0" class="text-lg font-bold text-green-600">{{ $t('freeCourse') }}</p>
+
+                                    <p v-else class="text-lg font-bold">${{ detail.price }}</p>
                                 </div>
 
                                 <div class="text-xs w-20 text-center font-bold text-[#3D3C0A] bg-yellow-300/60 p-1">
-                                    លក់ដាច់បំផុត</div>
+                                    {{ $t('bestSeller') }}</div>
                             </div>
                         </div>
                     </div>
@@ -78,6 +86,9 @@
             </div>
         </div>
     </div>
+
+    <!-- <pre>{{ bestSellerProducts }}</pre> -->
+
 </template>
 
 <script>
@@ -110,7 +121,7 @@ export default {
             await fetchCategoryProductAndProductDetail();
         });
 
-        
+
         //fetct category
         const fetchContent = async () => {
             const results = await getCollectionWhere('content', "GP5cKnVMF99bzFXPzFOt");

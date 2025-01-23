@@ -19,10 +19,10 @@
               <p class="text-[15px] text-background my-2" v-html="img.descripton"></p>
             </div>
             <div class="mt-5 mb-4">
-              <router-link to="#"
+              <a href="/advisorRegister"
                 class="bg-background hover:bg-background/90 w-full p-3 font-bold text-white text-[15px]">
-                ចុះឈ្មោះឥឡូវនេះ
-                </router-link>
+                {{ $t('register') }}
+                </a>
             </div>
           </div>
         </div>
@@ -68,10 +68,14 @@
               <p class="text-[15px] text-background my-2" v-html="img.descripton"></p>
             </div>
             <div class="mt-5 mb-4">
-              <router-link to="#"
+              <!-- <router-link to="#"
                 class="bg-background hover:bg-background/90  w-full p-3 font-bold text-white text-[15px]">
                 ចុះឈ្មោះឥឡូវនេះ
-                </router-link>
+                </router-link> -->
+                <a href="/advisorRegister"
+                class="bg-background hover:bg-background/90 w-full p-3 font-bold text-white text-[15px]">
+                {{ $t('register') }}
+                </a>
             </div>
           </div>
         </div>
@@ -100,9 +104,10 @@
               <p class="text-[14px] text-background my-2" v-html="img.descripton"></p>
             </div>
             <div class="mt-5 mb-4">
-              <router-link to="#" class="bg-background w-full p-3 font-bold text-white text-[15px]">
-                ចុះឈ្មោះឥឡូវនេះ
-              </router-link>
+              <a href="/advisorRegister"
+                class="bg-background hover:bg-background/90 w-full p-3 font-bold text-white text-[15px]">
+                {{ $t('register') }}
+                </a>
             </div>
           </div>
         </div>
@@ -131,7 +136,11 @@
               <p class="text-[14px] text-background my-2" v-html="img.descripton"></p>
             </div>
             <div class="flex justify-center w-full p-3 mt-5 mb-4 bg-background hover:bg-background/90">
-              <router-link to="#" class=" font-bold text-white text-[16px] ">ចុះឈ្មោះឥឡូវនេះ</router-link>
+              <!-- <router-link to="#" class="">ចុះឈ្មោះឥឡូវនេះ</router-link> -->
+              <a href="/advisorRegister"
+                class="font-bold text-white text-[16px]]">
+                {{ $t('register') }}
+                </a>
             </div>
           </div>
         </div>

@@ -4,11 +4,16 @@
             <div class="my-4">
 
                 <div v-for="con in content" :key="con.id">
-                    <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
+                    <!-- <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
                         {{ con.data.title }}</h1>
                     <p v-html="con.data.descripton" class="my-3 text-md text-background font-NotoSansKhmer ">
 
-                    </p>
+                    </p> -->
+
+                    <h1 class="text-[18px] flex items-center gap-2 lg:text-[20px] md:text-[20px] font-bold font-NotoSansKhmer text-background">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-to-line"><path d="M17 12H3"/><path d="m11 18 6-6-6-6"/><path d="M21 5v14"/></svg>
+                        <span>{{ $t('popularCourse') }}</span>
+                    </h1>
                 </div>
             </div>
 
