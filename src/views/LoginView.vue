@@ -18,7 +18,7 @@
                 </div>
                 <div
                     class="text-[19px] md:text-[24px] lg:text-[32px] text-background my-5 text-center  font-NotoSansKhmer font-bold">
-                    Log in to continue your <br> learning journey
+                    {{ $t('loginTolearning') }}
                 </div>
                 <form @submit.prevent="sendLink" class="space-y-4">
                     <div class="relative ">
@@ -27,7 +27,7 @@
                             placeholder="" />
                         <label for="floating_filled"
                             class="absolute text-sm ml-2.5 font-bold text-background dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5   peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
-                            Email</label>
+                            {{ $t('email') }}</label>
                     </div>
 
 
@@ -40,7 +40,7 @@
                                 <rect width="20" height="16" x="2" y="4" rx="2" />
                                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                             </svg>
-                            <p>Continue with email</p>
+                            <p>{{ $t('continueWithEmail') }}</p>
                         </button>
 
                         <button  v-else disabled
@@ -51,7 +51,7 @@
                                 <rect width="20" height="16" x="2" y="4" rx="2" />
                                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                             </svg>
-                            <p>Continue with email...</p>
+                            <p>{{ $t('continueLoading') }}</p>
                         </button>
 
 
@@ -110,8 +110,8 @@
                         </div>
 
                         <div class="flex items-center justify-center p-3 mt-10 bg-slate-100">
-                            <div class="font-[400] text-[16px] text-background">Don't have an account? <router-link
-                                    class="font-bold text-indigo-600" :to="{ name: 'signup' }">Sign up</router-link>
+                            <div class="font-[400] text-[16px] text-background">{{ $t('dontHaveAccount') }} <router-link
+                                    class="font-bold text-indigo-600" :to="{ name: 'signup' }">{{ $t('signup') }}</router-link>
                             </div>
                         </div>
                     </div>

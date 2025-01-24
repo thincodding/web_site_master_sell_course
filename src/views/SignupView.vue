@@ -1,22 +1,22 @@
 <template>
     <NavbarView />
-    <div class="h-screen flex justify-center">
+    <div class="flex justify-center h-screen">
 
-        <div class=" flex  lg:justify-center  gap-10 p-4">
+        <div class="flex gap-10 p-4 lg:justify-center">
             <div class=" hidden lg:block animate-infinite animate-duration-[7000ms]">
                 <img class="" src="https://frontends.udemycdn.com/components/auth/desktop-illustration-step-1-x1.webp"
                     alt="">
             </div>
 
 
-            <div class=" p-5 rounded-sm mt-5">
+            <div class="p-5 mt-5 rounded-sm ">
                 <div class=" lg:hidden animate-infinite animate-duration-[7000ms] flex justify-center">
                     <img class="w-[450px] md:w-[300px]"
                         src="https://frontends.udemycdn.com/components/auth/mobile-illustration-x1.webp" alt="">
                 </div>
                 <div
                     class="text-[19px] md:text-[24px] lg:text-[30px] text-background my-5 text-center  font-NotoSansKhmer font-bold ">
-                    Sign up and start learning
+                    {{ $t('signUpandStartLearning') }}
                 </div>
                 <form @submit.prevent="handleRegister" class="space-y-4">
                     <div class="relative ">
@@ -25,7 +25,7 @@
                             placeholder="" />
                         <label for="floating_filled"
                             class="absolute text-sm ml-2.5 font-bold text-background dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5   peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
-                            Full Name</label>
+                            {{ $t('fullName') }}</label>
                     </div>
                     <div class="relative ">
                         <input type="email" v-model="email" required
@@ -33,7 +33,7 @@
                             placeholder="" />
                         <label for="floating_filled"
                             class="absolute text-sm ml-2.5 font-bold text-background dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5   peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
-                            Email</label>
+                            {{ $t('email') }}</label>
                     </div>
                     <div class="relative ">
                         <input type="password" v-model="password" required
@@ -41,28 +41,28 @@
                             placeholder="" />
                         <label for="floating_filled"
                             class="absolute text-sm ml-2.5 font-bold text-background dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5   peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
-                            Password</label>
+                            {{ $t('password') }}</label>
                     </div>
                     <div>
                         <button v-if="!isPending"
                             class="bg-[#A435F0] flex items-center justify-center gap-2 p-3 text-white hover:bg-[#A435F0]/80 transition-all duration-300 ease-in-out w-full font-NotoSansKhmer font-[500]">
 
-                            <p>Sign up</p>
+                            <p>{{ $t('signup') }}</p>
                         </button>
 
                         <button v-else disabled
                             class="bg-[#A435F0]/50 flex items-center justify-center gap-2 p-3 text-white hover:bg-[#A435F0]/80 transition-all duration-300 ease-in-out w-full font-NotoSansKhmer font-[500]">
-                            <p>Signing up...</p>
+                            <p>{{ $t('signupLoading') }}</p>
                         </button>
 
-                        <div class="text-center text-xs my-6 text-background">
-                            By signing up, you agree to our <span class="text-indigo-500 underline">Terms of Use</span>
-                            and <span class="text-indigo-500 underline"> Privacy Policy.</span>
+                        <div class="my-6 text-xs text-center text-background">
+                            <!-- By signing up, you agree to our <span class="text-indigo-500 underline">Terms of Use</span>
+                            and <span class="text-indigo-500 underline"> Privacy Policy.</span> -->
                         </div>
 
-                        <div class=" bg-slate-100 p-3 flex justify-center items-center">
-                            <div class="font-[400] text-[16px] text-background">Already have an account? <router-link
-                                    class="font-bold text-indigo-600" :to="{ name: 'login' }">Login</router-link>
+                        <div class="flex items-center justify-center p-3 bg-slate-100">
+                            <div class="font-[400] text-[16px] text-background">{{ $t('alreadyAccount') }} <router-link
+                                    class="font-bold text-indigo-600" :to="{ name: 'login' }">{{ $t('login') }}</router-link>
                             </div>
                         </div>
                     </div>

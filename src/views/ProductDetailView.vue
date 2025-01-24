@@ -267,7 +267,7 @@
                                                                     detail.title }}</router-link>
                                                             <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                                 detail.lectures
-                                                            }}</p>
+                                                                }}</p>
                                                             <!-- <div class="flex space-x-[2px] items-center">
 
                                                         <p class="text-xs">5.0</p>
@@ -393,7 +393,7 @@
                                                                     detail.title }}</router-link>
                                                             <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                                 detail.lectures
-                                                            }}</p>
+                                                                }}</p>
                                                             <!-- <div class="flex space-x-[2px] items-center">
 
                                                         <p class="text-xs">5.0</p>
@@ -513,6 +513,10 @@
                                                         nextEl: '.button-next-slide',
                                                         prevEl: '.button-pre-slide'
                                                     }" :spaceBetween="10" :slidesPerView="'auto'" :breakpoints="{
+                                                        '240': {
+                                                            slidesPerView: 2,
+                                                            spaceBetween: 20,
+                                                        },
                                                         '540': {
                                                             slidesPerView: 2,
                                                             spaceBetween: 20,
@@ -529,7 +533,7 @@
                                                             :key="detail.id">
                                                             <div class="border-[1px]">
                                                                 <img :src="detail.imageUrl" alt=""
-                                                                    class="object-cover w-full h-48" />
+                                                                    class="w-full " />
 
                                                             </div>
                                                             <div class="mt-2 space-y-1">
@@ -583,7 +587,7 @@
                                                                     {{ $t('freeCourse') }}</h1>
                                                                 <h1 v-else class="text-[15px] font-bold">${{
                                                                     detail.price
-                                                                }}.99</h1>
+                                                                    }}.99</h1>
                                                             </div>
 
                                                         </swiper-slide>
@@ -627,6 +631,10 @@
                                                         nextEl: '.button-next-slide',
                                                         prevEl: '.button-pre-slide'
                                                     }" :spaceBetween="10" :slidesPerView="'auto'" :breakpoints="{
+                                                        '240': {
+                                                            slidesPerView: 2,
+                                                            spaceBetween: 20,
+                                                        },
                                                         '540': {
                                                             slidesPerView: 2,
                                                             spaceBetween: 20,
@@ -643,7 +651,7 @@
                                                             :key="detail.id">
                                                             <div class="border-[1px]">
                                                                 <img :src="detail.imageUrl" alt=""
-                                                                    class="object-cover w-full h-48" />
+                                                                    class="w-full " />
 
                                                             </div>
                                                             <div class="mt-2 space-y-1">
@@ -697,7 +705,7 @@
                                                                     {{ $t('freeCourse') }}</h1>
                                                                 <h1 v-else class="text-[15px] font-bold">${{
                                                                     detail.price
-                                                                }}.99</h1>
+                                                                    }}.99</h1>
                                                             </div>
                                                         </swiper-slide>
                                                     </swiper>
@@ -740,6 +748,10 @@
                                                         nextEl: '.button-next-slide',
                                                         prevEl: '.button-pre-slide'
                                                     }" :spaceBetween="10" :slidesPerView="'auto'" :breakpoints="{
+                                                        '240': {
+                                                            slidesPerView: 2,
+                                                            spaceBetween: 20,
+                                                        },
                                                         '540': {
                                                             slidesPerView: 2,
                                                             spaceBetween: 20,
@@ -756,7 +768,7 @@
                                                             :key="detail.id">
                                                             <div class="border-[1px]">
                                                                 <img :src="detail.imageUrl" alt=""
-                                                                    class="object-cover w-full h-48" />
+                                                                    class="w-full" />
 
                                                             </div>
                                                             <div class="mt-2 space-y-1">
@@ -810,7 +822,7 @@
                                                                     {{ $t('freeCourse') }}</h1>
                                                                 <h1 v-else class="text-[15px] font-bold">${{
                                                                     detail.price
-                                                                }}.99</h1>
+                                                                    }}.99</h1>
                                                             </div>
                                                         </swiper-slide>
                                                     </swiper>
@@ -826,7 +838,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div>
             <FooterView />
         </div>
@@ -872,7 +884,7 @@ export default {
         FooterView
     },
     setup() {
-        const {t} = useI18n();
+        const { t } = useI18n();
         const products = ref([]);
         const productDetails = ref([]);
         const isLoading = ref(false);
@@ -890,13 +902,17 @@ export default {
         const isOpenNav = ref(true);
         const isOpentDrodownNewLession = ref(false)
         const isOpenDropdownFavorite = ref(false)
-
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
-        const most_pupular = t('mostPopular');
-        const New = t('new');
-        const Beginer_favorite = t('beginnerFavorites')
 
-   
+        // const most_pupular = computed(t('mostPopular'));
+        // const New = computed(t('new'));
+        // const Beginer_favorite = (t('beginnerFavorites'))
+
+        const most_pupular = computed(() => t('mostPopular'));
+        const New = computed(() => t('new'));
+        const Beginer_favorite = computed(() => t('beginnerFavorites'));
+
+
 
         onMounted(async () => {
             await fetchCollection();
@@ -914,7 +930,6 @@ export default {
             isOpenDropdownProduct.value = isOpenDropdownProduct.value === most_pupular ? null : most_pupular;
         }
 
-
         //new 
         const dropdownClassesNew = computed(() => ({
             'h-80': isOpentDrodownNewLession.value,
@@ -927,7 +942,6 @@ export default {
         }
 
         //beginner_favorite
-
         const dropdownClassesBeginer = computed(() => ({
             'h-80': isOpenDropdownFavorite.value,
             'h-0': !isOpenDropdownFavorite.value,
@@ -937,7 +951,7 @@ export default {
             isOpenDropdownFavorite.value = isOpenDropdownFavorite.value === beginer ? null : beginer;
         }
 
-        const categories = computed(() =>[
+        const categories = computed(() => [
             { names: t('mostPopular') },
             { names: t('new') },
             { names: t('beginnerFavorites') }

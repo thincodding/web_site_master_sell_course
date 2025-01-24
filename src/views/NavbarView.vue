@@ -161,7 +161,7 @@
         <div class="ml-10">
           <router-link to="/" class="flex items-center">
             <img class="w-[80px] h-[40px] object-contain" src="../assets/logo_mater_it.jpg" alt="">
-            <p class="font-bold text-background/90">Master-IT Learn Online</p>
+            <p class="font-[600] text-background/90">{{ $t('logo') }}</p>
           </router-link>
         </div>
 

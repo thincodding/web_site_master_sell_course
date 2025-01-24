@@ -1,5 +1,8 @@
 <template>
+
+
     <div class="hidden lg:block">
+
         <div class="group w-full sticky top-[86px] z-10 -right-20">
             <div class="flex group">
                 <!-- Categories -->
@@ -26,7 +29,7 @@
                     <div class="relative p-4 border-l w-60" v-if="filteredSubcategories.length">
                         <p class="text-[14px] mt-1 font-bold text-[#6b6b6b]">{{ $t('popular') }}</p>
                         <div v-for="sub in filteredSubcategories" :key="sub.id" class="relative mt-1">
-                            <router-link :to="{ name: 'productdetail', params: { id: sub.id }  }"
+                            <router-link :to="{ name: 'productdetail', params: { id: sub.id } }"
                                 class="text-[14px] text-[#2D2f31] font-[400] leading-8 hover:text-indigo-400"
                                 @mouseover="activeSubcategoryId = sub.id" @click="handleClick(sub.id)"
                                 :class="{ 'text-indigo-600': sub.id === activeSubcategoryId }">
@@ -43,13 +46,38 @@
     </div>
 
     <!-- Mobile View -->
-    <div class="relative w-full h-screen overflow-hidden lg:hidden">
-        <div class="flex flex-col p-4 space-y-3">
+
+
+
+
+
+    <div class="relative flex flex-col w-full h-screen overflow-hidden lg:hidden">
+        <div v-if="user" class="max-w-full p-4 bg-neutral-50 lg:hidden">
+            <div class="flex justify-center">
+                <div class="">
+                    <div class="flex justify-center ">
+                        <div class="p-4 bg-gray-100 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-gray-500 lucide lucide-user">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+
+                        </div>
+                    </div>
+                    <div class="flex-grow mt-2 text-center md:text-left">
+                        <p class="font-bold">{{ $t('hi') }}, {{ user?.displayName }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else class="flex flex-col p-4 space-y-3">
             <router-link to="/login" class="text-indigo-600 text-[15px]">{{ $t('login') }}</router-link>
             <router-link to="/signup" class="text-indigo-600 text-[15px]">{{ $t('signup') }}</router-link>
         </div>
         <hr>
-        <div class="p-4">
+        <div class="p-4 mb-auto">
             <p class="my-1 text-sm font-bold text-background">{{ $t('popular') }}</p>
             <div v-for="cat in category" :key="cat.id">
                 <div @click="handleIsopen(cat.id)"
@@ -71,14 +99,26 @@
                     stroke-width="1.5" stroke="currentColor" class="font-bold cursor-pointer size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
-                <p class="text-[15px] text-background">Menu</p>
+                <p class="text-[15px] text-background">{{ $t('Menu') }}</p>
             </div>
 
             <div v-if="selectedCategory" class="px-5 mt-2 capitalize">
                 <div v-for="sub in selectedCategory" :key="sub.id" class="leading-9 text-[14px]">
-                    <router-link  :to="{name: 'productdetail', params: {id: sub.id} }" @click="handleClickSideBar(sub.id)">{{ sub.productName }}</router-link>
+                    <router-link :to="{ name: 'productdetail', params: { id: sub.id } }"
+                        @click="handleClickSideBar(sub.id)">{{ sub.productName }}</router-link>
                 </div>
             </div>
+        </div>
+
+        <div v-if="user">
+            <button @click="handleSignout" class="flex items-center gap-1 my-2 ml-2 hover:text-gray-700"> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                    height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" x2="9" y1="12" y2="12" />
+                </svg> <span class="font-bold">{{ $t('logout') }}</span> </button>
         </div>
     </div>
 </template>
@@ -87,7 +127,10 @@
 import { ref, watch } from 'vue';
 import getCollection from '@/firebase/getCollection';
 import getDocument from '@/firebase/getDocument';
-import {useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import getUser from '@/firebase/getUser'
+import useSignout from '@/firebase/useSignout'
+;
 
 
 
@@ -100,9 +143,10 @@ export default {
         const selectedCategory = ref(null);
 
         const filteredSubcategories = ref([]);
-
+        const { user } = getUser();
         const router = useRouter();
         const route = useRoute();
+        const { signOut } = useSignout();
         // Fetch categories
         const { document: category } = getCollection('categories');
         // Watch for hoveredCategoryId changes to fetch subcategories
@@ -168,33 +212,40 @@ export default {
 
             // Check if the current route's params.id matches the clicked product ID
             if (route.params.id === id) {
-               
+
                 const anotherId = route.params.id; // Set this to your desired fallback ID
                 router.push({ name: 'productdetail', params: { id: anotherId } });
             } else {
                 // If it doesn't match, navigate to the selected product detail page
                 router.push({ name: 'productdetail', params: { id } });
-               setTimeout(()=>{
-                window.location.reload();
-               },100)
+                setTimeout(() => {
+                    window.location.reload();
+                }, 100)
             }
         };
 
         const handleClickSideBar = (id) => {
-              // Check if the current route's params.id matches the clicked product ID
-              if (route.params.id === id) {
-               
-               const anotherId = route.params.id; // Set this to your desired fallback ID
-               router.push({ name: 'productdetail', params: { id: anotherId } });
-           } else {
-               // If it doesn't match, navigate to the selected product detail page
-               router.push({ name: 'productdetail', params: { id } });
-              setTimeout(()=>{
-               window.location.reload();
-              },100)
-           }
+            // Check if the current route's params.id matches the clicked product ID
+            if (route.params.id === id) {
+
+                const anotherId = route.params.id; // Set this to your desired fallback ID
+                router.push({ name: 'productdetail', params: { id: anotherId } });
+            } else {
+                // If it doesn't match, navigate to the selected product detail page
+                router.push({ name: 'productdetail', params: { id } });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 100)
+            }
         }
 
+
+        const handleSignout = async () => {
+            if (window.confirm('Are you sure to sign out')) {
+                await signOut()
+                router.push({ name: 'login' });
+            }
+        }
 
 
         return {
@@ -207,7 +258,9 @@ export default {
             selectedCategory,
             handleIsopen,
             handleClick,
-            handleClickSideBar
+            handleClickSideBar,
+            user,
+            handleSignout
         };
     }
 };
