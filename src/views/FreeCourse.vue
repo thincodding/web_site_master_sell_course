@@ -1,8 +1,11 @@
 <template>
 
+    <div>
+        <NavbarView />
+    </div>
 
     <div class="flex flex-col h-screen">
-        <div class="sticky top-0 z-10 p-5 bg-background">
+        <!-- <div class="sticky top-0 z-10 p-5 bg-background">
             <div class="flex items-center gap-2">
                 <button @click="goBack" class="p-2 bg-red-500 rounded-md shadow hover:bg-red-600 hover:shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -15,7 +18,7 @@
                     <p class="font-bold text-white font-NotoSansKhmer">{{ $t('back') }}</p>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div v-if="isLoading" class="animate-pulse w-[90%] md:w-[90%] xl:w-[1200px] mx-auto my-2 p-5">
             <div class="h-8 xl:h-9 bg-gray-300 w-72   xl:w-[600px] mb-4"></div>
             <div v-for="n in 5" :key="n" class="mb-4 space-y-6">
@@ -81,7 +84,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
                         </svg>
-                        <h2 class="text-xl font-bold capitalize font-nato">{{ category.categoryName }}</h2>
+                        <h2 class="text-xl font-bold capitalize font-NotoSansKhmer">{{ category.categoryName }}</h2>
 
                     </div>
 
@@ -93,8 +96,8 @@
                                 <img :src="pro.proImage" alt="" class="object-cover w-32 h-32 mb-2 rounded" />
                             </div>
                             <div class="space-y-2">
-                                <h3 class="text-lg font-bold">វគ្គសិក្សា {{ pro.productName }}</h3>
-                                <p class="text-justify text-gray-600 text-md line-clamp-4" v-html="pro.description"></p>
+                                <h3 class="text-lg font-bold">{{ pro.productName }}</h3>
+                                <p class="text-gray-600 text-md line-clamp-4" v-html="pro.description"></p>
                                 <p class="text-sm text-gray-400">
                                     {{ date(pro.createdAt.seconds * 1000).format('LL') }}
                                 </p>
@@ -107,7 +110,7 @@
                 </div>
             </div>
             <div>
-                <FooterView/>
+                <FooterView />
             </div>
 
         </div>
@@ -120,10 +123,12 @@ import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDoc
 
 import moment from 'moment';
 import { onMounted, ref } from 'vue';
+import NavbarView from './NavbarView.vue';
 
 export default {
     components: {
-        FooterView
+        FooterView,
+        NavbarView
     },
     setup() {
         const products = ref([]);

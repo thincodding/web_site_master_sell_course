@@ -1,7 +1,12 @@
 <template>
+
+    <div>
+        <NavbarView/>
+    </div>
+    
     <div class="flex flex-col h-screen">
 
-        <div class="sticky top-0 z-10 p-5 bg-background">
+        <!-- <div class="sticky top-0 z-10 p-5 bg-background">
             <div class="flex items-center gap-2">
                 <button @click="goBack" class="p-2 bg-red-500 rounded-md shadow hover:bg-red-600 hover:shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -14,7 +19,7 @@
                     <p class="font-bold text-white font-NotoSansKhmer">{{ $t('back') }}</p>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div v-if="isLoading" class="animate-pulse w-[90%] md:w-[90%] xl:w-[1200px] mx-auto my-2 p-5">
             <div class="h-8 xl:h-9 bg-gray-300 w-72   xl:w-[600px] mb-4"></div>
@@ -123,10 +128,12 @@ import { useFirestoreCollection, useSubcollection } from "@/firebase/getArrayDoc
 import getNestedSubcollection from "@/firebase/getNestedSubcollection";
 import { ref, onMounted } from "vue";
 import FooterView from "./FooterView.vue";
+import NavbarView from "./NavbarView.vue";
 
 export default {
     components: {
-        FooterView
+        FooterView,
+        NavbarView
     },
     setup() {
 

@@ -7,7 +7,8 @@
             <div class="flex group">
                 <!-- Categories -->
                 <div style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;"
-                    class="h-[500px] bg-white flex justify-center" @mouseleave="hoveredCategoryId = null" v-motion
+                    class="h-[500px] bg-white flex justify-center" @mouseleave="hoveredCategoryId = null" 
+                    v-motion
                     :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
                     <div class="p-4 w-60">
                         <div v-for="cate in category" :key="cate.id" class="cursor-pointer"

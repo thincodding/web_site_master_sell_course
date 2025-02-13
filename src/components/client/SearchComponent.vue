@@ -31,7 +31,7 @@
         </div>
       </div>
       <div v-else class="p-3 text-center text-gray-500">
-        <p>មិនមានមេរៀនឈ្មោះ {{ searchText }}</p>
+        <p>{{ $t('notFoundCourse') }} {{ searchText }}</p>
       </div>
     </div>
   </div>
@@ -78,7 +78,7 @@
       </div>
 
       <div v-else class="p-3 text-center text-gray-500">
-        <p class="text-sm">មិនមានមេរៀនឈ្មោះ {{ searchText }}</p>
+        <p class="text-sm">{{ $t('notFoundCourse') }} {{ searchText }}</p>
       </div>
     </div>
   </div>

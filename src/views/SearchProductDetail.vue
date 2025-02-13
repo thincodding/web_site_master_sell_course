@@ -38,8 +38,8 @@
             <div v-else class="xl:w-[1200px] mx-auto ">
                 <div v-if="currentProduct">
                     <div class="flex items-center gap-1 mb-10 text-lg md:text-2xl lg:my-5">
-                        <p>លទ្ធផល <b>{{ currentProduct.productDetail.length }}</b> </p>
-                        <p>នៃវគ្គសិក្សា "<b>{{ currentProduct.productName }}</b>"</p>
+                        <p>{{ $t('result') }} <b>{{ currentProduct.productDetail.length }}</b> </p>
+                        <p>{{ $t('ofStudy') }} "<b>{{ currentProduct.productName }}</b>"</p>
                     </div>
                     <div class="grid grid-cols-1 gap-5 lg:grid-cols-4 md:grid-cols-3">
                         <div v-for="detail in currentProduct.productDetail" :key="detail.id" class="p-2 mb-5 border">
@@ -59,7 +59,7 @@
                                     {{ detail.title }}
                                 </router-link>
                                 <div class="space-y-1.5">
-                                    <p class="text-gray-500 text-[12px] line-clamp-1">បង្រៀនដោយ: {{
+                                    <p class="text-gray-500 text-[12px] line-clamp-1">{{ $t('lectures') }} {{
                                         detail.lectures }}</p>
                                     <div class="flex space-x-[2px] items-center">
 
@@ -76,7 +76,7 @@
                                     </div>
                                     <div v-if="detail.studentCount > 2"
                                         class="text-xs w-20 text-center font-bold text-[#3D3C0A] bg-yellow-300/60 p-1">
-                                        លក់ដាច់បំផុត</div>
+                                        {{ $t('bestSeller') }}</div>
 
                                 </div>
                             </div>

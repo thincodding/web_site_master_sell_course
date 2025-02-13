@@ -1,7 +1,7 @@
 <template>
 
   <!-- desk top -->
-  <div class="hidden xl:block">
+  <div class="hidden mt-3 xl:block">
     <swiper :navigation="{
       nextEl: '.button-next-slide',
       prevEl: '.button-pre-slide'

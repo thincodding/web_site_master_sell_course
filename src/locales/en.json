@@ -27,7 +27,7 @@
     "course": "Course",
     "emptyCart": "Your cart is empty",
     "lastDate": "Last Date",
-    "addToCart": "Add to Cart",
+    "addToCart": "Consult for enrollment",
     "consult": "Consultant",
     "constant": "Consult with a teacher in person or register for online classes.",
     "loading": "Loading....",
@@ -66,5 +66,9 @@
     "dontHaveAccount": "Don't have an account?",
     "loginTolearning": "Log in to your learning",
     "continueWithEmail": "Continue with Email",
-    "continueLoading": "Continue with Email...."
+    "continueLoading": "Continue with Email....",
+    "notFoundCourse": "Not Found Course",
+    "result": "Result",
+    "ofStudy": "of Course",
+    "help": "Help"
 }
