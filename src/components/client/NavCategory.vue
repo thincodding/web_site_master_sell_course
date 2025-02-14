@@ -11,13 +11,13 @@
             <div class="w-full max-w-[80vw] lg:w-[85%] xl:max-w-[80%] mx-auto overflow-x-auto py-3">
                 <div class="flex items-center justify-center gap-4 ml-20 flex-nowrap "
                     @mouseleave="hoveredCategoryId = null">
-                    <div v-for="cat in category" :key="cat.id" class="relative flex-shrink-0 px-2 text-center border-r"
+                    <div v-for="cat in category" :key="cat.id" class="relative flex-shrink-0 px-2 text-center"
                         @mouseover="hoveredCategoryId = cat.id">
                         <div class="flex items-center gap-1 cursor-pointer hover:text-gray-500">
                             <!-- <div>
                                 <img class="w-5" :src="cat.image" alt="">
                             </div> -->
-                            <h1 class="font-bold capitalize lg:text-sm xl:text-lg">
+                            <h1 class="font-[500] capitalize lg:text-sm xl:text-lg">
                                 {{ cat.categoryName }}
                             </h1>
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
@@ -28,18 +28,18 @@
                         </div>
 
                         <!-- Dropdown for Subcategories -->
-                        <div class="h-1.5 bg-transparent"> </div>
+                        <div class="h-2 bg-transparent"> </div>
                         <div class="fixed z-20 top-14">
                             <div v-if="hoveredCategoryId === cat.id && filteredSubcategories.length && isNavbarVisible"
-                                class="w-[200px] p-4 space-y-2 bg-white rounded-sm"    v-motion
-                    :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }"
+                                class="w-[200px] p-4 space-y-2 bg-white rounded-sm" v-motion :initial="{ scale: 0.9 }"
+                                :visible="{ opacity: 1, scale: 1 }"
                                 style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
                                 <div v-for="sub in filteredSubcategories" :key="sub.id"
                                     class="w-full transition-colors duration-200 hover:text-red-600 text-start">
-                                    <router-link :to="{ name: 'productdetail', params: { id: sub.id } }"
-                                        class="text-gray-700 capitalize text-[15px] hover:text-gray-500 text-wrap">
-                                        {{ sub.productName }}
-                                    </router-link>
+                                    <a :href="`/productdetail/${sub.id}`"
+   class="text-gray-700 capitalize text-[15px] hover:text-gray-500 text-wrap">
+   {{ sub.productName }}
+</a>
                                 </div>
                             </div>
                         </div>
@@ -64,13 +64,13 @@
 
                 <!-- Help Icon -->
                 <div class="relative flex cursor-pointer group">
-                    <span class="px-2 py-1 text-black">
+                    <router-link :to="{ name: 'help' }" class="px-2 py-1 text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
                         </svg>
-                    </span>
+                    </router-link>
                     <span
                         class="absolute px-1 m-4 mx-auto text-sm text-gray-100 transition-opacity -translate-x-1/2 translate-y-full bg-gray-800 rounded-md opacity-0 group-hover:opacity-100 left-1/2">ជំនួយ</span>
                 </div>
@@ -183,13 +183,13 @@ export default {
 
 
 
-    const handleSignout = async () => {
-      if (window.confirm('Are you sure to sign out')) {
-        await signOut()
-        router.push({ name: 'login' });
-        isDrowdown.value = false
-      }
-    }
+        const handleSignout = async () => {
+            if (window.confirm('Are you sure to sign out')) {
+                await signOut()
+                router.push({ name: 'login' });
+                isDrowdown.value = false
+            }
+        }
         return {
             category,
             hoveredCategoryId,

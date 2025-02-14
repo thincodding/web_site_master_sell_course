@@ -50,7 +50,7 @@
   </div>
 
   <!-- laptop -->
-  <div class="hidden xl:hidden lg:block md:hidden">
+  <div class="hidden mt-3 xl:hidden lg:block md:hidden">
     <swiper :navigation="{
       nextEl: '.button-next-slide',
       prevEl: '.button-pre-slide'

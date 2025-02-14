@@ -196,8 +196,25 @@
 
                             </div>
                         </div>
-
                     </div>
+
+                    <div :class="isOpenNav ? '' : 'justify-center flex'">
+
+                        <router-link class="flex items-center gap-4 p-3 hover:text-primary " :to="{ name: 'help' }">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-info">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 16v-4" />
+                                <path d="M12 8h.01" />
+                            </svg>
+                            <p :class="isOpenNav ? 'block' : 'hidden'" class="font-NotoSansKhmer text-[18px]">
+                                ជំនួយ</p>
+                        </router-link>
+                    </div>
+
+
+
                 </div>
             </div>
 
@@ -218,6 +235,8 @@
                         ផ្ទាំង / <span class="text-gray-500 font-NotoSansKhmer">ផ្ទាំងបង្ហាញ</span></p>
                     <p v-else-if="currentRouteName === 'content'" class="font-bold select-none font-NotoSansKhmer">
                         ចំណងជើង / <span class="text-gray-500 font-NotoSansKhmer">មាតិការ</span></p>
+                        <p v-else-if="currentRouteName === 'help'" class="font-bold select-none font-NotoSansKhmer">
+                            បញ្ជី / <span class="text-gray-500 font-NotoSansKhmer">ជំនួយ</span></p>
                     <p v-else class="font-bold select-none font-NotoSansKhmer">ទំព័រដើម / <span
                             class="text-gray-500 font-NotoSansKhmer">ផ្ទាំងគ្រប់គ្រង</span></p>
                     <div class="flex items-center gap-3">

@@ -27,8 +27,6 @@
                         </div>
                     </div>
 
-
-
                     <div class="flex gap-5 mt-2">
                         <div
                             class="relative w-full overflow-hidden   h-6  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
@@ -230,7 +228,7 @@
                                                                 </div> -->
 
                                                                 <div class="mt-2 text-center">
-                                                                    <a href="/advisorRegister"
+                                                                    <a :href="`/advisorRegister/${detail.id}`"
                                                                         class="text-[12px] text-background/80 hover:underline">
                                                                         {{ $t('constant') }}
                                                                     </a>
@@ -653,7 +651,7 @@
                                                                 </div> -->
 
                                                                 <div class="mt-2 text-center">
-                                                                    <a href="/advisorRegister"
+                                                                    <a :href="`/advisorRegister/${detail.id}`"
                                                                         class="text-[12px] text-background/80 hover:underline">
                                                                         {{ $t('constant') }}
                                                                     </a>

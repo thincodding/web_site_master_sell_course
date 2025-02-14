@@ -16,6 +16,7 @@ import PartnerView from '@/admin/PartnerView.vue'
 import StudentRegiseterView from '@/admin/StudentRegiseterView.vue'
 import BannerView from '@/admin/BannerView.vue'
 import ContentView from '@/admin/ContentView.vue'
+import HelpView from '@/admin/HelpView.vue'
 
 const requireAuth = (to, from, next) => {
   const user = projectAuth.currentUser;
@@ -114,6 +115,11 @@ const routes = [
         path: "content",
         name: "content",
         component: ContentView,
+      },
+      {
+        path: "help",
+        name: "help",
+        component: HelpView,
       }
     ]
   },

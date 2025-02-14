@@ -228,7 +228,8 @@
                                                         </svg>
                                                     </button>
 
-                                                    <button type="button" v-if="productDetail" @click="handleEditContent(index)"
+                                                    <button type="button" v-if="productDetail"
+                                                        @click="handleEditContent(index)"
                                                         class="px-2 py-2 text-white bg-blue-600 hover:bg-blue-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -329,7 +330,8 @@
                                                         </svg>
                                                     </button>
 
-                                                    <button type="button" v-if="productDetail" @click="handleEditVideoLession(index)"
+                                                    <button type="button" v-if="productDetail"
+                                                        @click="handleEditVideoLession(index)"
                                                         class="px-2 py-2 text-white bg-blue-600 hover:bg-blue-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -379,7 +381,7 @@
 
 
                                         <div class="absolute right-0 top-[94px]">
-                                            <button type="button"  @click="addRowAchievmentStudent"
+                                            <button type="button" @click="addRowAchievmentStudent"
                                                 class="px-4 py-2.5 text-white bg-blue-500 hover:bg-blue-400">+</button>
                                         </div>
 
@@ -431,7 +433,8 @@
                                                         </svg>
                                                     </button>
 
-                                                    <button v-if="productDetail" type="button" @click="handleEditAchievStudent(index)"
+                                                    <button v-if="productDetail" type="button"
+                                                        @click="handleEditAchievStudent(index)"
                                                         class="px-2 py-2 text-white bg-blue-600 hover:bg-blue-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -496,7 +499,8 @@
                                                         </svg>
                                                     </button>
 
-                                                    <button type="button" v-if="productDetail" @click="handleEditCommentFile(index)"
+                                                    <button type="button" v-if="productDetail"
+                                                        @click="handleEditCommentFile(index)"
                                                         class="bg-blue-500 p-1 rounded-full m-0.5 text-white hover:bg-blue-400">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -592,7 +596,8 @@
                                                         </svg>
                                                     </button>
 
-                                                    <button type="button" v-if="productDetail" @click="handleEdiStudyMethod(index)"
+                                                    <button type="button" v-if="productDetail"
+                                                        @click="handleEdiStudyMethod(index)"
                                                         class="px-2 py-2 text-white bg-blue-600 hover:bg-blue-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -709,35 +714,35 @@ export default {
 
         onMounted(() => {
             if (props.categories && props.product && props.productDetail) {
-    title.value = props.productDetail?.title
-    categoryId.value = props.categories?.id
-    productId.value = props.product?.id
-    lectures.value = props.productDetail?.lectures
-    price.value = props.productDetail?.price
-    discount.value = props.productDetail?.discount
-    aboutCourse.value = props.productDetail?.aboutCourse
-    show_spacial.value = props.productDetail?.show_spacial
-    desctiption.value = props.productDetail.description
-    selectFile.value = props.productDetail?.imageUrl
-    introLessionVideo.value = props.productDetail?.introVideoLink
-    lessionBreif.value = props.productDetail?.lessionBreif
-    aboutLession.value = props.productDetail?.aboutLessionList?.title
-    aboutLessionDescription.value = props.productDetail?.aboutLessionList?.description
-    contentTitle.value = props.productDetail?.conetent?.title
-    contentDescriptionList.value = props.productDetail?.conetent?.descriptionList
+                title.value = props.productDetail?.title
+                categoryId.value = props.categories?.id
+                productId.value = props.product?.id
+                lectures.value = props.productDetail?.lectures
+                price.value = props.productDetail?.price
+                discount.value = props.productDetail?.discount
+                aboutCourse.value = props.productDetail?.aboutCourse
+                show_spacial.value = props.productDetail?.show_spacial
+                desctiption.value = props.productDetail.description
+                selectFile.value = props.productDetail?.imageUrl
+                introLessionVideo.value = props.productDetail?.introVideoLink
+                lessionBreif.value = props.productDetail?.lessionBreif
+                aboutLession.value = props.productDetail?.aboutLessionList?.title
+                aboutLessionDescription.value = props.productDetail?.aboutLessionList?.description
+                contentTitle.value = props.productDetail?.conetent?.title
+                contentDescriptionList.value = props.productDetail?.conetent?.descriptionList
 
-    lessionVideoTitle.value = props.productDetail?.lessionVideo?.title
-    lesssionVideoList.value = props.productDetail?.lessionVideo?.lesstionDescriptionList
+                lessionVideoTitle.value = props.productDetail?.lessionVideo?.title
+                lesssionVideoList.value = props.productDetail?.lessionVideo?.lesstionDescriptionList
 
-    achievmentTitle.value = props.productDetail?.achievment?.title
-    achievmentList.value = props.productDetail?.achievment?.achievmentList
+                achievmentTitle.value = props.productDetail?.achievment?.title
+                achievmentList.value = props.productDetail?.achievment?.achievmentList
 
-    studentComment.value = props.productDetail?.studentComment?.title
-    selectFeatureStudentCommentList.value = props.productDetail?.studentComment?.studentCommentList
+                studentComment.value = props.productDetail?.studentComment?.title
+                selectFeatureStudentCommentList.value = props.productDetail?.studentComment?.studentCommentList
 
-    studyMethodTittle.value = props.productDetail?.studyMethod?.title
-    studyMethodList.value = props.productDetail?.studyMethod?.studyMethodList
-}
+                studyMethodTittle.value = props.productDetail?.studyMethod?.title
+                studyMethodList.value = props.productDetail?.studyMethod?.studyMethodList
+            }
 
         })
 

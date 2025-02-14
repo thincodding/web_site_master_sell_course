@@ -23,7 +23,7 @@
 
         <div class="w-full px-1 ">
           <!-- <SearchComponentsVue /> -->
-           <NavCategory/>
+          <NavCategory />
         </div>
       </div>
 
@@ -56,7 +56,7 @@
         </div>
 
 
-      
+
 
 
         <!-- <div class="cursor-pointer hover:text-indigo-400">
@@ -138,7 +138,7 @@
           </router-link>
         </div>
 
-        <div class="flex gap-7 md:gap-6">
+        <div class="flex gap-3 md:gap-6">
           <div>
             <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-5">
@@ -146,15 +146,32 @@
                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg> -->
 
-            <SearchComponent />
+            <div class="relative flex cursor-pointer group">
+              <router-link :to="{ name: 'freeCourse' }" class="px-2 py-1 text-black">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                </svg>
+              </router-link>
+              <span
+                class="absolute px-1 m-4 mx-auto text-sm text-gray-100 transition-opacity -translate-x-1/2 translate-y-full bg-gray-800 rounded-md opacity-0 text-nowrap group-hover:opacity-100 left-1/2">ឥតគិតថ្លៃ</span>
+            </div>
 
           </div>
           <div>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" class="size-5">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-            </svg>
+            <div class="relative flex cursor-pointer group">
+              <router-link :to="{ name: 'help' }" class="py-1 text-black ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                </svg>
+              </router-link>
+              <span
+                class="absolute px-1 m-4 mx-auto text-sm text-gray-100 transition-opacity -translate-x-1/2 translate-y-full bg-gray-800 rounded-md opacity-0 group-hover:opacity-100 left-1/2">ជំនួយ</span>
+            </div>
+
           </div>
         </div>
       </div>
@@ -193,13 +210,13 @@ import CategoryDropdownVue from '@/components/client/CategoryDropdown.vue'
 import getUser from '@/firebase/getUser'
 import useSignout from '@/firebase/useSignout'
 import { useRouter } from 'vue-router'
-import SearchComponent from '@/components/client/SearchComponent.vue'
+// import SearchComponent from '@/components/client/SearchComponent.vue'
 // import SwitchLanguage from '@/components/client/SwitchLanguage.vue'
 import NavCategory from '@/components/client/NavCategory.vue'
 export default {
   components: {
     CategoryDropdownVue,
-    SearchComponent,
+    // SearchComponent,
     // SwitchLanguage,
     NavCategory
   },

@@ -7,8 +7,7 @@
             <div class="flex group">
                 <!-- Categories -->
                 <div style="box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;"
-                    class="h-[500px] bg-white flex justify-center" @mouseleave="hoveredCategoryId = null" 
-                    v-motion
+                    class="h-[500px] bg-white flex justify-center" @mouseleave="hoveredCategoryId = null" v-motion
                     :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
                     <div class="p-4 w-60">
                         <div v-for="cate in category" :key="cate.id" class="cursor-pointer"
@@ -110,16 +109,18 @@
                 </div>
             </div>
         </div>
-
+        
+        
+        
         <div v-if="user">
-            <button @click="handleSignout" class="flex items-center gap-1 my-2 ml-2 hover:text-gray-700"> 
-                <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                    height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out">
+            <button @click="handleSignout" class="flex items-center gap-1 my-2 ml-2 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-log-out">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                     <polyline points="16 17 21 12 16 7" />
                     <line x1="21" x2="9" y1="12" y2="12" />
-                </svg> <span class="font-bold">{{ $t('logout') }}</span> </button>
+                </svg> <span class=" text-[14px]">{{ $t('logout') }}</span> </button>
         </div>
     </div>
 </template>
@@ -131,7 +132,7 @@ import getDocument from '@/firebase/getDocument';
 import { useRoute, useRouter } from 'vue-router';
 import getUser from '@/firebase/getUser'
 import useSignout from '@/firebase/useSignout'
-;
+    ;
 
 
 

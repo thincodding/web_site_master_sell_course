@@ -57,7 +57,7 @@ const routes = [
     component: () => import('@/views/SearchProductDetail.vue')
   },
   {
-    path: "/advisorRegister",
+    path: "/advisorRegister/:id",
     name: "advisorRegister",
     component: () => import('@/views/AdvisorRegister.vue')
   },
@@ -70,6 +70,11 @@ const routes = [
     path: "/freeCourseDetail/:id",
     name: "freeCourseDetail",
     component: () => import('@/views/FreeCourseDetail.vue')
+  },
+  {
+    path: "/help",
+    name: "help",
+    component: () => import('@/views/HelpView.vue')
   }
 ]
 
