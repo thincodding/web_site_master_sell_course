@@ -22,36 +22,7 @@
         </div> -->
 
         <div v-if="isLoading" class="animate-pulse w-[90%] md:w-[90%] xl:w-[1200px] mx-auto my-2 p-5">
-            <div class="h-8 xl:h-9 bg-gray-300 w-72   xl:w-[600px] mb-4"></div>
-            <div v-for="n in 5" :key="n" class="mb-4 space-y-6">
-
-                <div class="flex gap-5 mt-2">
-                    <div
-                        class="relative w-full overflow-hidden   h-6  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                        <div class="w-full h-6 bg-gray-300"></div>
-                    </div>
-                </div>
-
-                <div class="flex gap-5">
-                    <div
-                        class="relative w-full overflow-hidden   h-4  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                        <div class="w-full h-6 bg-gray-300"></div>
-                    </div>
-                </div>
-
-                <div class="flex gap-5 mt-2">
-                    <div
-                        class="relative w-full overflow-hidden   h-6  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                        <div class="w-full h-6 bg-gray-300"></div>
-                    </div>
-                </div>
-                <div class="flex gap-5 mt-2">
-                    <div
-                        class="relative w-full overflow-hidden   h-6  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                        <div class="w-full h-6 bg-gray-300"></div>
-                    </div>
-                </div>
-            </div>
+            <LoadingComponent/>
         </div>
 
         <div v-else class="flex flex-col h-screen">
@@ -129,11 +100,13 @@ import getNestedSubcollection from "@/firebase/getNestedSubcollection";
 import { ref, onMounted } from "vue";
 import FooterView from "./FooterView.vue";
 import NavbarView from "./NavbarView.vue";
+import LoadingComponent from "@/components/client/LoadingComponent.vue";
 
 export default {
     components: {
         FooterView,
-        NavbarView
+        NavbarView,
+        LoadingComponent
     },
     setup() {
 

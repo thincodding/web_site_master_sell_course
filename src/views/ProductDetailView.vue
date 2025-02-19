@@ -8,33 +8,8 @@
             <div class="xl:w-[1200px] mx-auto  xl:mt-8 p-7 xl:p-0 select-none">
 
                 <div v-if="isLoading" class="animate-pulse">
-                    <div class="h-8 xl:h-9 bg-gray-300 w-72   xl:w-[600px] mb-4"></div>
-                    <div v-for="n in 5" :key="n" class="mb-4 space-y-6">
-
-                        <div class="flex gap-5 mt-2">
-                            <div
-                                class="relative w-full overflow-hidden   h-6  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                                <div class="w-full h-6 bg-gray-300"></div>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-5">
-                            <div
-                                class="relative w-full overflow-hidden   h-4  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                                <div class="w-full h-6 bg-gray-300"></div>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-5 mt-2">
-                            <div
-                                class="relative w-full overflow-hidden   h-6  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                                <div class="w-full h-6 bg-gray-300"></div>
-                            </div>
-                        </div>
-
-
-
-                    </div>
+                   
+                   <LoadingComponent/>
                 </div>
 
                 <div v-else>
@@ -43,7 +18,7 @@
                     <div v-for="cat in productDetails" :key="cat.id" class="mb-5">
                         <div v-for="pro in cat.product" :key="pro.id" class="mb-2">
                             <h1
-                                class="text-[24px] lg:text-[32px] font-playfair font-[500] text-background md:text-[32px]">
+                                class="text-[24px] lg:text-[32px] font-mono font-[500] text-background md:text-[32px]">
                                 {{
                                     pro.productName }} </h1>
                             <!-- <p class="text-[14px] md:text-[16px] lg:text-[15px] text-color_text mt-2">{{ pro.productName
@@ -129,61 +104,43 @@
                                                         :key="detail.id">
                                                         <div class="border-[1px]">
                                                             <img :src="detail.imageUrl" alt=""
-                                                                class="object-contain w-full h-40" />
+                                                                class="w-full " />
 
                                                         </div>
                                                         <div class="mt-2 space-y-1">
                                                             <router-link
-                                                                :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                                :to="user ? user ? { name: 'courseDetail', params: { id: detail.id } } : { name: 'login' } : { name: 'login' }"
                                                                 rel="noopener noreferrer"
                                                                 class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
                                                                 {{
                                                                     detail.title }}</router-link>
                                                             <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                                 $t('lectures') }} {{ detail.lectures }}</p>
-                                                            <!-- <div class="flex space-x-[2px] items-center">
 
-                                                        <p class="text-xs">5.0</p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="text-orange-700 size-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
-                                                        </svg>
-
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="text-orange-700 size-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
-                                                        </svg>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="text-orange-700 size-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
-                                                        </svg>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="text-orange-700 size-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
-                                                        </svg>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
-                                                        </svg>
-                                                        <p class="text-xs">(2)</p>
-                                                    </div> -->
                                                         </div>
                                                         <div class="mt-1">
-                                                            <h1 v-if="detail.price === 0"
+                                                            <!-- <h1 v-if="detail.price === 0"
                                                                 class="font-bold text-green-600 text-md ">
                                                                 {{ $t('freeCourse') }}</h1>
                                                             <h1 v-else class="font-bold text-md text-background">${{
-                                                                detail.price }}</h1>
+                                                                detail.price }}</h1> -->
+
+                                                            <div
+                                                                v-if="uniqueStudents.some(student => student.productDetailId === detail.id)">
+                                                                <div>
+                                                                    <!-- <p class="font-bold text-gray-600 text-md">
+                                                                        បានទិញមេរៀន</p> -->
+                                                                </div>
+                                                            </div>
+                                                            <div v-else>
+                                                                <p v-if="detail.price === 0"
+                                                                    class="font-bold text-green-600 text-md">
+                                                                    {{ $t('freeCourse') }}
+                                                                </p>
+                                                                <p v-else class="font-bold text-md">
+                                                                    ${{ detail.price }}
+                                                                </p>
+                                                            </div>
 
                                                         </div>
                                                     </swiper-slide>
@@ -256,18 +213,18 @@
                                                         :key="detail.id">
                                                         <div class="border-[1px]">
                                                             <img :src="detail.imageUrl" alt=""
-                                                                class="object-contain w-full h-40" />
+                                                                class="w-full" />
 
                                                         </div>
                                                         <div class="mt-2 space-y-1">
                                                             <router-link
-                                                                :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                                :to="user ? user ? { name: 'courseDetail', params: { id: detail.id } } : { name: 'login' } : { name: 'login' }"
                                                                 class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
                                                                 {{
                                                                     detail.title }}</router-link>
                                                             <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                                 detail.lectures
-                                                                }}</p>
+                                                            }}</p>
                                                             <!-- <div class="flex space-x-[2px] items-center">
 
                                                         <p class="text-xs">5.0</p>
@@ -306,12 +263,23 @@
                                                     </div> -->
                                                         </div>
                                                         <div class="mt-1">
-                                                            <h1 v-if="detail.price === 0"
-                                                                class="font-bold text-green-600 text-md ">
-                                                                {{ $t('freeCourse') }}</h1>
-                                                            <h1 v-else class="font-bold text-md text-background">${{
-                                                                detail.price }}</h1>
 
+                                                            <div
+                                                                v-if="uniqueStudents.some(student => student.productDetailId === detail.id)">
+                                                                <div>
+                                                                    <!-- <p class="font-bold text-gray-600 text-md">
+                                                                        បានទិញមេរៀន</p> -->
+                                                                </div>
+                                                            </div>
+                                                            <div v-else>
+                                                                <p v-if="detail.price === 0"
+                                                                    class="font-bold text-green-600 text-md">
+                                                                    {{ $t('freeCourse') }}
+                                                                </p>
+                                                                <p v-else class="font-bold text-md">
+                                                                    ${{ detail.price }}
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </swiper-slide>
                                                 </swiper>
@@ -383,17 +351,17 @@
                                                         :key="detail.id">
                                                         <div class="border-[1px]">
                                                             <img :src="detail.imageUrl" alt=""
-                                                                class="object-contain w-full h-40" />
+                                                                class="w-full" />
                                                         </div>
                                                         <div class="mt-2 space-y-1">
                                                             <router-link
-                                                                :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                                :to="user ? user ? { name: 'courseDetail', params: { id: detail.id } } : { name: 'login' } : { name: 'login' }"
                                                                 class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
                                                                 {{
                                                                     detail.title }}</router-link>
                                                             <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                                 detail.lectures
-                                                                }}</p>
+                                                            }}</p>
                                                             <!-- <div class="flex space-x-[2px] items-center">
 
                                                         <p class="text-xs">5.0</p>
@@ -432,11 +400,22 @@
                                                     </div> -->
                                                         </div>
                                                         <div class="mt-1">
-                                                            <h1 v-if="detail.price === 0"
-                                                                class="font-bold text-green-600 text-md ">
-                                                                {{ $t('freeCourse') }}</h1>
-                                                            <h1 v-else class="font-bold text-md text-background">${{
-                                                                detail.price }}</h1>
+                                                            <div
+                                                                v-if="uniqueStudents.some(student => student.productDetailId === detail.id)">
+                                                                <div>
+                                                                    <!-- <p class="font-bold text-gray-600 text-md">
+                                                                        បានទិញមេរៀន</p> -->
+                                                                </div>
+                                                            </div>
+                                                            <div v-else>
+                                                                <p v-if="detail.price === 0"
+                                                                    class="font-bold text-green-600 text-md">
+                                                                    {{ $t('freeCourse') }}
+                                                                </p>
+                                                                <p v-else class="font-bold text-md">
+                                                                    ${{ detail.price }}
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </swiper-slide>
                                                 </swiper>
@@ -532,13 +511,12 @@
                                                             v-for="detail in product.productDetail.filter(detail => detail.show_spacial === 'Most Popular')"
                                                             :key="detail.id">
                                                             <div class="border-[1px]">
-                                                                <img :src="detail.imageUrl" alt=""
-                                                                    class="w-full " />
+                                                                <img :src="detail.imageUrl" alt="" class="w-full " />
 
                                                             </div>
                                                             <div class="mt-2 space-y-1">
                                                                 <router-link
-                                                                    :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                                    :to="user ? { name: 'courseDetail', params: { id: detail.id } } : { name: 'login' }"
                                                                     class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
                                                                     {{
                                                                         detail.title }}</router-link>
@@ -582,12 +560,28 @@
                                                         </div> -->
                                                             </div>
                                                             <div class="mt-1">
-                                                                <h1 v-if="detail.price === 0"
+                                                                <!-- <h1 v-if="detail.price === 0"
                                                                     class="text-[15px] font-bold text-green-600">
                                                                     {{ $t('freeCourse') }}</h1>
                                                                 <h1 v-else class="text-[15px] font-bold">${{
                                                                     detail.price
-                                                                    }}.99</h1>
+                                                                    }}.99</h1> -->
+
+                                                                <div
+                                                                    v-if="uniqueStudents.some(student => student.productDetailId === detail.id)">
+                                                                    <div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div v-else>
+                                                                    <p v-if="detail.price === 0"
+                                                                        class="font-bold text-green-600 text-[15px]">
+                                                                        {{ $t('freeCourse') }}
+                                                                    </p>
+                                                                    <p v-else class="font-bold text-[15px]">
+                                                                        ${{ detail.price }}
+                                                                    </p>
+                                                                </div>
                                                             </div>
 
                                                         </swiper-slide>
@@ -650,13 +644,12 @@
                                                             v-for="detail in product.productDetail.filter(detail => detail.show_spacial === 'New')"
                                                             :key="detail.id">
                                                             <div class="border-[1px]">
-                                                                <img :src="detail.imageUrl" alt=""
-                                                                    class="w-full " />
+                                                                <img :src="detail.imageUrl" alt="" class="w-full " />
 
                                                             </div>
                                                             <div class="mt-2 space-y-1">
                                                                 <router-link
-                                                                    :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                                    :to="user ? { name: 'courseDetail', params: { id: detail.id } } : { name: 'login' }"
                                                                     class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
                                                                     {{
                                                                         detail.title }}</router-link>
@@ -700,12 +693,22 @@
                                                         </div> -->
                                                             </div>
                                                             <div class="mt-1">
-                                                                <h1 v-if="detail.price === 0"
-                                                                    class="text-[15px] font-bold text-green-600">
-                                                                    {{ $t('freeCourse') }}</h1>
-                                                                <h1 v-else class="text-[15px] font-bold">${{
-                                                                    detail.price
-                                                                    }}.99</h1>
+                                                                <div
+                                                                    v-if="uniqueStudents.some(student => student.productDetailId === detail.id)">
+                                                                    <div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div v-else>
+                                                                    <p v-if="detail.price === 0"
+                                                                        class="font-bold text-green-600 text-[15px]">
+                                                                        {{ $t('freeCourse') }}
+                                                                    </p>
+                                                                    <p v-else class="font-bold text-[15px]">
+                                                                        ${{ detail.price }}
+                                                                    </p>
+                                                                </div>
+                                            
                                                             </div>
                                                         </swiper-slide>
                                                     </swiper>
@@ -767,13 +770,12 @@
                                                             v-for="detail in product.productDetail.filter(detail => detail.show_spacial === 'Beginer Favorites')"
                                                             :key="detail.id">
                                                             <div class="border-[1px]">
-                                                                <img :src="detail.imageUrl" alt=""
-                                                                    class="w-full" />
+                                                                <img :src="detail.imageUrl" alt="" class="w-full" />
 
                                                             </div>
                                                             <div class="mt-2 space-y-1">
                                                                 <router-link
-                                                                    :to="{ name: 'courseDetail', params: { id: detail.id } }"
+                                                                    :to="user ? { name: 'courseDetail', params: { id: detail.id } } : { name: 'login' }"
                                                                     class="text-[14px] font-semibold line-clamp-2 cursor-pointer">
                                                                     {{
                                                                         detail.title }}</router-link>
@@ -817,12 +819,22 @@
                                                         </div> -->
                                                             </div>
                                                             <div class="mt-1">
-                                                                <h1 v-if="detail.price === 0"
-                                                                    class="text-[15px] font-bold text-green-600">
-                                                                    {{ $t('freeCourse') }}</h1>
-                                                                <h1 v-else class="text-[15px] font-bold">${{
-                                                                    detail.price
-                                                                    }}.99</h1>
+                                                                <div
+                                                                    v-if="uniqueStudents.some(student => student.productDetailId === detail.id)">
+                                                                    <div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div v-else>
+                                                                    <p v-if="detail.price === 0"
+                                                                        class="font-bold text-green-600 text-[15px]">
+                                                                        {{ $t('freeCourse') }}
+                                                                    </p>
+                                                                    <p v-else class="font-bold text-[15px]">
+                                                                        ${{ detail.price }}
+                                                                    </p>
+                                                                </div>
+                                            
                                                             </div>
                                                         </swiper-slide>
                                                     </swiper>
@@ -858,6 +870,7 @@ import getNestedSubSubcollection from '@/firebase/getNestedSubsubCollection';
 import moment from 'moment';
 import { onMounted, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
+import LoadingComponent from '@/components/client/LoadingComponent.vue';
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -869,6 +882,9 @@ import 'swiper/css/navigation';
 // import required modules
 import { Navigation } from 'swiper/modules';
 import FooterView from './FooterView.vue';
+import { projectFirestore } from '@/config/config';
+import getUser from '@/firebase/getUser';
+import { query, collection, where, getDocs } from 'firebase/firestore'
 
 export default {
     components: {
@@ -881,7 +897,8 @@ export default {
 
         Swiper,
         SwiperSlide,
-        FooterView
+        FooterView,
+        LoadingComponent
     },
     setup() {
         const { t } = useI18n();
@@ -902,7 +919,9 @@ export default {
         const isOpenNav = ref(true);
         const isOpentDrodownNewLession = ref(false)
         const isOpenDropdownFavorite = ref(false)
+        const uniqueStudents = ref([])
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
+        const { user } = getUser();
 
         // const most_pupular = computed(t('mostPopular'));
         // const New = computed(t('new'));
@@ -915,6 +934,7 @@ export default {
 
 
         onMounted(async () => {
+            await displayStudentByEmailCourse();
             await fetchCollection();
             await fetchCategoryProductAndProductDetail();
         });
@@ -1051,6 +1071,36 @@ export default {
         };
 
 
+        const displayStudentByEmailCourse = async () => {
+            try {
+                if (!user.value || !user.value.email) {
+                    console.log("User email is not available yet.");
+                    return;
+                }
+
+                const studentDocs = [];
+
+                // Query Firestore with the email filter
+                const q = query(
+                    collection(projectFirestore, "studentInfo"),
+                    where("email", "==", user.value.email) // Now we know user.value.email is available
+                );
+
+                const querySnapshot = await getDocs(q);
+
+                // Push data into studentDocs array
+                querySnapshot.forEach((doc) => {
+                    studentDocs.push({ id: doc.id, ...doc.data() });
+                });
+
+                // Assign the fetched data to uniqueStudents
+                uniqueStudents.value = studentDocs;
+            }
+            catch (err) {
+                console.log(err)
+            }
+        };
+
 
 
         return {
@@ -1083,7 +1133,9 @@ export default {
             Beginer_favorite,
             isOpenDropdownFavorite,
             dropdownClassesBeginer,
-            handleIsOpenDropdownBeginer
+            handleIsOpenDropdownBeginer,
+            user,
+            uniqueStudents
         };
     },
 };

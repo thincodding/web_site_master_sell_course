@@ -4,7 +4,7 @@
 
         <div class="mx-auto mb-auto">
             <div v-if="isLoading" class="animate-pulse p-5 md:mt-3 lg:mt-10 xl:w-[90%] mx-auto md:p-5">
-                <div class="h-8 xl:h-9 bg-gray-300 w-72   xl:w-[600px] mb-4"></div>
+                <!-- <div class="h-8 xl:h-9 bg-gray-300 w-72   xl:w-[600px] mb-4"></div>
                 <div v-for="n in 4" :key="n" class="mb-4 space-y-6">
                     <div class="flex gap-5 mt-2">
                         <div
@@ -46,7 +46,11 @@
                             <div class="w-full h-6 bg-gray-300"></div>
                         </div>
                     </div>
-                </div>
+                </div> -->
+
+
+
+                <LoadingComponent/>
             </div>
 
 
@@ -108,7 +112,7 @@
                                                                     <p class="text-indigo-300 underline">
                                                                     </p>
                                                                     <span class="text-sm">{{ detail.student.length
-                                                                        }}
+                                                                    }}
                                                                         {{ $t('people') }}</span>
                                                                 </div>
 
@@ -140,19 +144,7 @@
                                                                             }}</span>
                                                                     </div>
 
-                                                                    <!-- <div class="flex items-center space-x-2">
 
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24"
-                                                                            stroke-width="1.5" stroke="currentColor"
-                                                                            class="size-4">
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round"
-                                                                                d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
-                                                                        </svg>
-
-                                                                        <p>English</p>
-                                                                    </div> -->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -202,40 +194,51 @@
                                                                 class="font-bold text-[32px]  text-green-600">
                                                                 {{ $t('freeCourse') }}
                                                             </h3>
-                                                            <h3 v-else class="font-bold text-[32px] text-background">${{
-                                                                detail.price
-                                                                }}</h3>
-                                                            <div v-if="detail.price !== 0" class="mt-2 space-y-2">
-                                                                <router-link :to="{ name: 'advisorRegister' }">
-                                                                    <button
-                                                                        class="w-full p-3 font-bold text-[16px] text-white bg-black mt-2 ">
-                                                                        {{ $t('addToCart') }}
-                                                                    </button>
-                                                                </router-link>
-                                                                <!-- <button
-                                                                    class="border-[1px] border-black p-2.5 w-full font-bold hover:bg-background/10">
-                                                                    {{$t('consult')}}</button> -->
+                                                            <h3 v-else class="font-bold text-[32px] text-background">
 
-                                                                <!-- <div>
-                                                                    <a href="https://t.me/masteritsystems_saleconsultant"
-                                                                        class="mt-3" target="_blank"
-                                                                        rel="noopener noreferrer">
-                                                                        <button
-                                                                            class="border-[1px] border-black p-2.5 w-full font-bold hover:bg-background/10">
-                                                                            {{$t('consult')}}
-                                                                        </button>
-                                                                    </a>
-                                                                </div> -->
 
-                                                                <div class="mt-2 text-center">
-                                                                    <a :href="`/advisorRegister/${detail.id}`"
-                                                                        class="text-[12px] text-background/80 hover:underline">
-                                                                        {{ $t('constant') }}
-                                                                    </a>
+                                                                <div>
+                                                                    <!-- Check if uniqueStudents has items -->
+                                                                    <div v-if="uniqueStudents.length > 0">
+                                                                        <div v-for="student in uniqueStudents"
+                                                                            :key="student.id">
+                                                                            <div
+                                                                                v-if="student?.productDetailId === $route.params.id">
+                                                                                <!-- <div>{{ student?.title }}</div> -->
+                                                                                <!-- Display student title -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div v-else>
+                                                                        <span>${{ detail?.price }}</span>
+
+                                                                        <div v-if="detail.price !== 0"
+                                                                            class="mt-2 space-y-2">
+                                                                            <router-link
+                                                                                :to="{ name: 'advisorRegister' }">
+                                                                                <button
+                                                                                    class="w-full p-3 font-bold text-[16px] text-white bg-black mt-2 ">
+                                                                                    {{ $t('addToCart') }}
+                                                                                </button>
+                                                                            </router-link>
+
+
+                                                                            <div class="mt-2 text-center">
+                                                                                <a :href="`/advisorRegister/${detail.id}`"
+                                                                                    class="text-[12px] text-background/80 hover:underline">
+                                                                                    {{ $t('constant') }}
+                                                                                </a>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+
+
                                                                 </div>
 
+                                                            </h3>
 
-                                                            </div>
 
                                                             <div class="mt-5">
                                                                 <!-- <p class="text-sm font-bold">This course includes:</p> -->
@@ -245,6 +248,8 @@
                                                                     </p>
                                                                 </div>
                                                             </div>
+
+                                                            <!-- <pre>{{ studentDocs }}</pre> -->
                                                         </div>
                                                         <hr>
                                                     </div>
@@ -379,9 +384,36 @@
 
                                                             <div v-if="collapsedIndex === index"
                                                                 class="overflow-hidden">
-                                                                <div class="mt-3 space-y-2 text-blue-400 underline cursor-not-allowed "
+                                                                <!-- <div :class="uniqueStudents.length > 0 ? 'mt-3 space-y-2 text-blue-500 underline cursor-pointer' : 'mt-3 space-y-2 text-blue-400 underline cursor-not-allowed'"
+                                                                    v-html="content?.contentDescription">
+                                                                </div> -->
+
+                                                                <div v-if="detail.price === 0"
+                                                                    class="mt-3 space-y-2 text-blue-500 underline cursor-pointer"
                                                                     v-html="content?.contentDescription">
                                                                 </div>
+                                                                <div v-else-if="uniqueStudents.length > 0">
+                                                                    <span v-html="content?.contentDescription"
+                                                                        class="mt-3 space-y-2 text-blue-500 underline cursor-pointer"></span>
+                                                                </div>
+                                                                <div v-else>
+                                                                    <span v-html="content?.contentDescription"
+                                                                        class="mt-3 space-y-2 text-blue-400 underline cursor-not-allowed"></span>
+                                                                </div>
+
+                                                                <!-- <div v-if="uniqueStudents.length > 0">
+                                                                    <div v-for="student in uniqueStudents"
+                                                                        :key="student.id">
+                                                                        <div
+                                                                            v-if="student?.productDetailId === $route.params.id">
+                                                                           
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div v-else>
+                                                                    <p v-html="content?.contentDescription"></p>
+                                                                </div> -->
+
                                                             </div>
                                                         </transition>
                                                     </div>
@@ -621,42 +653,56 @@
                                                         <!-- Example content for each tab -->
                                                         <TabPanel>
 
-                                                            <div class="mt-0">
-                                                                <h1 v-if="detail.price === 0"
-                                                                    class="text-[19px] text-green-600 font-bold">
-                                                                    {{ $t('freeCourse') }}
-                                                                </h1>
-
-                                                                <h1 v-else
-                                                                    class="text-[19px] text-background font-bold">${{
-                                                                        detail.price }}</h1>
-
-                                                                <router-link v-if="detail.price !== 0"
-                                                                    :to="{ name: 'advisorRegister' }">
-                                                                    <button
-                                                                        class="w-full p-3 font-bold text-[16px] text-white bg-black mt-2 ">
-                                                                        {{ $t('addToCart') }}
-                                                                    </button>
-                                                                </router-link>
-
-                                                                <!-- <div class="mt-4">
-                                                                    <a href="https://t.me/masteritsystems_saleconsultant"
-                                                                        class="mt-3" target="_blank"
-                                                                        rel="noopener noreferrer">
-                                                                        <button
-                                                                            class="border-[1px] border-black p-2.5 w-full font-bold hover:bg-background/10">
-                                                                            {{$t('consult')}}
-                                                                        </button>
-                                                                    </a>
-                                                                </div> -->
-
-                                                                <div class="mt-2 text-center">
-                                                                    <a :href="`/advisorRegister/${detail.id}`"
-                                                                        class="text-[12px] text-background/80 hover:underline">
-                                                                        {{ $t('constant') }}
-                                                                    </a>
+                                                           
+                                                                   
+                                                            <h3 v-if="detail.price === 0"
+                                                                class="font-bold text-[32px]  text-green-600">
+                                                                {{ $t('freeCourse') }}
+                                                            </h3>
+                                                            <div v-else>
+                                                                <!-- Check if uniqueStudents has items -->
+                                                                <div v-if="uniqueStudents.length > 0">
+                                                                    <div v-for="student in uniqueStudents"
+                                                                        :key="student.id">
+                                                                        <div
+                                                                            v-if="student?.productDetailId === $route.params.id">
+                                                                            <!-- <div>{{ student?.title }}</div> -->
+                                                                            <!-- Display student title -->
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                                <div v-else>
+                                                                    <span class="text-[19px] font-bold">${{ detail?.price }}</span>
+
+                                                                    <h1 v-if="detail.price === 0"
+                                                                        class="text-[19px] text-green-600 font-bold">
+                                                                        {{ $t('freeCourse') }}
+                                                                    </h1>
+                                                                    <div v-if="detail.price !== 0"
+                                                                        class="mt-2 space-y-2">
+                                                                        <router-link :to="{ name: 'advisorRegister' }">
+                                                                            <button
+                                                                                class="w-full p-3 font-bold text-[16px] text-white bg-black mt-2 ">
+                                                                                {{ $t('addToCart') }}
+                                                                            </button>
+                                                                        </router-link>
+
+
+
+                                                                        <div class="mt-2 text-center">
+                                                                            <a :href="`/advisorRegister/${detail.id}`"
+                                                                                class="text-[12px] text-background/80 hover:underline">
+                                                                                {{ $t('constant') }}
+                                                                            </a>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+
+
                                                             </div>
+
                                                         </TabPanel>
 
                                                     </TabPanels>
@@ -781,9 +827,24 @@
                                                     <!-- Collapsible Content with Animate Transition -->
                                                     <transition name="fade-collapse" @enter="onEnter" @leave="onLeave">
                                                         <div v-if="collapsedIndex === index" class="overflow-hidden">
-                                                            <div class="mt-3 space-y-2 text-blue-400 underline cursor-not-allowed "
+                                                            <!-- <div :class="detail.price === 0 ? 'mt-3 space-y-2 text-blue-500 underline cursor-pointer ' : 'mt-3 space-y-2 text-blue-400 underline cursor-not-allowed'"
+                                                                v-html="content?.contentDescription">
+                                                            </div> -->
+
+
+                                                            <div v-if="detail.price === 0"
+                                                                class="mt-3 space-y-2 text-blue-500 underline cursor-pointer"
                                                                 v-html="content?.contentDescription">
                                                             </div>
+                                                            <div v-else-if="uniqueStudents.length > 0">
+                                                                <span v-html="content?.contentDescription"
+                                                                    class="mt-3 space-y-2 text-blue-500 underline cursor-pointer"></span>
+                                                            </div>
+                                                            <div v-else>
+                                                                <span v-html="content?.contentDescription"
+                                                                    class="mt-3 space-y-2 text-blue-400 underline cursor-not-allowed"></span>
+                                                            </div>
+
                                                         </div>
                                                     </transition>
                                                 </div>
@@ -896,27 +957,7 @@
 
             <div v-if="isLoading" class="animate-pulse p-5  lg:mt-10 xl:w-[90%] mx-auto md:p-5 -mt-10 block lg:hidden">
 
-                <div v-for="n in 2" :key="n" class="space-y-6 ">
-
-                    <div class="flex gap-5">
-                        <div
-                            class="relative w-full overflow-hidden   h-4  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                            <div class="w-full h-6 bg-gray-300"></div>
-                        </div>
-                    </div>
-                    <div class="flex gap-5">
-                        <div
-                            class="relative w-full overflow-hidden   h-4  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                            <div class="w-full h-6 bg-gray-300"></div>
-                        </div>
-                    </div>
-                    <div class="flex gap-5">
-                        <div
-                            class="relative w-full overflow-hidden   h-4  before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/70  before:animate-[shimmer_1.1s_infinite]">
-                            <div class="w-full h-6 bg-gray-300"></div>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
             <div v-else class="block lg:hidden">
 
@@ -928,6 +969,7 @@
             </div>
 
         </div>
+
 
 
 
@@ -948,14 +990,19 @@ import NavbarView from './NavbarView.vue';
 
 import FooterView from './FooterView.vue';
 import CourseRelatedCategory from '@/components/client/CourseRelatedCategory.vue';
-
-
+// import getCollectionQueryTerm from '@/firebase/getCollectionQueryTerm';
+import getUser from '@/firebase/getUser';
+import { getDocs, query, collection, where } from 'firebase/firestore';
+import { projectFirestore } from '@/config/config';
+import { useRoute } from 'vue-router';
+import LoadingComponent from '@/components/client/LoadingComponent.vue';
 
 export default {
     components: {
         NavbarView,
         FooterView,
-        CourseRelatedCategory
+        CourseRelatedCategory,
+        LoadingComponent
     },
     props: {
         id: {
@@ -976,6 +1023,8 @@ export default {
         const product = ref(null);
         const productDetail = ref(null);
         const date = moment;
+        const uniqueStudents = ref([]);
+        const route = useRoute();
 
         const displyDesctiptionList = ref("អំពីមេរៀនសិក្សា")
         const showCollaspedContent = ref(false)
@@ -983,12 +1032,18 @@ export default {
 
         const categoryProduct = ref([]);
 
+        const { user } = getUser();
+
+        // const { documents: studentDocs } = getCollectionQueryTerm("studentInfo", where("email", "==", user?.value?.email))
+
 
         // Firestore Collections
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
         onMounted(async () => {
+            await displayStudentByemailCourseDetail();
             await fetchCollection();
             await fetchCategoryProductAndProductDetail();
+
 
         });
 
@@ -1149,6 +1204,30 @@ export default {
 
 
 
+
+
+
+        // Fetch studentDocs from Firestore
+        const displayStudentByemailCourseDetail = async () => {
+            const studentDocs = [];
+
+            // Query Firestore with the email filter
+            const q = query(
+                collection(projectFirestore, "studentInfo"),
+                where("email", "==", user?.value.email)
+            );
+
+            const querySnapshot = await getDocs(q);
+
+            // Push data into studentDocs array
+            querySnapshot.forEach((doc) => {
+                studentDocs.push({ id: doc.id, ...doc.data() });
+            });
+
+            // Filter students based on productDetailId from route params
+            uniqueStudents.value = studentDocs.filter((student) => student.productDetailId === route.params.id);
+        };
+
         return {
             currentComponents,
             searchText,
@@ -1172,6 +1251,9 @@ export default {
             onLeave,
             categoryProduct,
             // goBack
+            // studentDocs,
+            user,
+            uniqueStudents,
 
         };
     },

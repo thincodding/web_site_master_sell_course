@@ -62,6 +62,11 @@ const routes = [
     component: () => import('@/views/AdvisorRegister.vue')
   },
   {
+    path: "/advisorRegisters",
+    name: "advisorRegisters",
+    component: () => import('@/views/AdvisorRegister.vue')
+  },
+  {
     path: "/freeCourse",
     name: "freeCourse",
     component: () => import('@/views/FreeCourse.vue')
@@ -75,7 +80,12 @@ const routes = [
     path: "/help",
     name: "help",
     component: () => import('@/views/HelpView.vue')
-  }
+  },
+  {
+    path: "/userProfile",
+    name: "userProfile",
+    component: () => import('@/views/UserProfileView.vue')
+  },
 ]
 
 

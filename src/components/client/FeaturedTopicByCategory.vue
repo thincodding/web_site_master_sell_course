@@ -1,26 +1,20 @@
 <template>
-    <div class="bg-[#E4E8EB]/30 py-5 ">
+    <div  :class="!filteredCategories.length > 0 ? 'bg-white py-5' : 'bg-[#E4E8EB]/30 py-5' ">
         <div class="xl:w-[1200px] mx-auto my-5 px-10 lg:px-10 xl:px-0">
-            <h1 class="text-[18px] my-3 flex items-center gap-2 lg:text-[20px] md:text-[20px] font-bold font-NotoSansKhmer text-background">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-to-line"><path d="M17 12H3"/><path d="m11 18 6-6-6-6"/><path d="M21 5v14"/></svg>
-                        <span>{{ $t('popularCourseByType') }}</span>
-                    </h1>
+            <h1 v-if="filteredCategories.length > 0"
+                class="text-[18px] my-3 flex items-center gap-2 lg:text-[20px] md:text-[20px] font-bold font-NotoSansKhmer text-background">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-arrow-right-to-line">
+                    <path d="M17 12H3" />
+                    <path d="m11 18 6-6-6-6" />
+                    <path d="M21 5v14" />
+                </svg>
+                <span>{{ $t('popularCourseByType') }}</span>
+            </h1>
             <div>
-                
-                <!-- <div v-for="con in content" :key="con.id">
-                    <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">
-                        {{ con.data.title }}</h1>
-                    <p v-html="con.data.descripton" class="my-3 text-md text-background font-NotoSansKhmer ">
-                        
-                    </p>
 
-                    <h1 class="text-[18px] my-3 flex items-center gap-2 lg:text-[20px] md:text-[20px] font-bold font-NotoSansKhmer text-background">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-to-line"><path d="M17 12H3"/><path d="m11 18 6-6-6-6"/><path d="M21 5v14"/></svg>
-                        <span>{{ $t('popularCourseByType') }}</span>
-                    </h1>
-                </div>   -->
-                
-                
+
                 <div v-if="isLoading">
                     <div class="flex gap-2 text-center">
                         <div
@@ -41,17 +35,19 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div v-else class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-                    <div v-for="category in filteredCategories" :key="category.id" class="">
-                        <h2 class="text-md font-[400] mb-1 capitalize">{{ category.categoryName }}</h2>
+                    <div v-for="category in filteredCategories" :key="category.id" class="space-y-2">
+                        <h2 class="text-lg font-[400] mb-1 capitalize">{{ category.categoryName }}</h2>
                         <div>
                             <div>
                                 <div v-for="product in category.product" :key="product.id">
-                                    <p class="text-sm text-indigo-600 underline cursor-pointer md:text-md">{{ product.productName }}</p>
+                                    <p class="text-sm cursor-pointer md:text-md">{{
+                                        product.productName }}</p>
 
                                     <span class="text-gray-500 text-[13px]">
-                                        {{ product.productDetail.reduce((sum, detail) => sum + detail.studentCount, 0)}} {{ $t('people') }} 
+                                        {{product.productDetail.reduce((sum, detail) => sum + detail.studentCount, 0)}}
+                                        {{ $t('people') }}
                                     </span>
                                 </div>
                             </div>
@@ -69,6 +65,7 @@ import getNestedSubcollection from '@/firebase/getNestedSubcollection';
 import getNestedSubSubcollection from '@/firebase/getNestedSubsubCollection';
 import { onMounted, ref, computed } from 'vue';
 import getCollectionWhere from '@/firebase/getCollectionWhere';
+import getUser from '@/firebase/getUser';
 
 export default {
     setup() {
@@ -76,7 +73,8 @@ export default {
         const productDetails = ref([]);
         const isLoading = ref(true);
         const content = ref(null)
-        
+        const {user} = getUser();
+
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
 
         onMounted(async () => {
@@ -219,11 +217,12 @@ export default {
                 return category.product.some(product => product.productDetail.length > 0);
             });
         });
-        
+
         return {
-            filteredCategories, 
+            filteredCategories,
             isLoading,
-            content
+            content,
+            user
 
         };
     },

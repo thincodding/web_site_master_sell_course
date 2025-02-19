@@ -146,7 +146,7 @@
                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg> -->
 
-            <div class="relative flex cursor-pointer group">
+            <div v-if="user" class="relative flex cursor-pointer group">
               <router-link :to="{ name: 'freeCourse' }" class="px-2 py-1 text-black">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                   stroke="currentColor" class="size-6">
@@ -201,6 +201,47 @@
   </div>
 
 
+  <div v-if="user">
+    <div v-if="!isOpen" class="fixed z-50 bottom-4 right-16 lg:hidden ">
+     
+        <div @click="handleSignout" 
+          class="px-3 py-3 font-bold text-white bg-red-600 border border-gray-200 rounded-full shadow-xl cursor-pointer hover:bg-red-500">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-log-out">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" x2="9" y1="12" y2="12" />
+          </svg>
+        </div>
+    
+    </div>
+  </div>
+  <div v-if="user">
+    <div v-if="!isOpen" class="fixed z-50 bottom-4 right-3 lg:hidden ">
+      <router-link :to="{ name: 'userProfile' }">
+        <div
+          class="px-3 py-3 font-bold text-white bg-red-600 border border-gray-200 rounded-full shadow-xl hover:bg-red-500">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-user-cog">
+            <circle cx="18" cy="15" r="3" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M10 15H6a4 4 0 0 0-4 4v2" />
+            <path d="m21.7 16.4-.9-.3" />
+            <path d="m15.2 13.9-.9-.3" />
+            <path d="m16.6 18.7.3-.9" />
+            <path d="m19.1 12.2.3-.9" />
+            <path d="m19.6 18.7-.4-1" />
+            <path d="m16.8 12.3-.4-1" />
+            <path d="m14.3 16.6 1-.4" />
+            <path d="m20.7 13.8 1-.4" />
+          </svg>
+        </div>
+      </router-link>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -228,6 +269,7 @@ export default {
     const { user } = getUser()
     const router = useRouter();
     const { signOut } = useSignout()
+    
 
     const isOpenDropdownFlag = ref(false)
 
@@ -257,7 +299,7 @@ export default {
     };
 
     const handleSignout = async () => {
-      if (window.confirm('Are you sure to sign out')) {
+      if (window.confirm('Are you sure to sign out?')) {
         await signOut()
         router.push({ name: 'login' });
         isDrowdown.value = false
@@ -268,6 +310,9 @@ export default {
     const handleSwitchLanguage = () => {
       isOpenDropdownFlag.value = !isOpenDropdownFlag.value;
     }
+
+    
+
     return { isOpen, handleIsopen, isDrowdown, user, handleSignout, isOpenDropdownFlag, handleSwitchLanguage }
   }
 }

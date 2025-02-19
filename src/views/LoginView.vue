@@ -20,8 +20,8 @@
                     class="text-[19px] md:text-[24px] lg:text-[32px] text-background my-5 text-center  font-NotoSansKhmer font-bold">
                     {{ $t('loginTolearning') }}
                 </div>
-                <form @submit.prevent="sendLink" class="space-y-4">
-                    <div class="relative ">
+                <form @submit.prevent="handleLogin" class="space-y-4">
+                    <div class="relative">
                         <input type="email" v-model="email" required
                             class="block  px-2.5 pl-5  pb-3 pt-5 md:w-[400px] w-full text-sm text-gray-900 border-[1px] dark:bg-gray-700 border-black appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                             placeholder="" />
@@ -31,29 +31,27 @@
                     </div>
 
 
+                    <div class="relative ">
+                        <input type="password" v-model="password" required
+                            class="block  px-2.5 pl-5  pb-3 pt-5 md:w-[400px] w-full text-sm text-gray-900 border-[1px] dark:bg-gray-700 border-black appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+                            placeholder="" />
+                        <label for="floating_filled"
+                            class="absolute text-sm ml-2.5 font-bold text-background dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5   peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
+                            {{ $t('password') }}</label>
+                    </div>
+
                     <div>
-                        <button  v-if="!isPending"
-                            class="bg-[#A435F0] flex items-center justify-center gap-2 p-3 text-white hover:bg-[#A435F0]/80 transition-all duration-300 ease-in-out w-full font-NotoSansKhmer font-[500]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-mail">
-                                <rect width="20" height="16" x="2" y="4" rx="2" />
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                            </svg>
+                        <button v-if="!isPending"
+                            class="bg-red-500 flex items-center justify-center gap-2 p-3 text-white hover:bg-red-400 transition-all duration-300 ease-in-out w-full font-NotoSansKhmer font-[500]">
+
                             <p>{{ $t('continueWithEmail') }}</p>
                         </button>
 
-                        <button  v-else disabled
-                            class="bg-[#A435F0]/50 flex items-center justify-center gap-2 p-3 text-white hover:bg-[#A435F0]/80 transition-all duration-300 ease-in-out w-full font-NotoSansKhmer font-[500]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-mail">
-                                <rect width="20" height="16" x="2" y="4" rx="2" />
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                            </svg>
+                        <button v-else disabled
+                            class="bg-red-400 flex items-center justify-center gap-2 p-3 text-white transition-all duration-300 ease-in-out w-full font-NotoSansKhmer font-[500]">
+
                             <p>{{ $t('continueLoading') }}</p>
                         </button>
-
 
 
                         <div class="flex items-center justify-center gap-3 my-5">
@@ -88,14 +86,15 @@
                                 </svg>
                             </div>
 
-                            <div @click="signInwithFacebook" class="border-[1px] border-black p-3 px-3 hover:bg-gray-200 cursor-pointer">
+                            <div @click="signInwithFacebook"
+                                class="border-[1px] border-black p-3 px-3 hover:bg-gray-200 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25"
                                     viewBox="0 0 48 48">
                                     <path fill="#039be5" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z"></path>
                                     <path fill="#fff"
                                         d="M26.572,29.036h4.917l0.772-4.995h-5.69v-2.73c0-2.075,0.678-3.915,2.619-3.915h3.119v-4.359c-0.548-0.074-1.707-0.236-3.897-0.236c-4.573,0-7.254,2.415-7.254,7.917v3.323h-4.701v4.995h4.701v13.729C22.089,42.905,23.032,43,24,43c0.875,0,1.729-0.08,2.572-0.194V29.036z">
                                     </path>
-                                    
+
                                 </svg>
                             </div>
 
@@ -111,7 +110,8 @@
 
                         <div class="flex items-center justify-center p-3 mt-10 bg-slate-100">
                             <div class="font-[400] text-[16px] text-background">{{ $t('dontHaveAccount') }} <router-link
-                                    class="font-bold text-indigo-600" :to="{ name: 'signup' }">{{ $t('signup') }}</router-link>
+                                    class="font-bold text-indigo-600" :to="{ name: 'signup' }">{{ $t('signup')
+                                    }}</router-link>
                             </div>
                         </div>
                     </div>
@@ -134,9 +134,10 @@ import { ref } from 'vue';
 import NavbarView from './NavbarView.vue';
 import FooterView from './FooterView.vue';
 import useSigninWithGoogle from '@/firebase/signInWithGoogle';
-import useEmailLinkAuth from '@/firebase/signInWithEmail';
-import { handleMessageSuccess } from '@/components/js/messageHandler';
+import useSignin from '@/firebase/useLogin';
 import useSigninwithFacebook from '@/firebase/signinWithFacebook';
+import { useRouter } from 'vue-router';
+import { handleMessageError } from '@/components/js/messageHandler';
 export default {
     components: {
         NavbarView,
@@ -144,54 +145,61 @@ export default {
     },
     setup() {
         const email = ref("")
+        const password = ref("")
+        const router = useRouter();
 
-        const isLinkSent = ref(false); // To toggle message after sending link
-        const errorMessage = ref("");
-        const user = ref(null);
-     
+        const isPending = ref(false)
+
 
         const { signInWithGoogle } = useSigninWithGoogle()
-        const {signInwithFacebook} = useSigninwithFacebook()
+        const { signInwithFacebook } = useSigninwithFacebook()
+        const { signIn } = useSignin()
+
+        const handleLogin = async () => {
+            isPending.value = true
+            try {
+                const res = await signIn(email.value, password.value)
+                if (res) {
+                    router.push("/")
+                }
+                else{
+                    handleMessageError("អុីម៉ែលនិងពាក្យសម្ងាត់មិនត្រឹមត្រូវ")
+                }
+            }
+            catch (err) {
+                console.log(err)
+                // switch (err.code) {
+                //     case "auth/invalid-credential":
+                //     handleMessageError("Invalid email or password. Please try again.");
+                //         break;
+                //     case "auth/email-already-in-use":
+                //     handleMessageError("អុីម៉ែលនេះមានរួចម្តងហើយ!");
+                //         break;
+                //     case "auth/weak-password":
+                //     handleMessageError("ពាក្យសម្ងាត់ត្រូវតែលើស៦ខ្ទង់!");
+                //         break;
+                //     default:
+                //     handleMessageError("An error occurred during registration. Please try again.");
+                // }
+            }
+            finally {
+                isPending.value = false
+            }
+        }
 
         // const handleSignWithGoogle = async () => {
         //     await signInWithGoogle()
-          
+
         // }
 
-        const { sendSignInLink, completeSignIn } = useEmailLinkAuth();
 
-        const sendLink = async () => {
-            try {
-                await sendSignInLink(email.value);
-                isLinkSent.value = true;
-                handleMessageSuccess(`Your email is sending to ${email.value}`)
-            } catch (error) {
-                errorMessage.value = error.message;
-            }
-        };
 
-        // Function to complete sign-in after clicking the email link
-        const finishSignIn = async () => {
-            try {
-                const signedInUser = await completeSignIn();
-                user.value = signedInUser;
-            } catch (error) {
-                errorMessage.value = error.message;
-            }
-        };
-
-        // Complete sign-in on page load if it's the email sign-in link
-        if (window.location.href.includes("verify")) {
-            finishSignIn();
-        }
-
-        
         // const handleSignWithGoogle = async () => {
         //     await singIngoogle();
         // }
 
 
-        return { email, signInWithGoogle,sendLink,signInwithFacebook }
+        return { email, signInWithGoogle, signInwithFacebook, password, handleLogin,isPending}
     }
 }
 

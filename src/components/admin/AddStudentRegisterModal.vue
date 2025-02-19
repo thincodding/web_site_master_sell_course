@@ -1,6 +1,6 @@
 <template>
-    <div class="h-screen bg-black/50 w-full z-10 fixed top-0 left-0 select-none">
-        <div class="flex justify-center items-center mt-5">
+    <div class="fixed top-0 left-0 z-10 w-full h-screen select-none bg-black/50">
+        <div class="flex items-center justify-center mt-5">
             <div class="bg-white w-[60%] overflow-y-auto" v-motion :initial="{ scale: 0.9 }"
                 :visible="{ opacity: 1, scale: 1 }">
 
@@ -59,39 +59,46 @@
                                         </svg>
                                         <p class="font-bold">ជ្រើសរើសមេរៀនសិក្សា</p>
                                     </div>
-                                    <div class="grid grid-cols-4 gap-3 h-[400px] overflow-y-auto p-4">
+                                    <div class="grid h-[700px] grid-cols-3 gap-3 p-4 overflow-y-auto ">
 
                                         <div v-for="detail in selectedProductDetail" :key="detail.id">
                                             <div @click="handleOpen(detail)"
-                                                class="shadow bg-white h-48 rounded-md p-1 flex justify-center mt-10 cursor-pointer hover:bg-gray-50">
+                                                class="flex justify-center p-1 mt-10 border rounded-md cursor-pointer hover:bg-gray-50" v-if="detail.price !== 0">
                                                 <div v-if="detail.imageUrl" class="p-2 ">
-                                                    <div class="space-y-2">
-                                                        <img class="w-full object-contain" :src="detail.imageUrl"
+                                                    <div class="space-y-2" >
+                                                        <img class="object-contain w-full" :src="detail.imageUrl"
                                                             alt="Lesson image">
 
-                                                        <p
-                                                            class="text-sm line-clamp-2 font-playfair font-[500] text-background">
-                                                            {{ detail.title }}</p>
+                                                        <div class="flex items-center gap-1 ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-chevrons-left-right">
+                                                                <path d="m9 7-5 5 5 5" />
+                                                                <path d="m15 7 5 5-5 5" />
+                                                            </svg>
+                                                            <p
+                                                                class="text-sm line-clamp-2 font-playfair font-[500] text-background">
+                                                                {{ detail.title }}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div v-else class="flex justify-center items-center">
+                                                <div v-else class="flex items-center justify-center">
                                                     <p>មិនមានមេរៀន</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
-
                             </div>
 
 
 
                             <div v-if="openModalSave"
-                                class="w-full  fixed top-0 left-0 flex justify-center bg-black/30 h-full   items-center">
-                                <div class="h-96 overflow-y-auto  bg-white border-t-2 border-t-blue-500  shadow-md w-[70%] p-4" v-motion
-                                    :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
+                                class="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black/30">
+                                <div class="h-[500px] overflow-y-auto  bg-white border-t-2 border-t-blue-500  shadow-md w-[70%] p-4"
+                                    v-motion :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }">
                                     <div class="flex justify-between">
                                         <div class="flex gap-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -121,9 +128,12 @@
 
                                     <div class="grid grid-cols-2 gap-2 ">
 
-                                        <div class="p-4 m-3 space-y-3">
+                                        <div class="p-4 m-3 space-y-3 border">
                                             <div>
-                                                <img class="w-52 border-[1px]" :src="items.imageUrl" alt="">
+                                                <div class="flex items-center justify-center">
+                                                    <img class="w-52 border-[1px]" :src="items.imageUrl" alt="">
+
+                                                </div>
                                                 <div class="flex items-center gap-1 mt-4">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -150,19 +160,26 @@
                                             </div>
                                         </div>
 
-                                        <div class="mt-4">
-                                            <input type="text" hidden readonly v-model="productDetailId" class="input_text">
+                                        <div class="mt-4 space-y-1">
+                                            <input type="text" hidden readonly v-model="productDetailId"
+                                                class="input_text">
                                             <div class="space-y-1">
                                                 <label for="" class="font-NotoSansKhmer font-[500]">ចំនួន:*</label>
-                                                <input type="text" required placeholder="ចំនួន" class="input_text"
-                                                    v-model="qty">
+                                                <input type="number" readonly required placeholder="ចំនួន"
+                                                    class="bg-gray-100 input_text" v-model="qty">
+                                            </div>
+
+                                            <div class="space-y-1">
+                                                <label for="" class="font-NotoSansKhmer font-[500]">អុីម៉ែលសិស្ស: *</label>
+                                                <input type="text"  required placeholder="អុីម៉ែលសិស្ស"
+                                                    class=" input_text" v-model="email">
                                             </div>
                                         </div>
 
                                     </div>
 
                                     <div class="flex justify-end">
-                                        <button v-if="!isLoading" class="button_only_submit">រក្សាទុក</button>
+                                        <button v-if="!isLoading" class="fixed button_only_submit">រក្សាទុក</button>
                                         <button v-else disabled
                                             class="bg-blue-400 px-8 py-2.5  text-white flex items-center gap-1  font-NotoSansKhmer font-bold">កំពុងរក្សាទុក...</button>
                                     </div>
@@ -185,6 +202,10 @@ import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDoc
 import getNestedSubcollection from '@/firebase/getNestedSubcollection';
 import useNestedSubDocument from '@/firebase/useNestedSubcollectionDocument';
 import { handleMessageSuccess } from '../js/messageHandler';
+import { timestamp,projectFirestore } from '@/config/config';
+// import useCollection from '@/firebase/useCollection';
+import { collection, doc, setDoc } from 'firebase/firestore';
+
 export default {
     props: ['documentProducts', 'handleLoadStudent'],
 
@@ -200,9 +221,13 @@ export default {
         const items = ref(null)
         const title = ref(null)
         const productDetailId = ref(null)
-        const qty = ref("")
+        const qty = ref(1)
+        const email = ref("")
+        const imageUrl = ref("")
 
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
+        // const {addcDocs: createDoc} = useCollection("studentInfo")
+        
 
         onMounted(async () => {
             await fetchCollection();
@@ -321,30 +346,47 @@ export default {
             items.value = item
             productDetailId.value = item.id
             title.value = item.title
+            imageUrl.value = item.imageUrl
         }
 
         const handleCloseX = () => {
             openModalSave.value = false
         }
 
+
+        const studentId = doc(collection(projectFirestore, "students")).id; // Generate unique ID
+
         const handleSubmitStudent = async () => {
             isLoading.value = true
-            const {addDocs} = useNestedSubDocument('categories',categoryId.value, 'product', productId.value, 'productDetail', productDetailId.value, 'student' )
+            const { addDocs } = useNestedSubDocument('categories', categoryId.value, 'product', productId.value, 'productDetail', productDetailId.value, 'student')
 
-            const data =  {
-
+            const data = {
+                
+                studentId: studentId,
                 studentName: studentName.value,
                 title: title.value,
-                qty: qty.value
+                qty: qty.value,
+                email: email.value.toLocaleLowerCase(),
+                categoryId: categoryId.value,
+                productId: productId.value,
+                productDetailId: productDetailId.value,
+                imageUrl: imageUrl.value,
+                createdAt: timestamp(),
             }
 
             await addDocs(data)
+
+            //for custom data
+            await setDoc(doc(projectFirestore, "studentInfo", studentId), data);
+
             handleMessageSuccess(`បានរក្សាទុក ${studentName.value} ដោយជោគជ័យ`)
             handleCloseX();
             await props.handleLoadStudent();
             studentName.value = ''
             isLoading.value = false
-            qty.value = ''
+            
+            email.value = ""
+            handleClose();
         }
 
         return {
@@ -364,7 +406,8 @@ export default {
             items,
             productDetailId,
             qty,
-            handleSubmitStudent
+            handleSubmitStudent,
+            email
         };
     }
 };

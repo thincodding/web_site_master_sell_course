@@ -50,7 +50,7 @@
                         <TabList class="flex w-full space-x-10 overflow-x-auto">
                             <Tab v-for="product in allProducts" :key="product.id" as="template" v-slot="{ selected }">
                                 <button :class="[
-                                    'space-x-3 py-2.5 text-sm font-medium leading-5 text-nowrap',
+                                    'space-x-3 py-2.5 text-sm font-mono leading-5 text-nowrap',
                                     'ring-white/60 ring-offset-2 focus:outline-none text-nowrap',
                                     selected ? 'text-black text-lg' : 'text-background/80 hover:bg-white/[0.12]',
                                 ]">
@@ -88,6 +88,9 @@
                                         }
 
                                     }" :modules="modules" class="mySwiper">
+
+
+
                                         <swiper-slide v-for="detail in product.productDetail" :key="detail.id">
                                             <div class="">
                                                 <div class="border-[1px]">
@@ -102,10 +105,11 @@
                                                 </div>
                                                 <div class="mt-2 space-y-1">
                                                     <router-link
-                                                        :to="{ name: 'courseDetail', params: { id: detail.id } }"
-                                                        class="text-[14px] font-semibold  cursor-pointer text-background line-clamp-1">
+                                                        :to="user ? { name: 'courseDetail', params: { id: detail.id } } : { name: 'login' }"
+                                                        class="text-[14px] font-semibold cursor-pointer text-background line-clamp-1">
                                                         {{ detail.title }}
                                                     </router-link>
+
                                                     <div class="space-y-1.5">
                                                         <p class="text-gray-500 text-[12px] line-clamp-1">{{
                                                             $t('lectures') }}: {{
@@ -122,11 +126,37 @@
 
                                                         </div>
                                                         <div>
-                                                            <p v-if="detail.price === 0"
-                                                                class="text-lg font-bold text-green-600">{{
-                                                                $t('freeCourse') }}</p>
-                                                            <p v-else class="text-lg font-bold">${{ detail.price }}</p>
+
+                                                            <div>
+                                                                <!-- Check if there is any student with a matching productDetailId -->
+                                                                <div
+                                                                    v-if="uniqueStudents.some(student => student.productDetailId === detail.id)">
+                                                                    <div>
+                                                                        <!-- {{uniqueStudents.find(student =>
+                                                                                student.productDetailId === detail.id).title
+                                                                            }} -->
+                                                                    </div>
+                                                                </div>
+                                                                <div v-else>
+                                                                    <p v-if="detail.price === 0"
+                                                                        class="text-lg font-bold text-green-600">
+                                                                        {{ $t('freeCourse') }}
+                                                                    </p>
+                                                                    <p v-else class="text-lg font-bold">
+                                                                        ${{ detail.price }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Show 'Free Course' if price is 0 -->
+
+
+
+
+
+
+
                                                         </div>
+
                                                         <div v-if="detail.studentCount > 2"
                                                             class="text-xs w-20 text-center font-bold text-[#3D3C0A] bg-yellow-300/60 p-1">
                                                             {{ $t('bestSeller') }}</div>
@@ -168,6 +198,9 @@
             </div>
         </div>
     </div>
+
+
+
 </template>
 
 <script>
@@ -176,13 +209,14 @@ import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDoc
 import getNestedSubcollection from '@/firebase/getNestedSubcollection';
 import getNestedSubSubcollection from '@/firebase/getNestedSubsubCollection';
 import { onMounted, ref, computed } from 'vue';
+import { query, collection, where, getDocs } from 'firebase/firestore';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import getCollectionWhere from '@/firebase/getCollectionWhere';
-
-
+import getUser from '@/firebase/getUser';
+import { projectFirestore } from '@/config/config';
 
 export default {
     components: {
@@ -199,6 +233,9 @@ export default {
         const isLoading = ref(false);
         const error = ref(null);
         const content = ref(null)
+        const uniqueStudents = ref([]);
+
+        const { user } = getUser()
 
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
 
@@ -211,11 +248,13 @@ export default {
         onMounted(async () => {
 
             try {
+              
                 await fetchContent();
                 isLoading.value = true;
 
                 await fetchCollection();
                 await fetchAllProducts();
+                await displayStudentByEmailCourse();
 
             } catch (err) {
                 console.error('Error during initialization:', err);
@@ -299,6 +338,32 @@ export default {
             }, 0);
         });
 
+
+
+        //display student by email
+        const displayStudentByEmailCourse = async () => {
+            const studentDocs = [];
+
+            // Query Firestore with the email filter
+            const q = query(
+                collection(projectFirestore, "studentInfo"),
+                where("email", "==", user?.value.email) // Fetch students matching the logged-in user's email
+            );
+
+            const querySnapshot = await getDocs(q);
+
+            // Push data into studentDocs array
+            querySnapshot.forEach((doc) => {
+                studentDocs.push({ id: doc.id, ...doc.data() });
+            });
+
+            // Assign the fetched data to uniqueStudents
+            uniqueStudents.value = studentDocs;
+        };
+
+
+
+
         return {
             allProducts,
             totalProducts,
@@ -307,6 +372,8 @@ export default {
             error,
             content,
             modules: [Navigation],
+            user,
+            uniqueStudents
         };
     },
 };

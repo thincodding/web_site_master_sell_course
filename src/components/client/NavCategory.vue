@@ -37,9 +37,9 @@
                                 <div v-for="sub in filteredSubcategories" :key="sub.id"
                                     class="w-full transition-colors duration-200 hover:text-red-600 text-start">
                                     <a :href="`/productdetail/${sub.id}`"
-   class="text-gray-700 capitalize text-[15px] hover:text-gray-500 text-wrap">
-   {{ sub.productName }}
-</a>
+                                        class="text-gray-700 capitalize text-[15px] hover:text-gray-500 text-wrap">
+                                        {{ sub.productName }}
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
             <!-- User/Login & Language -->
             <div class="flex items-center justify-end gap-3">
                 <!-- Free Course Icon -->
-                <div class="relative flex cursor-pointer group">
+                <div v-if="user" class="relative flex cursor-pointer group">
                     <router-link :to="{ name: 'freeCourse' }" class="px-2 py-1 text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
@@ -86,13 +86,15 @@
                             $t('signup') }}</router-link>
                     </div>
                 </div>
-                <div v-else class="relative">
-                    <div @click="isDrowdown = !isDrowdown"
+                <div v-else class="relative" @mouseenter="isOpens = true" @mouseleave="isOpens = false">
+                    <router-link :to="{ name: 'userProfile' }"
                         class="border-[1px] border-background bg-gray-50 w-10 h-10 flex justify-center items-center rounded-full hover:bg-gray-200 cursor-pointer">
-                        <div class="capitalize">{{ user?.displayName[0] }}</div>
-                    </div>
-                    <div v-if="isDrowdown"
-                        class="absolute top-16 right-5 w-28 shadow p-3 z-[10] bg-white flex items-center gap-2 cursor-pointer hover:text-gray-400">
+                        <div class="capitalize">{{ user?.displayName?.[0] || '' }}</div>
+                    </router-link>
+
+                    <div class="h-1.5 bg-transparent "></div>
+                    <div v-if="isOpens" v-motion :initial="{ scale: 0.9 }" :visible="{ opacity: 1, scale: 1 }"
+                        class="absolute top-10 border right-5 w-28 shadow p-3 z-[10] bg-white flex items-center gap-2 cursor-pointer hover:text-gray-400">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-log-out">
@@ -127,6 +129,7 @@ export default {
         const isNavbarVisible = ref(true);
         const navbar = ref(null);
         const isDrowdown = ref(false)
+        const isOpens = ref(false);
 
         const filteredSubcategories = ref([]);
         const { user } = getUser();
@@ -135,6 +138,7 @@ export default {
 
         // Fetch categories
         const { document: category } = getCollection('categories');
+
 
         // Watch for hoveredCategoryId changes to fetch subcategories
         watch(hoveredCategoryId, async (newCategoryId) => {
@@ -175,13 +179,14 @@ export default {
 
         onMounted(() => {
             window.addEventListener('scroll', handleScroll);
+
+            console.log("user", user)
+
         });
 
         onUnmounted(() => {
             window.removeEventListener('scroll', handleScroll);
         });
-
-
 
         const handleSignout = async () => {
             if (window.confirm('Are you sure to sign out')) {
@@ -190,6 +195,8 @@ export default {
                 isDrowdown.value = false
             }
         }
+
+
         return {
             category,
             hoveredCategoryId,
@@ -203,7 +210,8 @@ export default {
             navbar,
             categoriesWithProducts,
             isDrowdown,
-            handleSignout
+            handleSignout,
+            isOpens
         };
     }
 };

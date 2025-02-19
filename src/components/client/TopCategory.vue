@@ -1,7 +1,7 @@
 <template>
     <div class="xl:w-[1200px] mx-auto my-10 px-10 lg:px-10 xl:px-0">
         <div>
-            <div class="my-4">
+            <div v-if="filteredCategories.length > 0" class="my-4">
 
                 <div v-for="con in content" :key="con.id">
                     <!-- <h1 class="text-[18px] lg:text-[20px] md:text-[20px] font-bold font-KhmerMoul text-background">

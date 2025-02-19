@@ -44,6 +44,7 @@
             <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400 ">
                 <thead class="text-[16px] text-black/70 p-2 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                     <tr class="font-NotoSansKhmer">
+                        <th class="py-4">អុីម៉ែល</th>
                         <th class="py-4">ឈ្មោះសិស្ស</th>
                         <th class="py-4">វគ្គសិក្សា</th>
                         <th class="py-4">ចំនួន</th>
@@ -61,6 +62,7 @@
                             <template v-for="pro in cate.product" :key="pro.id">
                                 <template v-for="detail in pro.productDetail" :key="detail.id">
                                     <tr v-for="stu in detail.student" :key="stu.id">
+                                        <td class="py-3">{{ stu.email }}</td>
                                         <td class="py-3">{{ stu.studentName }}</td>
                                         <td>{{ pro.productName }}</td>
                                         <td>{{ stu.qty }}</td>
@@ -92,6 +94,8 @@
             </table>
         </div>
     </div>
+
+    <!-- <pre>{{ filteredStudentDetails }}</pre> -->
     <component :is="currentComponents" @close="currentComponents = ''" :documentProducts="products"
         :categoryId="categoryId" :productId="productId" :detail="productDetailId" :student="student"
         :handleLoadStudent="handleLoadStudent" />

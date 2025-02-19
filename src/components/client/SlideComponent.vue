@@ -19,7 +19,7 @@
               <p class="text-[15px] text-background my-2" v-html="img.descripton"></p>
             </div>
             <div class="mt-5 mb-4">
-              <a href="/advisorRegister"
+              <a href="/advisorRegisters"
                 class="bg-background hover:bg-background/90 w-full p-3 font-bold text-white text-[15px]">
                 {{ $t('register') }}
                 </a>
@@ -72,7 +72,7 @@
                 class="bg-background hover:bg-background/90  w-full p-3 font-bold text-white text-[15px]">
                 ចុះឈ្មោះឥឡូវនេះ
                 </router-link> -->
-                <a href="/advisorRegister"
+                <a href="/advisorRegisters"
                 class="bg-background hover:bg-background/90 w-full p-3 font-bold text-white text-[15px]">
                 {{ $t('register') }}
                 </a>
@@ -104,7 +104,7 @@
               <p class="text-[14px] text-background my-2" v-html="img.descripton"></p>
             </div>
             <div class="mt-5 mb-4">
-              <a href="/advisorRegister"
+              <a href="/advisorRegisters"
                 class="bg-background hover:bg-background/90 w-full p-3 font-bold text-white text-[15px]">
                 {{ $t('register') }}
                 </a>
@@ -137,7 +137,7 @@
             </div>
             <div class="flex justify-center w-full p-3 mt-5 mb-4 bg-background hover:bg-background/90">
               <!-- <router-link to="#" class="">ចុះឈ្មោះឥឡូវនេះ</router-link> -->
-              <a href="/advisorRegister"
+              <a href="/advisorRegisters"
                 class="font-bold text-white text-[16px]]">
                 {{ $t('register') }}
                 </a>

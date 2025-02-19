@@ -4,11 +4,11 @@ import { ref } from 'vue';
 
 const error = ref(null)
 const isLoading = ref(false)
-const signup = async (email, password, displayName) => {
+const signup = async (email, password, displayName, phone) => {
 
     try {
         isLoading.value = true
-        const response = await createUserWithEmailAndPassword(projectAuth, email, password);
+        const response = await createUserWithEmailAndPassword(projectAuth, email, password,phone);
         await updateProfile(response?.user, { displayName });
         await sendEmailVerification(response.user)
         isLoading.value = false
@@ -21,7 +21,7 @@ const signup = async (email, password, displayName) => {
         error.value = err.message;
         switch (err.code) {
             case 'auth/email-already-in-use':
-                error.value = 'Email already in use. Please try another email.';
+                error.value = 'អុីម៉ែលនេះមានរួចម្តងហើយ';
                 break;
             case 'auth/invalid-email':
                 error.value = 'Invalid email. Please enter a valid email address.';
@@ -30,7 +30,7 @@ const signup = async (email, password, displayName) => {
                 error.value = 'Operation not allowed. Please contact support.';
                 break;
             case 'auth/weak-password':
-                error.value = 'Password must be at least 6 characters.';
+                error.value = 'ពាក្យសម្ងាត់ត្រូវតែលើស៦ខ្ទង់!';
                 break;
             default:
                 error.value = err.message;

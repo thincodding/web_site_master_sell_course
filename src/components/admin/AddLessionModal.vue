@@ -45,7 +45,7 @@
 
                                     <div class="space-y-1">
                                         <label for="" class="font-NotoSansKhmer font-[500]">បង្ហាញលក្ខណ: *</label>
-                                        <select v-model="show_spacial" class="input_text p-[9.4px]" id="">
+                                        <select required v-model="show_spacial" class="input_text p-[9.4px]" id="">
                                             <option selected disabled value="">--ជ្រើសរើស--</option>
                                             <option value="Most Popular">Most Popular</option>
                                             <option value="New">New</option>

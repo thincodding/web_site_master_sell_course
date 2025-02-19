@@ -65,11 +65,14 @@
     "signUpandStartLearning": "ចុះឈ្មោះ និង ចាប់ផ្តើមសិក្សា",
     "dontHaveAccount": "មិនមានគណនីទេ?",
     "loginTolearning": "ចូលបន្តរការសិក្សារ",
-    "continueWithEmail": "បន្តជាមួយអ៊ីម៉ែល",
-    "continueLoading": "បន្តជាមួយអ៊ីម៉ែល....",
+    "continueWithEmail": "ចូលប្រើប្រាស់",
+    "continueLoading": "កំពុងចូលប្រើប្រាស់....",
     "notFoundCourse": "រកមិនឃើញវគ្គសិក្សា",
     "result": "លទ្ធផល",
     "ofStudy": "នៃវគ្គសិក្សា",
     "help": "ជំនួយ",
-    "helpmore": "ជំនួយបន្ថែម!"
+    "helpmore": "ជំនួយបន្ថែម!",
+    "phone": "លេខទូរស័ព្ទ",
+    "myLession": "មេរៀនរបស់ខ្ញុំ"
+   
 }

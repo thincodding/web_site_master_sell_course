@@ -55,11 +55,27 @@
                                                     class="font-bold line-clamp-1 text-gray-800 transition-colors textfont-bold text-[16px] font-NotoSansKhmer hover:text-background">
                                                     {{ detail.title }}
                                                 </a>
-                                                <p class="text-sm text-gray-600">{{ detail.lectures }}</p>
-                                                <p v-if="detail.price === 0"
-                                                    class="text-[16px] font-bold text-green-600">{{ $t('freeCourse') }}</p>
-                                                <p v-else class="text-[16px] font-bold">${{
-                                                    detail.price }}</p>
+                                                <p class="font-mono text-sm text-gray-600">{{ detail.lectures }}</p>
+
+                                                <div
+                                                    v-if="uniqueStudents.some(student => student.productDetailId === detail.id)">
+                                                    <div>
+                                                        <!-- {{uniqueStudents.find(student =>
+                                                                                student.productDetailId === detail.id).title
+                                                                            }} -->
+                                                        <p class="font-bold text-gray-600">បានទិញមេរៀន</p>
+                                                    </div>
+                                                </div>
+                                                <div v-else>
+                                                    <p v-if="detail.price === 0"
+                                                        class="text-lg font-bold text-green-600">
+                                                        {{ $t('freeCourse') }}
+                                                    </p>
+                                                    <p v-else class="text-lg font-bold text-gray-600">
+                                                        ${{ detail.price }}
+                                                    </p>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +97,7 @@
     <!-- Mobile View -->
     <div class="block w-full mx-auto lg:hidden">
         <div class="course-related-category">
-    
+
             <h2 class="flex justify-center text-[20px] font-bold my-2  gap-2 items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -134,14 +150,28 @@
                                             <!-- Product Info Section -->
                                             <div class="p-4 space-y-2 font-NotoSansKhmer">
                                                 <a :href="$router.resolve({ name: 'courseDetail', params: { id: detail.id } }).href"
-                                                    class="font-bold line-clamp-1 text-gray-800 transition-colors textfont-bold text-[16px] font-NotoSansKhmer hover:text-background">
+                                                    class="font-bold line-clamp-1 text-gray-800 transition-colors textfont-bold text-[15px] font-NotoSansKhmer hover:text-background">
                                                     {{ detail.title }}
                                                 </a>
                                                 <p class="text-sm text-gray-600">{{ detail.lectures }}</p>
-                                                <p v-if="detail.price === 0"
-                                                    class="text-[16px] font-bold text-green-600">ឥតគិតថ្លៃ</p>
-                                                <p v-else class="text-[16px] font-bold text-background">${{ detail.price
-                                                    }}</p>
+
+                                                <div
+                                                    v-if="uniqueStudents.some(student => student.productDetailId === detail.id)">
+                                                    <div>
+                                                        <p class="font-bold text-[14px] text-gray-600">បានទិញមេរៀន</p>
+                                                    </div>
+                                                </div>
+                                                <div v-else>
+                                                    <p v-if="detail.price === 0"
+                                                        class="text-[16px] font-bold text-green-600">
+                                                        {{ $t('freeCourse') }}
+                                                    </p>
+                                                    <p v-else class="text-[14px] font-bold">
+                                                        ${{ detail.price }}
+                                                    </p>
+                                                </div>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -163,9 +193,12 @@
 <script>
 
 import { useFirestoreCollection, useSubcollection } from '@/firebase/getArrayDocument';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { projectFirestore } from '@/config/config';
 import getNestedSubcollection from '@/firebase/getNestedSubcollection';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import getUser from '@/firebase/getUser';
 
 export default {
     setup() {
@@ -176,7 +209,11 @@ export default {
         const targetDetailId = route.params.id;
         const { documents: categoryDocument, fetchCollection } = useFirestoreCollection("categories");
 
+        const { user } = getUser();
+        const uniqueStudents = ref([])
+
         onMounted(async () => {
+            await displayStudentByEmailCourse();
             await fetchCollection();
             await fetchCategoryAndProductsByDetailId(targetDetailId);
         });
@@ -221,9 +258,33 @@ export default {
             }
         };
 
+
+
+        const displayStudentByEmailCourse = async () => {
+            const studentDocs = [];
+
+            // Query Firestore with the email filter
+            const q = query(
+                collection(projectFirestore, "studentInfo"),
+                where("email", "==", user.value.email) // Fetch students matching the logged-in user's email
+            );
+
+            const querySnapshot = await getDocs(q);
+
+            // Push data into studentDocs array
+            querySnapshot.forEach((doc) => {
+                studentDocs.push({ id: doc.id, ...doc.data() });
+            });
+
+            // Assign the fetched data to uniqueStudents
+            uniqueStudents.value = studentDocs;
+        };
+
+
         return {
             productDetails,
-            isLoading
+            isLoading,
+            uniqueStudents
         };
     },
 };
