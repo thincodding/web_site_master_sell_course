@@ -958,6 +958,8 @@
             <div v-if="isLoading" class="animate-pulse p-5  lg:mt-10 xl:w-[90%] mx-auto md:p-5 -mt-10 block lg:hidden">
 
                
+
+                
             </div>
             <div v-else class="block lg:hidden">
 
